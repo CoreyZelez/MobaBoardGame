@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <array>
+#include "DurationEffect.h"
 #include "CharacterAttributes.h"
 #include "Item.h"
 
@@ -12,10 +13,10 @@ public:
 	Character(std::array<const CharacterAttributes, 8> baseAttributes);
 
 private:
-	void updateTempEffects();
+	void updateDurationEffects();
 
 	const std::array<const CharacterAttributes, 8> baseAttributes;  // Position in array specifies level.
-	std::vector<Effect> Effects;  
+	std::vector<DurationEffect> durationEffects;  
 	std::array<Item, 4> items;
 
 	const static std::array<unsigned int, 7> experienceForLevel;

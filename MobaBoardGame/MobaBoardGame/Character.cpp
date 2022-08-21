@@ -7,10 +7,3 @@ Character::Character(std::array<const CharacterAttributes, 8> baseAttributes)
 {
 }
 
-void Character::updateTempEffects()
-{
-	for(Effect &effect : tempEffects)
-	{
-		effect.update();
-	}
-}

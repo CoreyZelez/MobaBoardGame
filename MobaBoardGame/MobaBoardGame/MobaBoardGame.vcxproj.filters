@@ -9,9 +9,15 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Header Files\Effects">
+      <UniqueIdentifier>{429a9ca3-a1d9-477a-9d29-a65a2175281b}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Effects">
+      <UniqueIdentifier>{3716ec80-b152-4455-8686-a30314604d0c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -24,14 +30,17 @@
     <ClCompile Include="Ability.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CharacterAttributes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DurationEffect.cpp">
+    <ClCompile Include="CharacterDurationEffect.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DurationEffect.cpp">
+      <Filter>Source Files\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterAttributes.cpp">
+      <Filter>Source Files\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,8 +56,11 @@
     <ClInclude Include="Item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterDurationEffect.h">
+      <Filter>Header Files\Effects</Filter>
+    </ClInclude>
     <ClInclude Include="DurationEffect.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Effects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
