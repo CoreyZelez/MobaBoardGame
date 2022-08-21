@@ -166,6 +166,7 @@
     <ClCompile Include="Ability.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterAttributes.cpp" />
+    <ClCompile Include="DurationEffect.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MobaBoardGame.cpp" />
   </ItemGroup>
@@ -173,6 +174,7 @@
     <ClInclude Include="Ability.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterAttributes.h" />
+    <ClInclude Include="DurationEffect.h" />
     <ClInclude Include="Item.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
