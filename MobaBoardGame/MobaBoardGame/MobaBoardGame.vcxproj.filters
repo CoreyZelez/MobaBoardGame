@@ -19,11 +19,14 @@
     <Filter Include="Source Files\Effects">
       <UniqueIdentifier>{3716ec80-b152-4455-8686-a30314604d0c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Effects\Health">
+      <UniqueIdentifier>{e451d0f7-024e-4a4d-ace2-b62797355877}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Effects\Health">
+      <UniqueIdentifier>{d4683f3d-9461-4db2-8bc3-6e7f1acb6114}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MobaBoardGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,14 +36,20 @@
     <ClCompile Include="Item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CharacterDurationEffect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DurationEffect.cpp">
       <Filter>Source Files\Effects</Filter>
     </ClCompile>
-    <ClCompile Include="CharacterAttributes.cpp">
-      <Filter>Source Files\Effects</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Attributes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthPoisonEffect.cpp">
+      <Filter>Source Files\Effects\Health</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterDurationEffects.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,17 +59,20 @@
     <ClInclude Include="Ability.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterAttributes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterDurationEffect.h">
-      <Filter>Header Files\Effects</Filter>
-    </ClInclude>
     <ClInclude Include="DurationEffect.h">
       <Filter>Header Files\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Attributes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthPoisonEffect.h">
+      <Filter>Header Files\Effects\Health</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterDurationEffects.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

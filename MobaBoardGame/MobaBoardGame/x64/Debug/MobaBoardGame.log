@@ -1,7 +1,2 @@
-﻿  Ability.cpp
-  Character.cpp
-  CharacterAttributes.cpp
-  DurationEffect.cpp
-  Item.cpp
-  Generating Code...
+﻿  CharacterDurationEffects.cpp
   MobaBoardGame.vcxproj -> D:\Projects\MobaBoardGame\MobaBoardGame\x64\Debug\MobaBoardGame.exe
