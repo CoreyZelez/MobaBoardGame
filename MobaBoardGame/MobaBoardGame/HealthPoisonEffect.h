@@ -1,14 +1,14 @@
 #pragma once
-#include "DurationEffect.h"
+#include "Effect.h"
 #include "Attributes.h"
 
-class HealthPoisonEffect : public DurationEffect<HealthAttributes>
+class HealthPoisonEffect : public Effect<CharacterAttributes>
 {
 public:
-	HealthPoisonEffect(int amount, int duration);
+	HealthPoisonEffect(int duration, int amount);
 
 private:
-	void apply(HealthAttributes &ha);  // Deals health damage. Non-magic.
+	void apply(CharacterAttributes &ca);  // Deals health damage.
 
 	int amount;  // Amount of damage inflicted.
 };

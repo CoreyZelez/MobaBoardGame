@@ -11,6 +11,9 @@ Character::Character(std::array<const CharacterAttributes, 8> baseAttributes)
 
 void Character::update()
 {
+	updateCurrAttributes();
+	attributeEffects.update(currAttributes);  // Applys each effect and updates them.
+
 }
 
 void Character::basicAttack(Character &enemyCharacter)
@@ -19,7 +22,7 @@ void Character::basicAttack(Character &enemyCharacter)
 
 void Character::printAttributes()
 {
-	std::cout << currAttributes.healthAttributes.health;
+	std::cout << currAttributes.healthAttributes.health << std::endl;
 }
 
 void Character::updateCurrAttributes()
@@ -27,11 +30,11 @@ void Character::updateCurrAttributes()
 	const int health = currAttributes.healthAttributes.health;  // Health is not recalculated.
 	currAttributes = baseAttributes[levelInformation.level];
 	currAttributes.healthAttributes.health = health;
+}
 
-	//for(auto &effect : healthAttributeDurationEffects)
-	//{
-		//effect.update(currAttributes.healthAttributes);
-	//}
+void Character::addEffect(std::unique_ptr<AttributeEffect> &effect)
+{
+	attributeEffects.add(effect);
 }
 
 

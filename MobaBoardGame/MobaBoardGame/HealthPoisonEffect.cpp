@@ -1,13 +1,13 @@
 #include "HealthPoisonEffect.h"
 
-struct HealthAttributes;
+struct CharacterAttributes;
 
-HealthPoisonEffect::HealthPoisonEffect(int amount, int duration)
-	: DurationEffect<HealthAttributes>(duration)
+HealthPoisonEffect::HealthPoisonEffect(int duration, int amount)
+	: Effect<CharacterAttributes>(duration), amount(amount)
 {
 }
 
-void HealthPoisonEffect::apply(HealthAttributes &ha)
+void HealthPoisonEffect::apply(CharacterAttributes &ca)
 {
-	ha.health -= amount;
+	ca.healthAttributes.health -= amount;
 }

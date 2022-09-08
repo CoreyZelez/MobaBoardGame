@@ -3,6 +3,7 @@
 #include <vector>
 #include "Character.h"
 #include "Attributes.h"
+#include "HealthPoisonEffect.h"
 
 
 const int WINDOW_WIDTH = 1280; //1920;
@@ -38,10 +39,21 @@ int main()
 	CharacterAttributes cha = { aca, ha, ca, aba};
 	const std::array<const CharacterAttributes, 8> baseAttributes = { cha, cha, cha, cha, cha, cha, cha, cha };
 	Character character1(baseAttributes);
+
+	character1.printAttributes();
+	HealthPoisonEffect hpe(10, 10);
+	std::unique_ptr<Effect<CharacterAttributes>> eff = std::make_unique<HealthPoisonEffect>(hpe);
+
+	character1.addEffect(eff);
+
+	for(int i = 0; i < 40; ++i){
+		character1.update();
+		character1.printAttributes();
+	}
+
 	////////////
 	// END CONSOLE TESTING
 	//////
-	character1.printAttributes();
 
 	return 0;
 }

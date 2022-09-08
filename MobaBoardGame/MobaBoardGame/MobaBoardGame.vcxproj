@@ -166,8 +166,8 @@
     <ClCompile Include="Ability.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Attributes.cpp" />
-    <ClCompile Include="CharacterDurationEffects.cpp" />
-    <ClCompile Include="DurationEffect.cpp" />
+    <ClCompile Include="CharacterAttributeEffects.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="HealthPoisonEffect.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
@@ -176,8 +176,8 @@
     <ClInclude Include="Ability.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Attributes.h" />
-    <ClInclude Include="CharacterDurationEffects.h" />
-    <ClInclude Include="DurationEffect.h" />
+    <ClInclude Include="CharacterAttributeEffects.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="HealthPoisonEffect.h" />
     <ClInclude Include="Item.h" />
   </ItemGroup>

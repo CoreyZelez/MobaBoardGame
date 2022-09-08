@@ -36,9 +36,6 @@
     <ClCompile Include="Item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DurationEffect.cpp">
-      <Filter>Source Files\Effects</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,8 +45,11 @@
     <ClCompile Include="HealthPoisonEffect.cpp">
       <Filter>Source Files\Effects\Health</Filter>
     </ClCompile>
-    <ClCompile Include="CharacterDurationEffects.cpp">
+    <ClCompile Include="CharacterAttributeEffects.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Source Files\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,17 +62,17 @@
     <ClInclude Include="Item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DurationEffect.h">
-      <Filter>Header Files\Effects</Filter>
-    </ClInclude>
     <ClInclude Include="Attributes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HealthPoisonEffect.h">
       <Filter>Header Files\Effects\Health</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterDurationEffects.h">
+    <ClInclude Include="CharacterAttributeEffects.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Header Files\Effects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
