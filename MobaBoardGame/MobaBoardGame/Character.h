@@ -1,15 +1,16 @@
 #pragma once
 #include <list>
 #include <array>
-#include "CharacterAttributeEffects.h"
+#include "CharacterEffects.h"
 #include "Effect.h"
 #include "Attributes.h"
 #include "Item.h"
+#include "CharacterAbilities.h"
 
 
 class Character
 {
-	using AttributeEffect = Effect<CharacterAttributes>;
+	using CharacterEffect = Effect<CharacterAttributes>;
 
 public:
 	Character(std::array<const CharacterAttributes, 8> baseAttributes);
@@ -23,12 +24,11 @@ public:
 	//end testing functions.
 
 	// PUBLIC FOR TESTING
-	void addEffect(std::unique_ptr<AttributeEffect> &effect);
+	void addEffect(std::unique_ptr<CharacterEffect> &effect);
 
 private:
 	// Functions.
 	void updateCurrAttributes();  // Recalled on self affecting abilities. Doesn't affect ability durations.
-
 
 	// Level information.
 	const static std::array<int, 8> experienceForLevel; 
@@ -39,9 +39,11 @@ private:
 	CharacterAttributes currAttributes;  // Recalculated at begginning of each turn from baseAttributes and effects. (Health uniquely is not recalculated).
 
 	// Attribute modifiers.
-	CharacterAttributeEffects attributeEffects;
+	CharacterEffects effects;
 	std::array<Item, 4> items;
 
+	// Abilities
+	CharacterAbilities abilites;
 
 };
 

@@ -12,7 +12,7 @@ Character::Character(std::array<const CharacterAttributes, 8> baseAttributes)
 void Character::update()
 {
 	updateCurrAttributes();
-	attributeEffects.update(currAttributes);  // Applys each effect and updates them.
+	effects.update(currAttributes);  // Applys each effect and updates them.
 
 }
 
@@ -32,9 +32,9 @@ void Character::updateCurrAttributes()
 	currAttributes.healthAttributes.health = health;
 }
 
-void Character::addEffect(std::unique_ptr<AttributeEffect> &effect)
+void Character::addEffect(std::unique_ptr<CharacterEffect> &effect)
 {
-	attributeEffects.add(effect);
+	effects.add(effect);
 }
 
 

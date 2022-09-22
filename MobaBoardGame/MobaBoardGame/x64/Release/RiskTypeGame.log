@@ -1,0 +1,38 @@
+﻿  ActionText.cpp
+  Map.cpp
+  MapMaker.cpp
+  Menu.cpp
+  MouseInputDetection.cpp
+  TextUtility.cpp
+d:\projects\risktypegame\risktypegame\risktypegame\textutility.cpp(5): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\risktypegame\risktypegame\risktypegame\textutility.cpp(5): warning C4244: 'initializing': conversion from 'T' to 'const int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\risktypegame\risktypegame\risktypegame\textutility.cpp(6): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\risktypegame\risktypegame\risktypegame\textutility.cpp(6): warning C4244: 'initializing': conversion from 'T' to 'const int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\risktypegame\risktypegame\risktypegame\textutility.cpp(7): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  main.cpp
+  Generating code
+  109 of 111 functions (98.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\RiskTypeGame\x64\Release\RiskTypeGame.exe

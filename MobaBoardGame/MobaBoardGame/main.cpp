@@ -39,16 +39,14 @@ int main()
 	CharacterAttributes cha = { aca, ha, ca, aba};
 	const std::array<const CharacterAttributes, 8> baseAttributes = { cha, cha, cha, cha, cha, cha, cha, cha };
 	Character character1(baseAttributes);
-
-	character1.printAttributes();
 	HealthPoisonEffect hpe(10, 10);
-	std::unique_ptr<Effect<CharacterAttributes>> eff = std::make_unique<HealthPoisonEffect>(hpe);
-
-	character1.addEffect(eff);
-
+	std::unique_ptr<Effect<CharacterAttributes>> eff1 = std::make_unique<HealthPoisonEffect>(hpe);
+	std::unique_ptr<Effect<CharacterAttributes>> eff2 = std::make_unique<decltype(hpe)>(hpe);
+	character1.addEffect(eff1);
+	character1.addEffect(eff2);
 	for(int i = 0; i < 40; ++i){
-		character1.update();
 		character1.printAttributes();
+		character1.update();
 	}
 
 	////////////
