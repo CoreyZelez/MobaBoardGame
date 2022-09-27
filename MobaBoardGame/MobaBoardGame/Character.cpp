@@ -34,7 +34,14 @@ void Character::updateCurrAttributes()
 
 void Character::addEffect(std::unique_ptr<CharacterEffect> &effect)
 {
-	effects.add(effect);
+	// Applys effect and updates it.
+	effect.get()->update(currAttributes);
+
+	// Adds effect if duration not 0 after initial update.
+	if(!effect.get()->isOver())
+	{
+		effects.add(effect);
+	}
 }
 
 

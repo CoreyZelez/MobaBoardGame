@@ -1,4 +1,5 @@
 #pragma once
+#include <List>
 #include "Ability.h"
 #include "Character.h"
 
@@ -12,8 +13,10 @@ enum CharacterEvent
 class PassiveAbility : public Ability
 {
 public:
-	void notify(CharacterEvent event);
-	void apply()
+	PassiveAbility(std::list<std::unique_ptr<CharacterEffect>> selfEffects);
+
+	virtual void notify(CharacterEvent event);
+	virtual void apply();
 private:
 
 };

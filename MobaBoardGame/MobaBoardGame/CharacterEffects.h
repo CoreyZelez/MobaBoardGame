@@ -10,7 +10,7 @@ class CharacterEffects
 
 public:
 	CharacterEffects();
-	void add(std::unique_ptr<CharacterEffect> &effect);
+	void add(const std::unique_ptr<CharacterEffect> &effect);  // Adds effect to effects.
 	void update(CharacterAttributes &attributes);  // Calls update on each effect.
 
 private:

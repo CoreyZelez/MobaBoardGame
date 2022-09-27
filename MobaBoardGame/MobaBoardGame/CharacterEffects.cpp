@@ -6,9 +6,9 @@ CharacterEffects::CharacterEffects()
 	
 }
 
-void CharacterEffects::add(std::unique_ptr<CharacterEffect> &effect)
+void CharacterEffects::add(const std::unique_ptr<CharacterEffect> &effect)
 {
-	effects.emplace_back(std::move(effect));
+	effects.emplace_back(effect.get()->clone());
 }
 
 void CharacterEffects::update(CharacterAttributes &attributes)
