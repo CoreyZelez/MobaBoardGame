@@ -39,10 +39,11 @@ int main()
 	AbilityAttributes aba = { 20, 10, 10 };
 	CharacterAttributes cha = { aca, ha, ca, aba};
 	const std::array<const CharacterAttributes, 8> baseAttributes = { cha, cha, cha, cha, cha, cha, cha, cha };
-
 	Character character1(baseAttributes);
+
 	HealthPoisonEffect hpe(10, 10);
 	ParalyseEffect pe(3);
+
 	std::unique_ptr<Effect<CharacterAttributes>> eff1 = std::make_unique<HealthPoisonEffect>(hpe);
 	std::unique_ptr<Effect<CharacterAttributes>> eff2 = std::make_unique<ParalyseEffect>(pe);
 

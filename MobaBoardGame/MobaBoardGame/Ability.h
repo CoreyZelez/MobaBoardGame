@@ -5,34 +5,25 @@
 #include "Effect.h"
 
 
-template<class T> class Ability
+class Ability
 {
-	static_assert(std::is_base_of<Entity, T>::value, "T must inherit boost::archive::text_oarchive");
-
 public:
-    bool validTarget(const Entity *entity)  // Ensures that entity parameter is of type T.
+	virtual void useAbility(Character &caster, Entity &target)  // Applys ability to caster and target if target underlying type is T.
 	{
-
-	}
-
-	void useAbility(Character &caster, Entity &target)  // Applys ability to caster and target if target underlying type is T.
-	{
-		if(validTarget(target))
+		if(&(Entity)caster == &target)  // Should check that caster and target are same object.
 		{
-			apply(caster, target);
+			apply(caster);
 		}
 	}
 
 protected:
 	virtual void applySelf(Character &caster) {};  // Effects on caster.
-	virtual void applyTarget(Character &target) {};  // Effects on target.
 	virtual int calculateCooldown(Character &caster) = 0;  // Cooldown after ability use.
 
 private:
-	void apply(Character &caster, T target)
+	void apply(Character &caster)
 	{
 		applySelf(caster);
-		applyTarget(target);
 		cooldown = calculateCooldown(caster);
 	}
 

@@ -81,6 +81,9 @@
     <ClCompile Include="ParalyseEffect.cpp">
       <Filter>Source Files\Effects\Movement</Filter>
     </ClCompile>
+    <ClCompile Include="TargetAbility.cpp">
+      <Filter>Source Files\Abilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HealthPoisonEffect.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="ParalyseEffect.h">
       <Filter>Header Files\Effects\Health</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetAbility.h">
+      <Filter>Header Files\Abilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

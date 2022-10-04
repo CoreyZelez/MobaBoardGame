@@ -175,6 +175,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParalyseEffect.cpp" />
     <ClCompile Include="Position.cpp" />
+    <ClCompile Include="TargetAbility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ParalyseEffect.h" />
     <ClInclude Include="Position.h" />
+    <ClInclude Include="TargetAbility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
