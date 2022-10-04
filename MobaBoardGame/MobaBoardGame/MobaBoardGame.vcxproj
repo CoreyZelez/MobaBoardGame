@@ -164,30 +164,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ability.cpp" />
-    <ClCompile Include="CharacterTargetAbility.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Attributes.cpp" />
     <ClCompile Include="CharacterAbilities.cpp" />
     <ClCompile Include="CharacterEffects.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="HealthPoisonEffect.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="Location.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PassiveAbility.cpp" />
+    <ClCompile Include="ParalyseEffect.cpp" />
+    <ClCompile Include="Position.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
-    <ClInclude Include="CharacterTargetAbility.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Attributes.h" />
     <ClInclude Include="CharacterAbilities.h" />
     <ClInclude Include="CharacterEffects.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="HealthPoisonEffect.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="Location.h" />
-    <ClInclude Include="PassiveAbility.h" />
+    <ClInclude Include="ParalyseEffect.h" />
+    <ClInclude Include="Position.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

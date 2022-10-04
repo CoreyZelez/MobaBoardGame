@@ -4,6 +4,7 @@
 #include "Character.h"
 #include "Attributes.h"
 #include "HealthPoisonEffect.h"
+#include "ParalyseEffect.h"
 
 
 const int WINDOW_WIDTH = 1280; //1920;
@@ -38,12 +39,19 @@ int main()
 	AbilityAttributes aba = { 20, 10, 10 };
 	CharacterAttributes cha = { aca, ha, ca, aba};
 	const std::array<const CharacterAttributes, 8> baseAttributes = { cha, cha, cha, cha, cha, cha, cha, cha };
+
 	Character character1(baseAttributes);
 	HealthPoisonEffect hpe(10, 10);
+	ParalyseEffect pe(3);
 	std::unique_ptr<Effect<CharacterAttributes>> eff1 = std::make_unique<HealthPoisonEffect>(hpe);
-	std::unique_ptr<Effect<CharacterAttributes>> eff2 = std::make_unique<decltype(hpe)>(hpe);
+	std::unique_ptr<Effect<CharacterAttributes>> eff2 = std::make_unique<ParalyseEffect>(pe);
+
+	character1.printAttributes();
+	character1.update();
+
 	character1.addEffect(eff1);
 	character1.addEffect(eff2);
+
 	for(int i = 0; i < 40; ++i){
 		character1.printAttributes();
 		character1.update();

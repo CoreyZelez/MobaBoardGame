@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Character">
       <UniqueIdentifier>{b591860c-4644-4268-9cdf-c0b59e5d62e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Effects\Movement">
+      <UniqueIdentifier>{313f80a4-a7a7-4177-b29b-cab959a0b9c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Effects\Movement">
+      <UniqueIdentifier>{99f1c52f-8147-4822-95f3-0cde249d6f5a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -47,12 +53,6 @@
     </ClCompile>
     <ClCompile Include="Effect.cpp">
       <Filter>Source Files\Effects</Filter>
-    </ClCompile>
-    <ClCompile Include="Ability.cpp">
-      <Filter>Source Files\Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="PassiveAbility.cpp">
-      <Filter>Source Files\Abilities</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>Source Files\Character</Filter>
@@ -69,11 +69,17 @@
     <ClCompile Include="Attributes.cpp">
       <Filter>Source Files\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Location.cpp">
-      <Filter>Source Files\Character</Filter>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CharacterTargetAbility.cpp">
+    <ClCompile Include="Position.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ability.cpp">
       <Filter>Source Files\Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="ParalyseEffect.cpp">
+      <Filter>Source Files\Effects\Movement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,12 +88,6 @@
     </ClInclude>
     <ClInclude Include="Effect.h">
       <Filter>Header Files\Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Ability.h">
-      <Filter>Header Files\Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="PassiveAbility.h">
-      <Filter>Header Files\Abilities</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Header Files\Character</Filter>
@@ -101,14 +101,20 @@
     <ClInclude Include="Item.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Location.h">
-      <Filter>Header Files\Character</Filter>
-    </ClInclude>
     <ClInclude Include="CharacterEffects.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterTargetAbility.h">
+    <ClInclude Include="Ability.h">
       <Filter>Header Files\Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParalyseEffect.h">
+      <Filter>Header Files\Effects\Health</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

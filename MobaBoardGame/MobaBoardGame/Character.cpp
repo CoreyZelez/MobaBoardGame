@@ -13,7 +13,6 @@ void Character::update()
 {
 	updateCurrAttributes();
 	effects.update(currAttributes);  // Applys each effect and updates them.
-
 }
 
 void Character::basicAttack(Character &enemyCharacter)
@@ -22,7 +21,10 @@ void Character::basicAttack(Character &enemyCharacter)
 
 void Character::printAttributes()
 {
-	std::cout << currAttributes.healthAttributes.health << std::endl;
+	std::cout << "Health:   " << currAttributes.healthAttributes.health << std::endl;
+	std::cout << "Movement: " << currAttributes.actionAttributes.movementPoints << std::endl;
+	std::cout << std::endl;
+
 }
 
 void Character::updateCurrAttributes()

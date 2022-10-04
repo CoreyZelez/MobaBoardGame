@@ -1,20 +1,47 @@
 #pragma once
-#include <List>
-#include <memory>
+#include <vector>
+#include "Entity.h"
+#include "Character.h"
 #include "Effect.h"
-#include "Attributes.h"
 
-class Ability
+
+template<class T> class Ability
 {
-protected:
-	using CharacterEffect = Effect<CharacterAttributes>;
+	static_assert(std::is_base_of<Entity, T>::value, "T must inherit boost::archive::text_oarchive");
 
 public:
-	Ability(const std::list<std::unique_ptr<CharacterEffect>> &selfEffects);
-	void update();
+    bool validTarget(const Entity *entity)  // Ensures that entity parameter is of type T.
+	{
+
+	}
+
+	void useAbility(Character &caster, Entity &target)  // Applys ability to caster and target if target underlying type is T.
+	{
+		if(validTarget(target))
+		{
+			apply(caster, target);
+		}
+	}
+
+protected:
+	virtual void applySelf(Character &caster) {};  // Effects on caster.
+	virtual void applyTarget(Character &target) {};  // Effects on target.
+	virtual int calculateCooldown(Character &caster) = 0;  // Cooldown after ability use.
 
 private:
-	int cooldown;
-	std::list<std::unique_ptr<CharacterEffect>> selfEffects;  // Effects applied to self.
+	void apply(Character &caster, T target)
+	{
+		applySelf(caster);
+		applyTarget(target);
+		cooldown = calculateCooldown(caster);
+	}
+
+	int cooldown = 0;
 };
+
+
+
+
+
+
 

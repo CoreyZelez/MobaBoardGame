@@ -6,13 +6,15 @@
 #include "Attributes.h"
 #include "Item.h"
 #include "CharacterAbilities.h"
+#include "Position.h"
 
 
-class Character
+class Character : public Position
 {
 	using CharacterEffect = Effect<CharacterAttributes>;
 
 public:
+	//Character(std::array<const CharacterAttributes, 8> baseAttributes, CharacterAbilities abilities);
 	Character(std::array<const CharacterAttributes, 8> baseAttributes);
 
 	void update();
@@ -23,7 +25,6 @@ public:
 	void printAttributes();
 	//end testing functions.
 
-	// PUBLIC FOR TESTING
 	void addEffect(std::unique_ptr<CharacterEffect> &effect);
 
 private:
@@ -42,8 +43,8 @@ private:
 	CharacterEffects effects;
 	std::array<Item, 4> items;
 
-	// Abilities
-	CharacterAbilities abilites;
+	// Abilities.
+	CharacterAbilities abilities;
 
 };
 
