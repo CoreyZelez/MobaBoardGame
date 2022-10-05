@@ -6,8 +6,9 @@ template<class T> class TargetAbility : public Ability
 static_assert(std::is_base_of<Entity, T>::value, "T must inherit boost::archive::text_oarchive");
 
 public:
-	bool validTarget(const Entity *entity)  // Ensures that entity parameter is of type T.
+	virtual bool validTarget(const Entity *entity)  // Ensures that entity parameter is of type T and is valid.
 	{
+		// implement this function.
 		return true;
 	}
 
@@ -19,6 +20,8 @@ public:
 			apply(caster, target);  // target is placeholder. should be different variable there.
 		}
 	}
+
+	virtual void update(CharacterAction action) {};
 
 protected:
 	virtual void applySelf(Character &caster) {};  // Effects on caster.

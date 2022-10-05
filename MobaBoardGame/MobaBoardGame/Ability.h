@@ -3,9 +3,10 @@
 #include "Entity.h"
 #include "Character.h"
 #include "Effect.h"
+#include "PassiveAbility.h"
 
 
-class Ability
+class Ability : public PassiveAbility
 {
 public:
 	virtual void useAbility(Character &caster, Entity &target)  // Applys ability to caster and target if target underlying type is T.
@@ -15,6 +16,10 @@ public:
 			apply(caster);
 		}
 	}
+
+	// Functions relating to abilities passive.
+	virtual void update(CharacterAction action, Character &character) {};
+	virtual void applyPassive(Character &character) {}; 
 
 protected:
 	virtual void applySelf(Character &caster) {};  // Effects on caster.

@@ -2,12 +2,6 @@
 #include <memory>
 #include <assert.h>
 
-enum CharacterAction
-{
-	basicAttackPerson,
-	basicAttackMinion,
-
-};
 
 template<class T> class Effect
 {
@@ -15,10 +9,8 @@ public:
 	Effect(int duration): duration(duration) {};
 
 	virtual std::unique_ptr<Effect<T>> clone() = 0;  // Allows for copying of unique_ptrs to base class.
-
-	void response(CharacterAction action, T t) {};  // Effect is updated based on character action.
 	
-	void update(T &t)
+	void update(T &t)  // Applys effect and updates effect.
 	{
 		assert(duration > 0);
 

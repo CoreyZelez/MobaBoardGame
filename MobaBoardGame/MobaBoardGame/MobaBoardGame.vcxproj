@@ -168,12 +168,14 @@
     <ClCompile Include="Attributes.cpp" />
     <ClCompile Include="CharacterAbilities.cpp" />
     <ClCompile Include="CharacterEffects.cpp" />
+    <ClCompile Include="CharacterObserver.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="HealthPoisonEffect.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParalyseEffect.cpp" />
+    <ClCompile Include="PassiveAbility.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="TargetAbility.cpp" />
   </ItemGroup>
@@ -183,11 +185,13 @@
     <ClInclude Include="Attributes.h" />
     <ClInclude Include="CharacterAbilities.h" />
     <ClInclude Include="CharacterEffects.h" />
+    <ClInclude Include="CharacterObserver.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="HealthPoisonEffect.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ParalyseEffect.h" />
+    <ClInclude Include="PassiveAbility.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="TargetAbility.h" />
   </ItemGroup>
