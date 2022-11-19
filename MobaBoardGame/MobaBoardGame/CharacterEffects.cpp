@@ -1,4 +1,5 @@
 #include "CharacterEffects.h"
+#include "Effect.h"
 #include <iostream>
 
 CharacterEffects::CharacterEffects()

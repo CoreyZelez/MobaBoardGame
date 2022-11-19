@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <array>
 #include <vector>
-#include "Character.h"
 #include "Attributes.h"
 #include "HealthPoisonEffect.h"
 #include "ParalyseEffect.h"
+#include "Character.h"
 
 
 const int WINDOW_WIDTH = 1280; //1920;
@@ -32,31 +32,38 @@ int main()
 	////////////
 	// CONSOLE TESTING
 	//////
-
+	
+	// Attributes
 	HealthAttributes ha = { 300, 200 };
 	CombatAttributes ca = {30, 20, 20 };
 	ActionAttributes aca = { 3, 2, 2 };
 	AbilityAttributes aba = { 20, 10, 10 };
-	CharacterAttributes cha = { aca, ha, ca, aba};
+	SpecialAttributes sa = { 0 };
+	CharacterAttributes cha = { aca, ha, ca, aba, sa};
 	const std::array<const CharacterAttributes, 8> baseAttributes = { cha, cha, cha, cha, cha, cha, cha, cha };
-	Character character1(baseAttributes);
+	Position position{ 0, 1 };
 
-	HealthPoisonEffect hpe(10, 10);
-	ParalyseEffect pe(3);
+	// Abilities
 
-	std::unique_ptr<Effect<CharacterAttributes>> eff1 = std::make_unique<HealthPoisonEffect>(hpe);
-	std::unique_ptr<Effect<CharacterAttributes>> eff2 = std::make_unique<ParalyseEffect>(pe);
 
-	character1.printAttributes();
-	character1.update();
-
-	character1.addEffect(eff1);
-	character1.addEffect(eff2);
-
-	for(int i = 0; i < 40; ++i){
-		character1.printAttributes();
-		character1.update();
-	}
+	//Character character1(position, baseAttributes, nullptr);
+	//
+	//HealthPoisonEffect hpe(10, 10);
+	//ParalyseEffect pe(3);
+	//
+	//std::unique_ptr<Effect<CharacterAttributes>> eff1 = std::make_unique<HealthPoisonEffect>(hpe);
+	//std::unique_ptr<Effect<CharacterAttributes>> eff2 = std::make_unique<ParalyseEffect>(pe);
+	//
+	//character1.printAttributes();
+	//character1.update();
+	//	
+	//character1.addEffect(eff1);
+	//character1.addEffect(eff2);
+	//
+	//for(int i = 0; i < 40; ++i){
+	//	character1.printAttributes();
+	//	character1.update();
+	//}
 
 	////////////
 	// END CONSOLE TESTING

@@ -1,4 +1,5 @@
 #include "ParalyseEffect.h"
+#include "Attributes.h"
 
 ParalyseEffect::ParalyseEffect(int duration)
 	: Effect(duration)

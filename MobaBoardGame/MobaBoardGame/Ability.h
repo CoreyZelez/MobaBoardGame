@@ -1,40 +1,39 @@
 #pragma once
-#include <vector>
-#include "Entity.h"
-#include "Character.h"
-#include "Effect.h"
+#include <assert.h>
+#include <memory>
 #include "PassiveAbility.h"
 
+class Character;
+enum CharacterAction;
 
-class Ability : public PassiveAbility
+class Ability 
 {
 public:
-	virtual void useAbility(Character &caster, Entity &target)  // Applys ability to caster and target if target underlying type is T.
-	{
-		if(&(Entity)caster == &target)  // Should check that caster and target are same object.
-		{
-			apply(caster);
-		}
-	}
+	Ability(Character &character);
+	Ability(PassiveAbility *passive);
+	virtual std::unique_ptr<Ability> clone() = 0;  // Allows for copying of unique_ptrs to base class.
 
-	// Functions relating to abilities passive.
-	virtual void update(CharacterAction action, Character &character) {};
-	virtual void applyPassive(Character &character) {}; 
+	// Ability functions for each target type.
+	bool use(Character &target);
 
 protected:
-	virtual void applySelf(Character &caster) {};  // Effects on caster.
-	virtual int calculateCooldown(Character &caster) = 0;  // Cooldown after ability use.
+	// Target validation functions.
+	virtual bool validTarget(Character &target) { return false; }
+
+	// Ability effect logic.
+	virtual void applySelf(Character &owner) {};  // Effects on caster.
+	virtual void applyTarget(Character &owner, Character &target) {};  // Effects on target. Returns boolean on whether target is valid.
+	void applyPassive();
+
+	virtual int calculateCooldown(Character &owner) = 0;  // Cooldown after ability use.
+
+	const Character *getOwner();
 
 private:
-	void apply(Character &caster)
-	{
-		applySelf(caster);
-		cooldown = calculateCooldown(caster);
-	}
-
+	std::unique_ptr<PassiveAbility> passive;
+	int level = 0;
 	int cooldown = 0;
 };
-
 
 
 

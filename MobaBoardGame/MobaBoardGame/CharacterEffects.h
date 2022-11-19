@@ -1,8 +1,10 @@
 #pragma once
 #include <list>
 #include <memory>
-#include "Effect.h"
-#include "Attributes.h"
+
+template<class T>
+class Effect;
+struct CharacterAttributes;
 
 class CharacterEffects
 {

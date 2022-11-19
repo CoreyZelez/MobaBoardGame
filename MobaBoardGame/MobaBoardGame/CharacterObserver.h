@@ -1,15 +1,11 @@
 #pragma once
-#include "Character.h"
+#include "CharacterAction.h"
 
-enum CharacterAction
-{
-	basicAttackCharacter,
-	basicAttackMinion,
-};
+class Character;
 
 class CharacterObserver
 {
 public:
-	virtual void update(CharacterAction action, Character& character) {};
+	virtual void update(CharacterAction action) = 0;
 };
 

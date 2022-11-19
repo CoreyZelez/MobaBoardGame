@@ -163,37 +163,46 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Ability.cpp" />
+    <ClCompile Include="EmptyPassive.cpp" />
+    <ClCompile Include="HealthDrainEffect.cpp" />
+    <ClCompile Include="LifeDrainAbility.cpp" />
+    <ClCompile Include="LifeStealPassive.cpp" />
+    <ClCompile Include="SelfAbility.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Attributes.cpp" />
     <ClCompile Include="CharacterAbilities.cpp" />
     <ClCompile Include="CharacterEffects.cpp" />
     <ClCompile Include="CharacterObserver.cpp" />
     <ClCompile Include="Effect.cpp" />
-    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="HealthPoisonEffect.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParalyseEffect.cpp" />
     <ClCompile Include="PassiveAbility.cpp" />
     <ClCompile Include="Position.cpp" />
-    <ClCompile Include="TargetAbility.cpp" />
+    <ClCompile Include="Ability.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ability.h" />
+    <ClInclude Include="CharacterAction.h" />
+    <ClInclude Include="EmptyPassive.h" />
+    <ClInclude Include="HealthDrainEffect.h" />
+    <ClInclude Include="LifeDrainAbility.h" />
+    <ClInclude Include="LifeStealPassive.h" />
+    <ClInclude Include="SelfAbility.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Attributes.h" />
     <ClInclude Include="CharacterAbilities.h" />
     <ClInclude Include="CharacterEffects.h" />
     <ClInclude Include="CharacterObserver.h" />
     <ClInclude Include="Effect.h" />
-    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="HealthPoisonEffect.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ParalyseEffect.h" />
     <ClInclude Include="PassiveAbility.h" />
     <ClInclude Include="Position.h" />
-    <ClInclude Include="TargetAbility.h" />
+    <ClInclude Include="Ability.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

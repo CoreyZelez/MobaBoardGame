@@ -9,21 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Header Files\Effects">
-      <UniqueIdentifier>{429a9ca3-a1d9-477a-9d29-a65a2175281b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\Effects">
-      <UniqueIdentifier>{3716ec80-b152-4455-8686-a30314604d0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Effects\Health">
-      <UniqueIdentifier>{e451d0f7-024e-4a4d-ace2-b62797355877}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Effects\Health">
-      <UniqueIdentifier>{d4683f3d-9461-4db2-8bc3-6e7f1acb6114}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Abilities">
       <UniqueIdentifier>{536b8461-f988-41f7-8abe-d41f4387c6ad}</UniqueIdentifier>
@@ -31,16 +19,46 @@
     <Filter Include="Header Files\Character">
       <UniqueIdentifier>{c57db608-b69b-407d-816c-43988bbf1379}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Abilities">
-      <UniqueIdentifier>{20fa6406-41b4-4c06-abbc-b1838977f229}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Character">
       <UniqueIdentifier>{b591860c-4644-4268-9cdf-c0b59e5d62e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Effects\Movement">
+    <Filter Include="Header Files\Abilities\Self Abilities">
+      <UniqueIdentifier>{1be6a727-1f76-4bc6-85ab-bcb1131d7d1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Passive Abilities">
+      <UniqueIdentifier>{d80a2722-0849-48ae-a28b-35fc54ba2305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Other Abilities">
+      <UniqueIdentifier>{318705e2-be6d-40f5-8972-cf25cdce5b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Effects">
+      <UniqueIdentifier>{429a9ca3-a1d9-477a-9d29-a65a2175281b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Effects\Health">
+      <UniqueIdentifier>{e451d0f7-024e-4a4d-ace2-b62797355877}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Effects\Movement">
       <UniqueIdentifier>{313f80a4-a7a7-4177-b29b-cab959a0b9c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Effects\Movement">
+    <Filter Include="Source Files\Abilties">
+      <UniqueIdentifier>{20fa6406-41b4-4c06-abbc-b1838977f229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Effects">
+      <UniqueIdentifier>{3716ec80-b152-4455-8686-a30314604d0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Passive Abilities">
+      <UniqueIdentifier>{c7bbad50-d53b-4f79-9fa2-fbf248cb3d8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Self Abilities">
+      <UniqueIdentifier>{44a957e5-a9f0-429e-8c37-3e06a8c0a36e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Other Abilities">
+      <UniqueIdentifier>{53ac8de7-5a1c-4f51-a45e-e6c9313a4c5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Effects\Health">
+      <UniqueIdentifier>{d4683f3d-9461-4db2-8bc3-6e7f1acb6114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Effects\Movement">
       <UniqueIdentifier>{99f1c52f-8147-4822-95f3-0cde249d6f5a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -49,10 +67,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HealthPoisonEffect.cpp">
-      <Filter>Source Files\Effects\Health</Filter>
+      <Filter>Source Files\Abilties\Effects\Health</Filter>
     </ClCompile>
     <ClCompile Include="Effect.cpp">
-      <Filter>Source Files\Effects</Filter>
+      <Filter>Source Files\Abilties\Effects</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>Source Files\Character</Filter>
@@ -69,37 +87,46 @@
     <ClCompile Include="Attributes.cpp">
       <Filter>Source Files\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
+    <ClCompile Include="ParalyseEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterObserver.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="PassiveAbility.cpp">
+      <Filter>Source Files\Abilties\Passive Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="SelfAbility.cpp">
+      <Filter>Source Files\Abilties\Self Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeStealPassive.cpp">
+      <Filter>Source Files\Abilties\Passive Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Ability.cpp">
+      <Filter>Source Files\Abilties\Other Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthDrainEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Health</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeDrainAbility.cpp">
+      <Filter>Source Files\Abilties\Other Abilities</Filter>
     </ClCompile>
     <ClCompile Include="Position.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ability.cpp">
-      <Filter>Source Files\Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="ParalyseEffect.cpp">
-      <Filter>Source Files\Effects\Movement</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetAbility.cpp">
-      <Filter>Source Files\Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="CharacterObserver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PassiveAbility.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="EmptyPassive.cpp">
+      <Filter>Source Files\Abilties\Passive Abilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HealthPoisonEffect.h">
-      <Filter>Header Files\Effects\Health</Filter>
+      <Filter>Header Files\Abilities\Effects\Health</Filter>
     </ClInclude>
     <ClInclude Include="Effect.h">
-      <Filter>Header Files\Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Header Files\Character</Filter>
+      <Filter>Header Files\Abilities\Effects</Filter>
     </ClInclude>
     <ClInclude Include="CharacterAbilities.h">
       <Filter>Header Files\Character</Filter>
@@ -113,26 +140,44 @@
     <ClInclude Include="CharacterEffects.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Ability.h">
-      <Filter>Header Files\Abilities</Filter>
+    <ClInclude Include="CharacterObserver.h">
+      <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
+    <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParalyseEffect.h">
+      <Filter>Header Files\Abilities\Effects\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterAction.h">
+      <Filter>Header Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Ability.h">
+      <Filter>Header Files\Abilities\Other Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="PassiveAbility.h">
+      <Filter>Header Files\Abilities\Passive Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="SelfAbility.h">
+      <Filter>Header Files\Abilities\Self Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeStealPassive.h">
+      <Filter>Header Files\Abilities\Passive Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthDrainEffect.h">
+      <Filter>Header Files\Abilities\Effects\Health</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeDrainAbility.h">
+      <Filter>Header Files\Abilities\Other Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\Character</Filter>
     </ClInclude>
     <ClInclude Include="Position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParalyseEffect.h">
-      <Filter>Header Files\Effects\Health</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetAbility.h">
-      <Filter>Header Files\Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterObserver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PassiveAbility.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="EmptyPassive.h">
+      <Filter>Header Files\Abilities\Passive Abilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

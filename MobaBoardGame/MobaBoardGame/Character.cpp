@@ -1,10 +1,10 @@
-#include "Character.h"
 #include <iostream>
+#include "Character.h"
 
 const std::array<int, 8> Character::experienceForLevel = { 0, 20, 45, 80, 130, 200, 300, 450 };
 
-Character::Character(std::array<const CharacterAttributes, 8> baseAttributes)
-	: baseAttributes(baseAttributes)
+Character::Character(Position position, std::array<const CharacterAttributes, 8> baseAttributes, AbilityArsenal abilityArsenal)
+	: position(position), baseAttributes(baseAttributes), abilities(abilityArsenal)
 {
 	currAttributes = baseAttributes[0];  // Current attributes starts at level 0 base attributes.
 }
@@ -13,6 +13,11 @@ void Character::update()
 {
 	updateCurrAttributes();
 	effects.update(currAttributes);  // Applys each effect and updates them.
+}
+
+CharacterAttributes& Character::getAttributes()
+{
+	return currAttributes;
 }
 
 void Character::basicAttack(Character &enemyCharacter)

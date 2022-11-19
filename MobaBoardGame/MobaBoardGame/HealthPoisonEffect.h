@@ -1,18 +1,19 @@
 #pragma once
 #include <memory>
 #include "Effect.h"
-#include "Attributes.h"
+
+struct CharacterAttributes;
 
 class HealthPoisonEffect : public Effect<CharacterAttributes>
 {
 public:
-	HealthPoisonEffect(int duration, int amount);
+	HealthPoisonEffect(int duration, int amountPT);
 
 	std::unique_ptr<Effect<CharacterAttributes>> clone();
 
 private:
 	void apply(CharacterAttributes &ca);  // Deals health damage.
 
-	int amount;  // Amount of damage inflicted.
+	int amountPT;  // Amount of damage inflicted.
 };
 

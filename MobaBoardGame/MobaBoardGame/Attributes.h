@@ -36,11 +36,16 @@ struct LevelInformation
 	int experience = 0;
 };
 
+struct SpecialAttributes{
+	int lifeSteal = 0;
+};
+
 struct CharacterAttributes
 {
 	ActionAttributes actionAttributes;
 	HealthAttributes healthAttributes;
 	CombatAttributes combatAttributes;
 	AbilityAttributes abilityAttributes;
+	SpecialAttributes specialAttributes;
 };
 

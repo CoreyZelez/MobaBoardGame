@@ -1,5 +1,7 @@
 #pragma once
-class Position
+struct Position
 {
+	int x;
+	int y;
 };
 
