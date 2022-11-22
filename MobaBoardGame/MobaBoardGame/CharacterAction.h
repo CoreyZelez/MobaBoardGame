@@ -2,6 +2,15 @@
 
 enum CharacterAction
 {
-	basicAttackCharacter,
-	basicAttackMinion,
+	preBasicAttackCharacter,
+	postBasicAttackCharacter,
+
+	preBasicAttackMinion,
+	postBasicAttackMinion,
+
+	preTakeCharacterDamage,
+	postTakeCharacterDamage,
+
+	death,
+	killCharacter
 };

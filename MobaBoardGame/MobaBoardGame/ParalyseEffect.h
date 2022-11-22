@@ -10,7 +10,6 @@ public:
 
 	std::unique_ptr<Effect<CharacterAttributes>> clone();
 
-private:
 	void apply(CharacterAttributes &ca);  // Deals health damage.
 };
 

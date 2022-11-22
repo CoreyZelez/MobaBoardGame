@@ -1,4 +1,5 @@
 #include "HealthDrainEffect.h"
+#include "HealthEffect.h"
 #include "Attributes.h"
 #include "Character.h"
 
@@ -17,11 +18,22 @@ void HealthDrainEffect::apply(CharacterAttributes &ca)
 	if(ca.healthAttributes.health >= amountPT)
 	{
 		ca.healthAttributes.health -= amountPT;
-		absorber.getAttributes().healthAttributes.health += amountPT * absorbRatio;
+
+		// Handles health absorbtion for absorber.
+		const int healthAbsorb = amountPT * absorbRatio;
+		HealthEffect healthEff(1, healthAbsorb);
+		std::unique_ptr<Effect<CharacterAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
+		absorber.addEffect(healthEffect);
 	}
 	else
 	{
-		absorber.getAttributes().healthAttributes.health += ca.healthAttributes.health * absorbRatio;
+		// Handles health absorbtion for absorber.
+		const int healthAbsorb = ca.healthAttributes.health * absorbRatio;
+		HealthEffect healthEff(1, healthAbsorb);
+		std::unique_ptr<Effect<CharacterAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
+		absorber.addEffect(healthEffect);
+
+		// Character dies.
 		ca.healthAttributes.health = 0;
 	}
 }

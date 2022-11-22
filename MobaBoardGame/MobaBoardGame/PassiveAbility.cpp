@@ -1,11 +1,14 @@
+#include <assert.h>
+#include "Character.h"
 #include "PassiveAbility.h"
 
-PassiveAbility::PassiveAbility(Character &character)
-	: character(character)
+void PassiveAbility::initCharacter(Character &character)
 {
+	assert(this->character == nullptr);
+	this->character = &character;
 }
 
-Character& PassiveAbility::getCharacter()
+Character* PassiveAbility::getCharacter()
 {
 	return character;
 }

@@ -5,3 +5,6 @@ struct Position
 	int y;
 };
 
+bool inRange(Position pos1, Position pos2, double range);
+
+

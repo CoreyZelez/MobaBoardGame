@@ -61,13 +61,16 @@
     <Filter Include="Source Files\Abilties\Effects\Movement">
       <UniqueIdentifier>{99f1c52f-8147-4822-95f3-0cde249d6f5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Abilities\Effects\Attack">
+      <UniqueIdentifier>{66e2c373-8028-49ea-96a9-c67b56f5bf69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Effects\Attack">
+      <UniqueIdentifier>{aac27724-e759-47b3-910e-149099ea3eea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthPoisonEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Health</Filter>
     </ClCompile>
     <ClCompile Include="Effect.cpp">
       <Filter>Source Files\Abilties\Effects</Filter>
@@ -102,17 +105,11 @@
     <ClCompile Include="SelfAbility.cpp">
       <Filter>Source Files\Abilties\Self Abilities</Filter>
     </ClCompile>
-    <ClCompile Include="LifeStealPassive.cpp">
-      <Filter>Source Files\Abilties\Passive Abilities</Filter>
-    </ClCompile>
     <ClCompile Include="Ability.cpp">
       <Filter>Source Files\Abilties\Other Abilities</Filter>
     </ClCompile>
     <ClCompile Include="HealthDrainEffect.cpp">
       <Filter>Source Files\Abilties\Effects\Health</Filter>
-    </ClCompile>
-    <ClCompile Include="LifeDrainAbility.cpp">
-      <Filter>Source Files\Abilties\Other Abilities</Filter>
     </ClCompile>
     <ClCompile Include="Position.cpp">
       <Filter>Source Files</Filter>
@@ -120,11 +117,23 @@
     <ClCompile Include="EmptyPassive.cpp">
       <Filter>Source Files\Abilties\Passive Abilities</Filter>
     </ClCompile>
+    <ClCompile Include="LifeHarvestAbility.cpp">
+      <Filter>Source Files\Abilties\Other Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackHealPassive.cpp">
+      <Filter>Source Files\Abilties\Passive Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Health</Filter>
+    </ClCompile>
+    <ClCompile Include="EnhancedBasicPassive.cpp">
+      <Filter>Source Files\Abilties\Passive Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HealthPoisonEffect.h">
-      <Filter>Header Files\Abilities\Effects\Health</Filter>
-    </ClInclude>
     <ClInclude Include="Effect.h">
       <Filter>Header Files\Abilities\Effects</Filter>
     </ClInclude>
@@ -161,14 +170,8 @@
     <ClInclude Include="SelfAbility.h">
       <Filter>Header Files\Abilities\Self Abilities</Filter>
     </ClInclude>
-    <ClInclude Include="LifeStealPassive.h">
-      <Filter>Header Files\Abilities\Passive Abilities</Filter>
-    </ClInclude>
     <ClInclude Include="HealthDrainEffect.h">
       <Filter>Header Files\Abilities\Effects\Health</Filter>
-    </ClInclude>
-    <ClInclude Include="LifeDrainAbility.h">
-      <Filter>Header Files\Abilities\Other Abilities</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Header Files\Character</Filter>
@@ -177,6 +180,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EmptyPassive.h">
+      <Filter>Header Files\Abilities\Passive Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackHealPassive.h">
+      <Filter>Header Files\Abilities\Passive Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeHarvestAbility.h">
+      <Filter>Header Files\Abilities\Other Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthEffect.h">
+      <Filter>Header Files\Abilities\Effects\Health</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageEffect.h">
+      <Filter>Header Files\Abilities\Effects\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnhancedBasicPassive.h">
       <Filter>Header Files\Abilities\Passive Abilities</Filter>
     </ClInclude>
   </ItemGroup>

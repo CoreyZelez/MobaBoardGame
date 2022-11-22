@@ -2,9 +2,9 @@
 #include <array>
 #include <vector>
 #include "Attributes.h"
-#include "HealthPoisonEffect.h"
-#include "ParalyseEffect.h"
 #include "Character.h"
+#include "AttackHealPassive.h"
+#include "LifeHarvestAbility.h"
 
 
 const int WINDOW_WIDTH = 1280; //1920;
@@ -35,35 +35,26 @@ int main()
 	
 	// Attributes
 	HealthAttributes ha = { 300, 200 };
-	CombatAttributes ca = {30, 20, 20 };
-	ActionAttributes aca = { 3, 2, 2 };
+	CombatAttributes ca = {30, 20, 15, 10 };
+	ActionAttributes aca = { 3, 2, 2, 1, 2, 3 };
 	AbilityAttributes aba = { 20, 10, 10 };
-	SpecialAttributes sa = { 0 };
-	CharacterAttributes cha = { aca, ha, ca, aba, sa};
+	CharacterAttributes cha = { aca, ha, ca, aba};
 	const std::array<const CharacterAttributes, 8> baseAttributes = { cha, cha, cha, cha, cha, cha, cha, cha };
-	Position position{ 0, 1 };
+	Position pos1{ 0, 1 };
+	Position pos2{ 1, 3 };
 
-	// Abilities
+	// abilities
+	AbilityArsenal arsenal = { &AttackHealPassive(), 
+		&LifeHarvestAbility({50, 100, 150}, 2, 0.5), 
+		&LifeHarvestAbility({100, 160, 240}, 4, 0.3) };
 
+	// Characters
+	Character character1(pos1, baseAttributes, arsenal);
+	Character character2(pos2, baseAttributes, arsenal);
 
-	//Character character1(position, baseAttributes, nullptr);
-	//
-	//HealthPoisonEffect hpe(10, 10);
-	//ParalyseEffect pe(3);
-	//
-	//std::unique_ptr<Effect<CharacterAttributes>> eff1 = std::make_unique<HealthPoisonEffect>(hpe);
-	//std::unique_ptr<Effect<CharacterAttributes>> eff2 = std::make_unique<ParalyseEffect>(pe);
-	//
-	//character1.printAttributes();
-	//character1.update();
-	//	
-	//character1.addEffect(eff1);
-	//character1.addEffect(eff2);
-	//
-	//for(int i = 0; i < 40; ++i){
-	//	character1.printAttributes();
-	//	character1.update();
-	//}
+	character1.basicAttack(character2);
+	character1.printAttributes();
+	character2.printAttributes();
 
 	////////////
 	// END CONSOLE TESTING

@@ -6,8 +6,9 @@ struct ActionAttributes
 	int points;  // Spent in order to move or attack or use ability.
 	int movementPoints;  // Spent in order to move.
 	int attackPoints;  // Spent in order to attack.
-	int movementCost = 1;
-	int attackCost = 2;
+	int movementCost;  // Typically 1 at start
+	int attackCost;  // Typically 2 at start
+	double range;  // Basic attack. Uses euclidean distance.
 };
 
 struct HealthAttributes
@@ -18,9 +19,10 @@ struct HealthAttributes
 
 struct CombatAttributes
 {
-	int damage;
-	int armour;
-	int armourPenetration;
+	int physicalDamage;
+	int armor;
+	int armorPenetration;  // Scaling. In terms of %.
+	int lethality;  // Flat armor penetration.
 };
 
 struct AbilityAttributes
@@ -36,9 +38,6 @@ struct LevelInformation
 	int experience = 0;
 };
 
-struct SpecialAttributes{
-	int lifeSteal = 0;
-};
 
 struct CharacterAttributes
 {
@@ -46,6 +45,5 @@ struct CharacterAttributes
 	HealthAttributes healthAttributes;
 	CombatAttributes combatAttributes;
 	AbilityAttributes abilityAttributes;
-	SpecialAttributes specialAttributes;
 };
 

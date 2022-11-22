@@ -6,3 +6,10 @@ CharacterAbilities::CharacterAbilities(AbilityArsenal arsenal)
 	ability2(arsenal.ability2->clone())
 {
 }
+
+void CharacterAbilities::initCharacter(Character & character)
+{
+	passive.get()->initCharacter(character);
+	ability1.get()->initCharacter(character);
+	ability2.get()->initCharacter(character);
+}

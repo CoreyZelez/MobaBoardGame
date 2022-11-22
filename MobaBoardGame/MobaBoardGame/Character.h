@@ -23,21 +23,25 @@ public:
 	//Character(std::array<const CharacterAttributes, 8> baseAttributes, CharacterAbilities abilities, Team team);
 	Character(Position position, std::array<const CharacterAttributes, 8> baseAttributes, AbilityArsenal abilityArsenal);
 
+	// Getters
+	CharacterAttributes getAttributes();
+
+	// Game Actions
 	void update();
+	void basicAttack(Character &enemy);
+	void addEffect(std::unique_ptr<CharacterEffect> &effect);
 
-	CharacterAttributes& getAttributes();
-
-	void basicAttack(Character &enemyCharacter);
+	// Observer functions
+	void subscribeObserver(CharacterObserver *observer);
+	void unsubscribeObserver(CharacterObserver *observer);  
 
 	//testing functions.
 	void printAttributes();
-	//end testing functions.
-
-	void addEffect(std::unique_ptr<CharacterEffect> &effect);
 
 private:
 	// Functions.
-	void updateCurrAttributes();  // Recalled on self affecting abilities. Doesn't affect ability durations.
+	void updateCurrAttributes();  
+	void notifyObservers(CharacterAction action);
 
 	// Level information.
 	const static std::array<int, 8> experienceForLevel; 
@@ -57,7 +61,8 @@ private:
 	CharacterAbilities abilities;
 
 	// Observing objects.
-	// CharacterObserver *observers;
-
+	std::list<CharacterObserver*> observers;  // consider rewriting code to use shared pointers.
 };
+
+double calculatePhysicalDamageMultiplier(int armor, int armorPenetration, int lethality);
 

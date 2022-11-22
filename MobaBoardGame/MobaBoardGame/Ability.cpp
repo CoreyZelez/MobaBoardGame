@@ -2,26 +2,42 @@
 #include "Ability.h"
 #include "PassiveAbility.h"
 #include "EmptyPassive.h"
+#include "Character.h"
 
 
-Ability::Ability(Character &character)
-	: passive(std::make_unique<EmptyPassive>(character))
+Ability::Ability(std::array<int, 3> levelValues, int range)
+	: levelValues(levelValues), range(range), passive(std::make_unique<EmptyPassive>(EmptyPassive()))
 {
 }
 
-Ability::Ability(PassiveAbility *passive)
-	: passive(passive->clone())
+Ability::Ability(std::array<int, 3> levelValues, int range, PassiveAbility *passive)
+	: levelValues(levelValues), range(range), passive(passive->clone())
 {
+}
+
+int Ability::getLevel() const
+{
+	return level;
+}
+
+void Ability::initCharacter(Character & character)
+{
+	passive.get()->initCharacter(character);
+	character.subscribeObserver(passive.get());
+}
+
+std::array<int, 3> Ability::getLevelValues() const
+{
+	return levelValues;
 }
 
 bool Ability::use(Character &target)
 {
 	if(validTarget(target))
 	{
-		Character &owner = passive.get()->getCharacter();
-		applyTarget(owner, target);
-		applySelf(owner);
-		cooldown = calculateCooldown(owner);
+		applyTarget(target);
+		applySelf();
+		cooldown = calculateCooldown();
 		return true;
 	}
 
@@ -33,9 +49,9 @@ void Ability::applyPassive()
 	passive.get()->apply();
 }
 
-const Character* Ability::getOwner()
+Character* Ability::getOwner()
 {
-	return &passive.get()->getCharacter();
+	return passive.get()->getCharacter();
 }
 
 
