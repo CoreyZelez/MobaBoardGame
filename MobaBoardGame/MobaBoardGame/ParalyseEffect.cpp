@@ -6,13 +6,13 @@ ParalyseEffect::ParalyseEffect(int duration)
 {
 }
 
-std::unique_ptr<Effect<CharacterAttributes>> ParalyseEffect::clone()
+std::unique_ptr<Effect<EntityAttributes>> ParalyseEffect::clone()
 {
 	return std::make_unique<ParalyseEffect>(*this);
 }
 
-void ParalyseEffect::apply(CharacterAttributes &ca)
+void ParalyseEffect::apply(EntityAttributes &ea)
 {
-	ca.actionAttributes.movementPoints = 0;
-	ca.actionAttributes.attackPoints = 0;
+	ea.actionAttributes.movementPoints = 0;
+	ea.actionAttributes.attackPoints = 0;
 }

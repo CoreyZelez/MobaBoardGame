@@ -163,7 +163,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DamageEffect.cpp" />
+    <ClCompile Include="ActiveEntity.cpp" />
+    <ClCompile Include="AttackPointEffect.cpp" />
+    <ClCompile Include="BloodAnguishAbility.cpp" />
+    <ClCompile Include="CharacterFactory.cpp" />
+    <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="MovementPointEffect.cpp" />
+    <ClCompile Include="PhysicalDamageEffect.cpp" />
     <ClCompile Include="EmptyPassive.cpp" />
     <ClCompile Include="EnhancedBasicPassive.cpp" />
     <ClCompile Include="HealthDrainEffect.cpp" />
@@ -173,7 +179,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Attributes.cpp" />
     <ClCompile Include="CharacterAbilities.cpp" />
-    <ClCompile Include="CharacterEffects.cpp" />
+    <ClCompile Include="EntityEffects.cpp" />
     <ClCompile Include="CharacterObserver.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -184,10 +190,19 @@
     <ClCompile Include="PassiveAbility.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="Ability.cpp" />
+    <ClCompile Include="ActionPointEffect.cpp" />
+    <ClCompile Include="VoidParalyseAbility.cpp" />
+    <ClCompile Include="VoidShotPassive.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CharacterAction.h" />
-    <ClInclude Include="DamageEffect.h" />
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="ActiveEntity.h" />
+    <ClInclude Include="AttackPointEffect.h" />
+    <ClInclude Include="BloodAnguishAbility.h" />
+    <ClInclude Include="CharacterFactory.h" />
+    <ClInclude Include="Creature.h" />
+    <ClInclude Include="MovementPointEffect.h" />
+    <ClInclude Include="PhysicalDamageEffect.h" />
     <ClInclude Include="EmptyPassive.h" />
     <ClInclude Include="EnhancedBasicPassive.h" />
     <ClInclude Include="HealthDrainEffect.h" />
@@ -197,7 +212,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Attributes.h" />
     <ClInclude Include="CharacterAbilities.h" />
-    <ClInclude Include="CharacterEffects.h" />
+    <ClInclude Include="EntityEffects.h" />
     <ClInclude Include="CharacterObserver.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Game.h" />
@@ -207,6 +222,9 @@
     <ClInclude Include="PassiveAbility.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Ability.h" />
+    <ClInclude Include="ActionPointEffect.h" />
+    <ClInclude Include="VoidParalyseAbility.h" />
+    <ClInclude Include="VoidShotPassive.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

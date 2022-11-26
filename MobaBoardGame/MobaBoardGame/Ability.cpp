@@ -5,13 +5,13 @@
 #include "Character.h"
 
 
-Ability::Ability(std::array<int, 3> levelValues, int range)
-	: levelValues(levelValues), range(range), passive(std::make_unique<EmptyPassive>(EmptyPassive()))
+Ability::Ability(std::array<double, 3> levelValues, int range)
+	: levelValues(levelValues), range(range)
 {
 }
 
-Ability::Ability(std::array<int, 3> levelValues, int range, PassiveAbility *passive)
-	: levelValues(levelValues), range(range), passive(passive->clone())
+Ability::Ability(std::array<double, 3> levelValues, int range, double abilityPowerRatio)
+	: levelValues(levelValues), range(range), abilityPowerRatio(abilityPowerRatio)
 {
 }
 
@@ -20,20 +20,36 @@ int Ability::getLevel() const
 	return level;
 }
 
-void Ability::initCharacter(Character & character)
+
+
+void Ability::initCharacter(Character &character)
 {
-	passive.get()->initCharacter(character);
-	character.subscribeObserver(passive.get());
+	this->character = &character;
+	character.subscribeObserver(this);
 }
 
-std::array<int, 3> Ability::getLevelValues() const
+
+
+std::array<double, 3> Ability::getLevelValues() const
 {
 	return levelValues;
 }
 
+int Ability::getTrueValue()
+{
+	const int abilityPower = character->getAttributes().abilityAttributes.abilityPower;
+	const int level = getLevel() - 1;
+	return levelValues[level] + (abilityPowerRatio * abilityPower);
+}
+
+double Ability::getAbilityPowerRatio() const
+{
+	return abilityPowerRatio;
+}
+
 bool Ability::use(Character &target)
 {
-	if(validTarget(target))
+	if(validTarget(target) && cooldown == 0 && level > 0)
 	{
 		applyTarget(target);
 		applySelf();
@@ -44,14 +60,11 @@ bool Ability::use(Character &target)
 	return false;
 }
 
-void Ability::applyPassive()
-{
-	passive.get()->apply();
-}
 
-Character* Ability::getOwner()
+
+Character *const Ability::getCharacter()
 {
-	return passive.get()->getCharacter();
+	return character;
 }
 
 

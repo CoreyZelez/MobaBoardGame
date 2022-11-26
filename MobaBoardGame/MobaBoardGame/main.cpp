@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <array>
 #include <vector>
+#include <iostream>
 #include "Attributes.h"
 #include "Character.h"
-#include "AttackHealPassive.h"
-#include "LifeHarvestAbility.h"
+#include "CharacterFactory.h"
 
 
 const int WINDOW_WIDTH = 1280; //1920;
@@ -32,29 +32,47 @@ int main()
 	////////////
 	// CONSOLE TESTING
 	//////
-	
-	// Attributes
-	HealthAttributes ha = { 300, 200 };
-	CombatAttributes ca = {30, 20, 15, 10 };
-	ActionAttributes aca = { 3, 2, 2, 1, 2, 3 };
-	AbilityAttributes aba = { 20, 10, 10 };
-	CharacterAttributes cha = { aca, ha, ca, aba};
-	const std::array<const CharacterAttributes, 8> baseAttributes = { cha, cha, cha, cha, cha, cha, cha, cha };
-	Position pos1{ 0, 1 };
-	Position pos2{ 1, 3 };
 
-	// abilities
-	AbilityArsenal arsenal = { &AttackHealPassive(), 
-		&LifeHarvestAbility({50, 100, 150}, 2, 0.5), 
-		&LifeHarvestAbility({100, 160, 240}, 4, 0.3) };
+	CharacterFactory factory;
 
-	// Characters
-	Character character1(pos1, baseAttributes, arsenal);
-	Character character2(pos2, baseAttributes, arsenal);
+	Character character1 = factory.createVoidArcherLeanna({ 2,2 }, 1);
+	Character character2 = factory.createBloodlordKlaus({1,1}, 1);
 
-	character1.basicAttack(character2);
+	character1.init();
+	character2.init();
+
 	character1.printAttributes();
 	character2.printAttributes();
+
+	for(int i = 0; i < 13; ++i)
+	{
+		// leanna
+		character1.basicAttack(character2);
+
+		character1.update();
+		character2.update();
+
+		// klaus
+		character2.basicAttack(character1);
+
+		character1.update();
+		character2.update();
+	}
+
+	character1.printAttributes();
+	character2.printAttributes();
+
+	character2.useAbility2(character2);
+	character2.basicAttack(character1);
+
+	character1.update();
+	character2.update();
+
+	character1.printAttributes();
+	character2.printAttributes();
+
+
+
 
 	////////////
 	// END CONSOLE TESTING

@@ -3,13 +3,13 @@
 #include "Effect.h"
 #include "Attributes.h"
 
-class ParalyseEffect : public Effect<CharacterAttributes>
+class ParalyseEffect : public Effect<EntityAttributes>
 {
 public:
 	ParalyseEffect(int duration);
 
-	std::unique_ptr<Effect<CharacterAttributes>> clone();
+	std::unique_ptr<Effect<EntityAttributes>> clone();
 
-	void apply(CharacterAttributes &ca);  // Deals health damage.
+	void apply(EntityAttributes &ea);  // Deals health damage.
 };
 

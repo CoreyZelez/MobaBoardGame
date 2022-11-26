@@ -7,9 +7,26 @@ CharacterAbilities::CharacterAbilities(AbilityArsenal arsenal)
 {
 }
 
-void CharacterAbilities::initCharacter(Character & character)
+void CharacterAbilities::initCharacter(Character &character)
 {
 	passive.get()->initCharacter(character);
 	ability1.get()->initCharacter(character);
 	ability2.get()->initCharacter(character);
+}
+
+void CharacterAbilities::update()
+{
+	passive.get()->apply();
+	ability1.get()->update();
+	ability2.get()->update();
+}
+
+void CharacterAbilities::useAbility1(Character & target)
+{
+	ability1.get()->use(target);
+}
+
+void CharacterAbilities::useAbility2(Character & target)
+{
+	ability2.get()->use(target);
 }

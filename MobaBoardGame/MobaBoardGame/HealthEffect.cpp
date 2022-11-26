@@ -1,20 +1,21 @@
 #include <memory>
+#include <iostream>
 #include "HealthEffect.h"
 #include "Attributes.h"
 
-struct CharacterAttributes;
+struct EntityAttributes;
 
 HealthEffect::HealthEffect(int duration, int amountPT)
-	: Effect<CharacterAttributes>(duration), amountPT(amountPT)
+	: Effect<EntityAttributes>(duration), amountPT(amountPT)
 {
 }
 
-std::unique_ptr<Effect<CharacterAttributes>> HealthEffect::clone()
+std::unique_ptr<Effect<EntityAttributes>> HealthEffect::clone()
 {
 	return std::make_unique<HealthEffect>(*this);
 }
 
-void HealthEffect::apply(CharacterAttributes &ca)
+void HealthEffect::apply(EntityAttributes &ea)
 {
-	ca.healthAttributes.health += amountPT;
+	ea.healthAttributes.health += amountPT;
 }

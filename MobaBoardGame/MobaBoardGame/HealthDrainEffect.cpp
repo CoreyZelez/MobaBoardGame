@@ -1,3 +1,4 @@
+#include <iostream>
 #include "HealthDrainEffect.h"
 #include "HealthEffect.h"
 #include "Attributes.h"
@@ -8,32 +9,34 @@ HealthDrainEffect::HealthDrainEffect(int duration, int amountPT, double absorbRa
 {
 }
 
-std::unique_ptr<Effect<CharacterAttributes>> HealthDrainEffect::clone()
+std::unique_ptr<Effect<EntityAttributes>> HealthDrainEffect::clone()
 {
 	return std::make_unique<HealthDrainEffect>(*this);
 }
 
-void HealthDrainEffect::apply(CharacterAttributes &ca)
+void HealthDrainEffect::apply(EntityAttributes &ea)
 {
-	if(ca.healthAttributes.health >= amountPT)
+	const int health = ea.healthAttributes.health;
+	if(health >= amountPT)
 	{
-		ca.healthAttributes.health -= amountPT;
+		ea.healthAttributes.health -= amountPT;
 
 		// Handles health absorbtion for absorber.
 		const int healthAbsorb = amountPT * absorbRatio;
 		HealthEffect healthEff(1, healthAbsorb);
-		std::unique_ptr<Effect<CharacterAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
+		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
 		absorber.addEffect(healthEffect);
 	}
 	else
 	{
+		assert(health > 0);
 		// Handles health absorbtion for absorber.
-		const int healthAbsorb = ca.healthAttributes.health * absorbRatio;
+		const int healthAbsorb = ea.healthAttributes.health * absorbRatio;
 		HealthEffect healthEff(1, healthAbsorb);
-		std::unique_ptr<Effect<CharacterAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
+		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
 		absorber.addEffect(healthEffect);
 
 		// Character dies.
-		ca.healthAttributes.health = 0;
+		ea.healthAttributes.health = 0;
 	}
 }

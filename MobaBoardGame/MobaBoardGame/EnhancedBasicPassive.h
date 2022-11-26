@@ -6,6 +6,8 @@ class EnhancedBasicPassive : public PassiveAbility
 public:
 	EnhancedBasicPassive(double damageMultiplier, int stackTrigger, int duration);
 
+	std::unique_ptr<PassiveAbility> clone();
+
 	void update(CharacterAction action);
 
 private:

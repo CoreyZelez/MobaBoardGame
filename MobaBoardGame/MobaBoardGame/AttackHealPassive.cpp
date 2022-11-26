@@ -1,39 +1,32 @@
+#include <iostream>
 #include "AttackHealPassive.h"
 #include "Character.h"
 #include "HealthEffect.h"
 
 
 
-AttackHealPassive::AttackHealPassive(int creatureStack, int characterStack, int creatureMultiplier)
-	: creatureStack(creatureStack), characterStack(characterStack), creatureMultiplier(creatureMultiplier)
+AttackHealPassive::AttackHealPassive(int characterStack, int creatureStack)
+	: creatureStack(creatureStack), characterStack(characterStack)
 {
 }
 
 AttackHealPassive::AttackHealPassive()
-	: AttackHealPassive(1, 3, 0.5)
+	: AttackHealPassive(1, 2)
 {
+}
+
+void AttackHealPassive::update()
+{
+	stacks -= decayAmount;
+	if(stacks < 0)
+	{
+		stacks = 0;
+	}
 }
 
 void AttackHealPassive::update(CharacterAction action)
 {
-	if(action == postBasicAttackCharacter)
-	{
-		HealthEffect healthEff(1, stacks);
-		std::unique_ptr<Effect<CharacterAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
-		getCharacter()->addEffect(healthEffect);
-		stacks += characterStack;
-	}
-	else if(action == postBasicAttackMinion)
-	{
-		const int healthIncrease = stacks * creatureMultiplier;
-		assert(healthIncrease > 0);
-
-		HealthEffect healthEff(1, healthIncrease);
-		std::unique_ptr<Effect<CharacterAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
-		getCharacter()->addEffect(healthEffect);
-		stacks += creatureStack;
-	}
-	else if(action == death)
+	if(action == death)
 	{
 		stacks = 0;
 	}
@@ -42,6 +35,31 @@ void AttackHealPassive::update(CharacterAction action)
 std::unique_ptr<PassiveAbility> AttackHealPassive::clone()
 {
 	return std::make_unique<AttackHealPassive>(*this);
+}
+
+void AttackHealPassive::update(TargetCharacterAction action, Character &target)
+{
+	if(action == postBasicAttackCharacter)
+	{
+		HealthEffect healthEff(1, stacks);
+		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
+		getCharacter()->addEffect(healthEffect);
+		stacks += characterStack;
+	}
+}
+
+void AttackHealPassive::update(TargetCreatureAction action, Creature *target)
+{
+	if(action == postBasicAttackCreature)
+	{
+		const int healthIncrease = stacks * creatureMultiplier;
+		assert(healthIncrease >= 0);
+
+		HealthEffect healthEff(1, healthIncrease);
+		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
+		getCharacter()->addEffect(healthEffect);
+		stacks += creatureStack;
+	}
 }
 
 

@@ -1,49 +1,81 @@
 #include <iostream>
 #include "Character.h"
 
-const std::array<int, 8> Character::experienceForLevel = { 0, 20, 45, 80, 130, 200, 300, 450 };
-
-Character::Character(Position position, std::array<const CharacterAttributes, 8> baseAttributes, AbilityArsenal abilityArsenal)
+Character::Character(Position position, std::array<const EntityAttributes, 6> baseAttributes, AbilityArsenal abilityArsenal)
 	: position(position), baseAttributes(baseAttributes), abilities(abilityArsenal)
 {
-	currAttributes = baseAttributes[0];  // Current attributes starts at level 0 base attributes.
+
+}
+
+void Character::init()
+{
+	// const int level = levelInformation.level - 1;  // Should be 0 under normal circumstances.
+	const int level = 5;  // Should be 0 under normal circumstances.
+	currAttributes = baseAttributes[level];  // Current attributes starts at level 0 base attributes.
 	abilities.initCharacter(*this);  // Grants each ability a reference to self.
+}
+
+void Character::initName(std::string name)
+{
+	this->name = name;
 }
 
 void Character::update()
 {
 	updateCurrAttributes();
 	effects.update(currAttributes);  // Applys each effect and updates them.
+	abilities.update();
 }
 
-CharacterAttributes Character::getAttributes()
+EntityAttributes Character::getAttributes() const
 {
 	return currAttributes;
 }
 
-void Character::basicAttack(Character &enemy)
+EntityAttributes Character::getBaseAttributes() const
 {
-	if(inRange(position, enemy.position, currAttributes.actionAttributes.range))
+	const int level = getLevel() - 1;
+	return baseAttributes[level];
+}
+
+int Character::getLevel() const
+{
+	return levelInformation.level;
+}
+
+void Character::basicAttack(Character &target)
+{
+	if(inRange(position, target.position, currAttributes.actionAttributes.range))
 	{
-		notifyObservers(preBasicAttackCharacter);
+		notifyObservers(preBasicAttackCharacter, target);
 
 		// Update action points.
 		currAttributes.actionAttributes.attackPoints -= currAttributes.actionAttributes.attackCost;
 		currAttributes.actionAttributes.points -= currAttributes.actionAttributes.attackCost;
 
 		// Deal damage.
-		enemy.notifyObservers(preTakeCharacterDamage);
-		double mult = calculatePhysicalDamageMultiplier(enemy.currAttributes.combatAttributes.armor,
+		const double mult = calculatePhysicalDamageMultiplier(target.currAttributes.combatAttributes.armor,
 			currAttributes.combatAttributes.armorPenetration,
 			currAttributes.combatAttributes.lethality);
-		enemy.currAttributes.healthAttributes.health -= currAttributes.combatAttributes.physicalDamage * mult;
+		const int damage = mult * (double)currAttributes.combatAttributes.physicalDamage;
+		std::cout << std::endl;
+		std::cout << target.getAttributes().healthAttributes.health;
+		target.takeDamage(damage);
+		std::cout << " --- " << target.getAttributes().healthAttributes.health << std::endl;
+		std::cout << std::endl;
+
+
+		notifyObservers(postBasicAttackCharacter, target);
 	}
 }
 
 void Character::printAttributes()
 {
-	std::cout << "Health:   " << currAttributes.healthAttributes.health << std::endl;
-	std::cout << "Movement: " << currAttributes.actionAttributes.movementPoints << std::endl;
+	std::cout << std::endl;
+	std::cout << name << std::endl;
+	std::cout << "Health:         " << currAttributes.healthAttributes.health << std::endl;
+	std::cout << "movementPoints: " << currAttributes.actionAttributes.movementPoints << std::endl;
+	std::cout << "points:         " << currAttributes.actionAttributes.points << std::endl;
 	std::cout << std::endl;
 
 }
@@ -63,7 +95,30 @@ void Character::notifyObservers(CharacterAction action)
 	}
 }
 
-void Character::addEffect(std::unique_ptr<CharacterEffect> &effect)
+void Character::notifyObservers(TargetCharacterAction action, Character &character)
+{
+	for(auto &observer : observers)
+	{
+		observer->update(action, character);
+	}
+}
+
+void Character::notifyObservers(TargetCreatureAction action, Creature *creature)
+{
+	for(auto &observer : observers)
+	{
+		observer->update(action, creature);
+	}
+}
+
+void Character::takeDamage(int damage)
+{
+	notifyObservers(preReceiveCharacterBasicAttack);
+	currAttributes.healthAttributes.health -= damage;
+	notifyObservers(postReceiveCharacterBasicAttack);
+}
+
+void Character::addEffect(std::unique_ptr<EntityEffect> &effect)
 {
 	// Applys effect and updates it.
 	effect.get()->update(currAttributes);
@@ -75,6 +130,16 @@ void Character::addEffect(std::unique_ptr<CharacterEffect> &effect)
 	}
 }
 
+void Character::useAbility1(Character &target)
+{
+	abilities.useAbility1(target);
+}
+
+void Character::useAbility2(Character & target)
+{
+	abilities.useAbility2(target);
+}
+
 void Character::subscribeObserver(CharacterObserver *observer)
 {
 	observers.push_back(observer);
@@ -83,21 +148,4 @@ void Character::subscribeObserver(CharacterObserver *observer)
 void Character::unsubscribeObserver(CharacterObserver *observer)
 {
 	observers.remove(observer);
-}
-
-double calculatePhysicalDamageMultiplier(int armor, int armorPenetration, int lethality)
-{
-	int trueArmor = ((armor * armorPenetration) / 100) - lethality;
-	double multiplier;
-
-	if(trueArmor >= 0)
-	{
-		multiplier = 100 / (100 + trueArmor);
-	}
-	else
-	{
-		multiplier = 2 - (100 / 100 - armor);
-	}
-
-	return multiplier;
 }

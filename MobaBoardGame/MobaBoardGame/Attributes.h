@@ -1,4 +1,6 @@
 #pragma once
+#include <array>
+
 
 struct ActionAttributes
 {
@@ -6,8 +8,8 @@ struct ActionAttributes
 	int points;  // Spent in order to move or attack or use ability.
 	int movementPoints;  // Spent in order to move.
 	int attackPoints;  // Spent in order to attack.
-	int movementCost;  // Typically 1 at start
-	int attackCost;  // Typically 2 at start
+	int movementCost;  // Typically 1 at start.
+	int attackCost;  // Typically 2 at start.
 	double range;  // Basic attack. Uses euclidean distance.
 };
 
@@ -20,9 +22,9 @@ struct HealthAttributes
 struct CombatAttributes
 {
 	int physicalDamage;
-	int armor;
-	int armorPenetration;  // Scaling. In terms of %.
+	int armorPenetration;  // In terms of %.
 	int lethality;  // Flat armor penetration.
+	int armor;
 };
 
 struct AbilityAttributes
@@ -32,14 +34,14 @@ struct AbilityAttributes
 	int abilityResist;
 };
 
-struct LevelInformation
+struct CharacterLevelInformation
 {
-	int level = 0;
+	int level = 1;
 	int experience = 0;
+	const static std::array<int, 6> experienceForLevel; 
 };
 
-
-struct CharacterAttributes
+struct EntityAttributes
 {
 	ActionAttributes actionAttributes;
 	HealthAttributes healthAttributes;
@@ -47,3 +49,8 @@ struct CharacterAttributes
 	AbilityAttributes abilityAttributes;
 };
 
+double calculatePhysicalDamageMultiplier(int armor, int armorPenetration, int lethality);
+
+class Character;
+// Need to overload for creatures.
+double calculateAbilityMultiplier(const Character &caster, const Character &target);

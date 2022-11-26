@@ -1,18 +1,20 @@
 #include "SelfAbility.h"
 
-SelfAbility::SelfAbility(std::array<int, 3> coreValues, PassiveAbility *passive)
-	: Ability(coreValues, 0, passive)
+
+
+SelfAbility::SelfAbility(std::array<double, 3> levelValues)
+	: Ability(levelValues, 0)
 {
 }
 
-SelfAbility::SelfAbility(std::array<int, 3> coreValues)
-	: Ability(coreValues, 0)
+SelfAbility::SelfAbility(std::array<double, 3> levelValues, double abilityPowerRatio)
+	: Ability(levelValues, 0, abilityPowerRatio)
 {
 }
 
 bool SelfAbility::validTarget(Character &target)
 {
-	if(&target == getOwner())
+	if(&target == getCharacter())
 	{
 		return true;
 	}

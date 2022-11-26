@@ -3,14 +3,14 @@
 #include "Effect.h"
 #include "Attributes.h"
 
-class HealthEffect : public Effect<CharacterAttributes>
+class HealthEffect : public Effect<EntityAttributes>
 {
 public:
 	HealthEffect(int duration, int amountPT);
 
-	std::unique_ptr<Effect<CharacterAttributes>> clone();
+	std::unique_ptr<Effect<EntityAttributes>> clone();
 
-	void apply(CharacterAttributes &ca);  // Deals health damage.
+	void apply(EntityAttributes &ea);  // Deals health damage.
 
 private:
 	int amountPT;  // Amount of damage inflicted.

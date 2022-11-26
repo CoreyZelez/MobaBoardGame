@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Abilties\Effects\Attack">
       <UniqueIdentifier>{aac27724-e759-47b3-910e-149099ea3eea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Entities">
+      <UniqueIdentifier>{a46035b5-7e85-436a-bd36-45f6f732b531}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{cddf861b-4861-4963-9515-5b68a1f6ca73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -79,9 +85,6 @@
       <Filter>Source Files\Character</Filter>
     </ClCompile>
     <ClCompile Include="CharacterAbilities.cpp">
-      <Filter>Source Files\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="CharacterEffects.cpp">
       <Filter>Source Files\Character</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
@@ -111,9 +114,6 @@
     <ClCompile Include="HealthDrainEffect.cpp">
       <Filter>Source Files\Abilties\Effects\Health</Filter>
     </ClCompile>
-    <ClCompile Include="Position.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EmptyPassive.cpp">
       <Filter>Source Files\Abilties\Passive Abilities</Filter>
     </ClCompile>
@@ -129,8 +129,41 @@
     <ClCompile Include="EnhancedBasicPassive.cpp">
       <Filter>Source Files\Abilties\Passive Abilities</Filter>
     </ClCompile>
-    <ClCompile Include="DamageEffect.cpp">
+    <ClCompile Include="PhysicalDamageEffect.cpp">
       <Filter>Source Files\Abilties\Effects\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="VoidShotPassive.cpp">
+      <Filter>Source Files\Abilties\Passive Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementPointEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityEffects.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterFactory.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="ActiveEntity.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Creature.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Position.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionPointEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="VoidParalyseAbility.cpp">
+      <Filter>Source Files\Abilties\Other Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackPointEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="BloodAnguishAbility.cpp">
+      <Filter>Source Files\Abilties\Other Abilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,13 +173,7 @@
     <ClInclude Include="CharacterAbilities.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Attributes.h">
-      <Filter>Header Files\Character</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Header Files\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterEffects.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
     <ClInclude Include="CharacterObserver.h">
@@ -157,9 +184,6 @@
     </ClInclude>
     <ClInclude Include="ParalyseEffect.h">
       <Filter>Header Files\Abilities\Effects\Movement</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterAction.h">
-      <Filter>Header Files\Character</Filter>
     </ClInclude>
     <ClInclude Include="Ability.h">
       <Filter>Header Files\Abilities\Other Abilities</Filter>
@@ -176,9 +200,6 @@
     <ClInclude Include="Character.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Position.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EmptyPassive.h">
       <Filter>Header Files\Abilities\Passive Abilities</Filter>
     </ClInclude>
@@ -191,11 +212,50 @@
     <ClInclude Include="HealthEffect.h">
       <Filter>Header Files\Abilities\Effects\Health</Filter>
     </ClInclude>
-    <ClInclude Include="DamageEffect.h">
-      <Filter>Header Files\Abilities\Effects\Attack</Filter>
-    </ClInclude>
     <ClInclude Include="EnhancedBasicPassive.h">
       <Filter>Header Files\Abilities\Passive Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalDamageEffect.h">
+      <Filter>Header Files\Abilities\Effects\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidShotPassive.h">
+      <Filter>Header Files\Abilities\Passive Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Header Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionPointEffect.h">
+      <Filter>Header Files\Abilities\Effects\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityEffects.h">
+      <Filter>Header Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementPointEffect.h">
+      <Filter>Header Files\Abilities\Effects\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveEntity.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterFactory.h">
+      <Filter>Header Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Creature.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Attributes.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidParalyseAbility.h">
+      <Filter>Header Files\Abilities\Other Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackPointEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BloodAnguishAbility.h">
+      <Filter>Header Files\Abilities\Other Abilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
