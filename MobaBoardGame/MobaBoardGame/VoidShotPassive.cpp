@@ -18,13 +18,18 @@ std::unique_ptr<PassiveAbility> VoidShotPassive::clone()
 
 void VoidShotPassive::update(TargetCharacterAction action, Character &target)
 {
+	const int level = getCharacter()->getLevel() - 1;
+
 	if(stacks == stackTrigger && action == preBasicAttackCharacter)
 	{
 		stacks = 0;
 
 		// True damage effect.
-		const int level = getCharacter()->getLevel() - 1;
-		const int damage = trueDamage[level];
+		int damage = trueDamage[level];
+		if(target.hasEffectType(voidInfliction))
+		{
+			damage *= 2;
+		}
 		const int damagePerTurn = (double)damage / (double)duration;
 
 		std::unique_ptr<Effect<EntityAttributes>> effect1 = std::make_unique<HealthEffect>(duration, -damagePerTurn);
@@ -34,6 +39,17 @@ void VoidShotPassive::update(TargetCharacterAction action, Character &target)
 		target.addEffect(effect1);
 		target.addEffect(effect2);
 		target.addEffect(effect3);
+	}
+	else if(action == preBasicAttackCharacter)
+	{
+		// True damage when target is voidInflicted but stacks not at trigger. (non void shot).
+		if(target.hasEffectType(voidInfliction))
+		{
+			const double nonVoidShotRate = 0.5;
+			const int damage = (double)trueDamage[level] * nonVoidShotRate;
+			const int damagePerTurn = (double)damage / (double)duration;
+			std::unique_ptr<Effect<EntityAttributes>> effect1 = std::make_unique<HealthEffect>(duration, -damagePerTurn);
+		}
 	}
 	else if(action == preBasicAttackCharacter)
 	{

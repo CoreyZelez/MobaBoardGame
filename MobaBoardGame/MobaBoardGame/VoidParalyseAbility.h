@@ -10,6 +10,7 @@ public:
 protected:
 	bool validTarget(Character &character);
 	void applyTarget(Character &target);
+	void applySelf();
 	int calculateCooldown() const;
 
 private:

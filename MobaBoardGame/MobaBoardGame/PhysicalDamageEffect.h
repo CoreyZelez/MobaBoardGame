@@ -6,6 +6,8 @@ class PhysicalDamageEffect : public Effect<EntityAttributes>
 {
 public:
 	PhysicalDamageEffect(int duration, int amount);
+	PhysicalDamageEffect(int duration, int amount, EffectType type);
+
 
 	std::unique_ptr<Effect<EntityAttributes>> clone();
 

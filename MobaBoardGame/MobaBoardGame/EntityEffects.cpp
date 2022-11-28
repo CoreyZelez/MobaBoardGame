@@ -31,6 +31,19 @@ void EntityEffects::update(EntityAttributes &attributes)
 	}
 }
 
+bool EntityEffects::hasEffectType(EffectType type) 
+{
+	for(const auto &effect : effects)
+	{
+		if(effect.get()->getType() == type)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 
 
 

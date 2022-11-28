@@ -22,23 +22,8 @@
     <Filter Include="Source Files\Character">
       <UniqueIdentifier>{b591860c-4644-4268-9cdf-c0b59e5d62e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Abilities\Self Abilities">
-      <UniqueIdentifier>{1be6a727-1f76-4bc6-85ab-bcb1131d7d1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Abilities\Passive Abilities">
-      <UniqueIdentifier>{d80a2722-0849-48ae-a28b-35fc54ba2305}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Abilities\Other Abilities">
-      <UniqueIdentifier>{318705e2-be6d-40f5-8972-cf25cdce5b4b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Abilities\Effects">
       <UniqueIdentifier>{429a9ca3-a1d9-477a-9d29-a65a2175281b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Abilities\Effects\Health">
-      <UniqueIdentifier>{e451d0f7-024e-4a4d-ace2-b62797355877}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Abilities\Effects\Movement">
-      <UniqueIdentifier>{313f80a4-a7a7-4177-b29b-cab959a0b9c2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Abilties">
       <UniqueIdentifier>{20fa6406-41b4-4c06-abbc-b1838977f229}</UniqueIdentifier>
@@ -46,32 +31,41 @@
     <Filter Include="Source Files\Abilties\Effects">
       <UniqueIdentifier>{3716ec80-b152-4455-8686-a30314604d0c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Abilties\Passive Abilities">
-      <UniqueIdentifier>{c7bbad50-d53b-4f79-9fa2-fbf248cb3d8c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Abilties\Self Abilities">
-      <UniqueIdentifier>{44a957e5-a9f0-429e-8c37-3e06a8c0a36e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Abilties\Other Abilities">
-      <UniqueIdentifier>{53ac8de7-5a1c-4f51-a45e-e6c9313a4c5d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Abilties\Effects\Health">
-      <UniqueIdentifier>{d4683f3d-9461-4db2-8bc3-6e7f1acb6114}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Abilties\Effects\Movement">
-      <UniqueIdentifier>{99f1c52f-8147-4822-95f3-0cde249d6f5a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Abilities\Effects\Attack">
-      <UniqueIdentifier>{66e2c373-8028-49ea-96a9-c67b56f5bf69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Abilties\Effects\Attack">
-      <UniqueIdentifier>{aac27724-e759-47b3-910e-149099ea3eea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Entities">
       <UniqueIdentifier>{a46035b5-7e85-436a-bd36-45f6f732b531}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{cddf861b-4861-4963-9515-5b68a1f6ca73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Effects\Action">
+      <UniqueIdentifier>{39b20d73-7365-4efa-bb82-ef6bc784fab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Effects\Combat">
+      <UniqueIdentifier>{aac27724-e759-47b3-910e-149099ea3eea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Effects\Combat">
+      <UniqueIdentifier>{66e2c373-8028-49ea-96a9-c67b56f5bf69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Effects\Action">
+      <UniqueIdentifier>{313f80a4-a7a7-4177-b29b-cab959a0b9c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Leanna">
+      <UniqueIdentifier>{647abecb-9c5f-415c-bed3-70fa3957a524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Klaus">
+      <UniqueIdentifier>{8b9670d5-3f59-485f-937a-f627af5a89cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Leanna">
+      <UniqueIdentifier>{db5aaaa6-bfe6-4333-b8b2-4aca648ff4d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Klaus">
+      <UniqueIdentifier>{d83742ed-7236-477a-ba87-69a9dfe68b2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{da9bdf23-700a-4c94-9b12-28edeca71054}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{25b2c442-8211-473f-8b6d-754c225bc6da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -87,59 +81,11 @@
     <ClCompile Include="CharacterAbilities.cpp">
       <Filter>Source Files\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Attributes.cpp">
-      <Filter>Source Files\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="ParalyseEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Movement</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterObserver.cpp">
       <Filter>Source Files\Character</Filter>
     </ClCompile>
-    <ClCompile Include="PassiveAbility.cpp">
-      <Filter>Source Files\Abilties\Passive Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="SelfAbility.cpp">
-      <Filter>Source Files\Abilties\Self Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Ability.cpp">
-      <Filter>Source Files\Abilties\Other Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthDrainEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Health</Filter>
-    </ClCompile>
-    <ClCompile Include="EmptyPassive.cpp">
-      <Filter>Source Files\Abilties\Passive Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="LifeHarvestAbility.cpp">
-      <Filter>Source Files\Abilties\Other Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="AttackHealPassive.cpp">
-      <Filter>Source Files\Abilties\Passive Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Health</Filter>
-    </ClCompile>
-    <ClCompile Include="EnhancedBasicPassive.cpp">
-      <Filter>Source Files\Abilties\Passive Abilities</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicalDamageEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="VoidShotPassive.cpp">
-      <Filter>Source Files\Abilties\Passive Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="MovementPointEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Movement</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityEffects.cpp">
-      <Filter>Source Files\Character</Filter>
+      <Filter>Source Files\Abilties\Effects\Combat</Filter>
     </ClCompile>
     <ClCompile Include="CharacterFactory.cpp">
       <Filter>Source Files\Character</Filter>
@@ -154,16 +100,82 @@
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="ActionPointEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Movement</Filter>
+      <Filter>Source Files\Abilties\Effects\Action</Filter>
     </ClCompile>
-    <ClCompile Include="VoidParalyseAbility.cpp">
-      <Filter>Source Files\Abilties\Other Abilities</Filter>
+    <ClCompile Include="Attributes.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityEffects.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmorEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementPointEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="ParalyseEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthDrainEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Combat</Filter>
     </ClCompile>
     <ClCompile Include="AttackPointEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Movement</Filter>
+      <Filter>Source Files\Abilties\Effects\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="VoidParalyseAbility.cpp">
+      <Filter>Source Files\Abilties\Leanna</Filter>
+    </ClCompile>
+    <ClCompile Include="VoidRendAbility.cpp">
+      <Filter>Source Files\Abilties\Leanna</Filter>
+    </ClCompile>
+    <ClCompile Include="VoidShotPassive.cpp">
+      <Filter>Source Files\Abilties\Leanna</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackHealPassive.cpp">
+      <Filter>Source Files\Abilties\Klaus</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeHarvestAbility.cpp">
+      <Filter>Source Files\Abilties\Klaus</Filter>
     </ClCompile>
     <ClCompile Include="BloodAnguishAbility.cpp">
-      <Filter>Source Files\Abilties\Other Abilities</Filter>
+      <Filter>Source Files\Abilties\Klaus</Filter>
+    </ClCompile>
+    <ClCompile Include="SelfAbility.cpp">
+      <Filter>Source Files\Abilties</Filter>
+    </ClCompile>
+    <ClCompile Include="Ability.cpp">
+      <Filter>Source Files\Abilties</Filter>
+    </ClCompile>
+    <ClCompile Include="PassiveAbility.cpp">
+      <Filter>Source Files\Abilties</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameBoard.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicSquare.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditor.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditorHandler.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ImpassableBoardSquare.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSquare.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,65 +185,26 @@
     <ClInclude Include="CharacterAbilities.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files\Character</Filter>
-    </ClInclude>
     <ClInclude Include="CharacterObserver.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ParalyseEffect.h">
-      <Filter>Header Files\Abilities\Effects\Movement</Filter>
-    </ClInclude>
-    <ClInclude Include="Ability.h">
-      <Filter>Header Files\Abilities\Other Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="PassiveAbility.h">
-      <Filter>Header Files\Abilities\Passive Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="SelfAbility.h">
-      <Filter>Header Files\Abilities\Self Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthDrainEffect.h">
-      <Filter>Header Files\Abilities\Effects\Health</Filter>
+      <Filter>Header Files\Abilities\Effects\Action</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="EmptyPassive.h">
-      <Filter>Header Files\Abilities\Passive Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="AttackHealPassive.h">
-      <Filter>Header Files\Abilities\Passive Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="LifeHarvestAbility.h">
-      <Filter>Header Files\Abilities\Other Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthEffect.h">
-      <Filter>Header Files\Abilities\Effects\Health</Filter>
-    </ClInclude>
-    <ClInclude Include="EnhancedBasicPassive.h">
-      <Filter>Header Files\Abilities\Passive Abilities</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicalDamageEffect.h">
-      <Filter>Header Files\Abilities\Effects\Attack</Filter>
-    </ClInclude>
-    <ClInclude Include="VoidShotPassive.h">
-      <Filter>Header Files\Abilities\Passive Abilities</Filter>
+      <Filter>Header Files\Abilities\Effects\Combat</Filter>
     </ClInclude>
     <ClInclude Include="Action.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
     <ClInclude Include="ActionPointEffect.h">
-      <Filter>Header Files\Abilities\Effects\Movement</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityEffects.h">
-      <Filter>Header Files\Character</Filter>
+      <Filter>Header Files\Abilities\Effects\Action</Filter>
     </ClInclude>
     <ClInclude Include="MovementPointEffect.h">
-      <Filter>Header Files\Abilities\Effects\Movement</Filter>
+      <Filter>Header Files\Abilities\Effects\Action</Filter>
     </ClInclude>
     <ClInclude Include="ActiveEntity.h">
       <Filter>Header Files\Entities</Filter>
@@ -248,14 +221,74 @@
     <ClInclude Include="Attributes.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="VoidParalyseAbility.h">
-      <Filter>Header Files\Abilities\Other Abilities</Filter>
+    <ClInclude Include="HealthDrainEffect.h">
+      <Filter>Header Files\Abilities\Effects\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthEffect.h">
+      <Filter>Header Files\Abilities\Effects\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorEffect.h">
+      <Filter>Header Files\Abilities\Effects\Combat</Filter>
     </ClInclude>
     <ClInclude Include="AttackPointEffect.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Abilities\Effects\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityEffects.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidRendAbility.h">
+      <Filter>Header Files\Abilities\Leanna</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidParalyseAbility.h">
+      <Filter>Header Files\Abilities\Leanna</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidShotPassive.h">
+      <Filter>Header Files\Abilities\Leanna</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackHealPassive.h">
+      <Filter>Header Files\Abilities\Klaus</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeHarvestAbility.h">
+      <Filter>Header Files\Abilities\Klaus</Filter>
     </ClInclude>
     <ClInclude Include="BloodAnguishAbility.h">
-      <Filter>Header Files\Abilities\Other Abilities</Filter>
+      <Filter>Header Files\Abilities\Klaus</Filter>
+    </ClInclude>
+    <ClInclude Include="Ability.h">
+      <Filter>Header Files\Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="SelfAbility.h">
+      <Filter>Header Files\Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="PassiveAbility.h">
+      <Filter>Header Files\Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameBoard.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditor.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditorHandler.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ImpassableBoardSquare.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicSquare.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareType.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSquare.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

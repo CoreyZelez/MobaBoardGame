@@ -2,7 +2,8 @@
 #include <array>
 #include "PassiveAbility.h"
 
-/* Causes basic attack to deal true damage over time whilst also slowing the target.*/
+/* Causes basic attack to deal true damage over time whilst also slowing the target (after stacks reached).
+Damage bonus to a void shot on a voidInfliction target. */
 class VoidShotPassive : public PassiveAbility
 {
 public:

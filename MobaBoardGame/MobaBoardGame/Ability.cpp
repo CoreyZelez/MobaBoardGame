@@ -5,12 +5,12 @@
 #include "Character.h"
 
 
-Ability::Ability(std::array<double, 3> levelValues, int range)
+Ability::Ability(std::array<double, 3> levelValues, double range)
 	: levelValues(levelValues), range(range)
 {
 }
 
-Ability::Ability(std::array<double, 3> levelValues, int range, double abilityPowerRatio)
+Ability::Ability(std::array<double, 3> levelValues, double range, double abilityPowerRatio)
 	: levelValues(levelValues), range(range), abilityPowerRatio(abilityPowerRatio)
 {
 }

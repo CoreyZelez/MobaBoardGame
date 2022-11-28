@@ -44,6 +44,8 @@ public:
 	void subscribeObserver(CharacterObserver *observer);
 	void unsubscribeObserver(CharacterObserver *observer);  
 
+	bool hasEffectType(EffectType type);
+
 	//testing functions.
 	void printAttributes();
 

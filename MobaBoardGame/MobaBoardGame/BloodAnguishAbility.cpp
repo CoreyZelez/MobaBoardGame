@@ -5,6 +5,8 @@
 #include "MovementPointEffect.h"
 #include "AttackPointEffect.h"
 #include "PhysicalDamageEffect.h"
+#include "healthEffect.h"
+
 
 
 
@@ -65,10 +67,10 @@ void BloodAnguishAbility::update(TargetCharacterAction action, Character &target
 
 	if(action == preBasicAttackCharacter)
 	{
-		// Determine ratio to add physical damage stats to character. Dependant on target health.
+		// Determine ratio to add physical damage stats to character. Dependant on target health. 
+		// Ignores magic penetration and resist.
 		const double abilityPowerRatio = getLevelValues()[getCharacter()->getLevel()];
 		health = target.getAttributes().healthAttributes.health;
-		std::cout << "pre-health -> " << health << std::endl;
 		const int maxHealth = target.getBaseAttributes().healthAttributes.health;
 		double healthRatio = ((double)maxHealth / (double)health);
 		const int abilityPower = getCharacter()->getAttributes().abilityAttributes.abilityPower;
@@ -80,8 +82,6 @@ void BloodAnguishAbility::update(TargetCharacterAction action, Character &target
 		}
 		const double finalRatio = healthRatio * abilityPowerMultiplier * 0.5;
 
-		std::cout << "finalRatio --> " << finalRatio << std::endl;  // testing
-
 		// Adds physical damage to character.
 		const int physicalDamage = getCharacter()->getAttributes().combatAttributes.physicalDamage;
 		const int amount = physicalDamage * finalRatio;
@@ -91,7 +91,7 @@ void BloodAnguishAbility::update(TargetCharacterAction action, Character &target
 	else if(action == postBasicAttackCharacter)
 	{
 		// Character absorbs all damage from basic attack.
-		const int currHealth = target.getBaseAttributes().healthAttributes.health;
+		const int currHealth = target.getAttributes().healthAttributes.health;
 		if(currHealth < 0)
 		{
 			std::unique_ptr<Effect<EntityAttributes>> effect = std::make_unique<PhysicalDamageEffect>(1, health);
@@ -100,10 +100,9 @@ void BloodAnguishAbility::update(TargetCharacterAction action, Character &target
 		else
 		{
 			const int healthDiff = health - currHealth;
-			std::cout << std::endl << health << " " << currHealth << std::endl;
-			std::cout << "post-health -> " << currHealth << std::endl;
+			std::cout << healthDiff;
 			assert(healthDiff > 0);
-			std::unique_ptr<Effect<EntityAttributes>> effect = std::make_unique<PhysicalDamageEffect>(1, healthDiff);
+			std::unique_ptr<Effect<EntityAttributes>> effect = std::make_unique<HealthEffect>(1, healthDiff);
 			getCharacter()->addEffect(effect);
 		}
 	}

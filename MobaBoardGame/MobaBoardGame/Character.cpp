@@ -9,8 +9,8 @@ Character::Character(Position position, std::array<const EntityAttributes, 6> ba
 
 void Character::init()
 {
-	// const int level = levelInformation.level - 1;  // Should be 0 under normal circumstances.
-	const int level = 5;  // Should be 0 under normal circumstances.
+	// const int level = levelInformation.level - 1;  // ???
+	const int level = 5;  // ???
 	currAttributes = baseAttributes[level];  // Current attributes starts at level 0 base attributes.
 	abilities.initCharacter(*this);  // Grants each ability a reference to self.
 }
@@ -58,12 +58,7 @@ void Character::basicAttack(Character &target)
 			currAttributes.combatAttributes.armorPenetration,
 			currAttributes.combatAttributes.lethality);
 		const int damage = mult * (double)currAttributes.combatAttributes.physicalDamage;
-		std::cout << std::endl;
-		std::cout << target.getAttributes().healthAttributes.health;
 		target.takeDamage(damage);
-		std::cout << " --- " << target.getAttributes().healthAttributes.health << std::endl;
-		std::cout << std::endl;
-
 
 		notifyObservers(postBasicAttackCharacter, target);
 	}
@@ -148,4 +143,9 @@ void Character::subscribeObserver(CharacterObserver *observer)
 void Character::unsubscribeObserver(CharacterObserver *observer)
 {
 	observers.remove(observer);
+}
+
+bool Character::hasEffectType(EffectType type)
+{
+	return effects.hasEffectType(type);
 }

@@ -6,6 +6,11 @@ ParalyseEffect::ParalyseEffect(int duration)
 {
 }
 
+ParalyseEffect::ParalyseEffect(int duration, EffectType type)
+	: Effect(duration, type)
+{
+}
+
 std::unique_ptr<Effect<EntityAttributes>> ParalyseEffect::clone()
 {
 	return std::make_unique<ParalyseEffect>(*this);

@@ -164,14 +164,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ActiveEntity.cpp" />
+    <ClCompile Include="ArmorEffect.cpp" />
     <ClCompile Include="AttackPointEffect.cpp" />
+    <ClCompile Include="BasicSquare.cpp" />
     <ClCompile Include="BloodAnguishAbility.cpp" />
+    <ClCompile Include="GameSquare.cpp" />
     <ClCompile Include="CharacterFactory.cpp" />
     <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="GameBoard.cpp" />
+    <ClCompile Include="ImpassableBoardSquare.cpp" />
+    <ClCompile Include="MapEditor.cpp" />
+    <ClCompile Include="MapEditorHandler.cpp" />
     <ClCompile Include="MovementPointEffect.cpp" />
     <ClCompile Include="PhysicalDamageEffect.cpp" />
-    <ClCompile Include="EmptyPassive.cpp" />
-    <ClCompile Include="EnhancedBasicPassive.cpp" />
     <ClCompile Include="HealthDrainEffect.cpp" />
     <ClCompile Include="LifeHarvestAbility.cpp" />
     <ClCompile Include="AttackHealPassive.cpp" />
@@ -192,19 +197,25 @@
     <ClCompile Include="Ability.cpp" />
     <ClCompile Include="ActionPointEffect.cpp" />
     <ClCompile Include="VoidParalyseAbility.cpp" />
+    <ClCompile Include="VoidRendAbility.cpp" />
     <ClCompile Include="VoidShotPassive.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="ActiveEntity.h" />
+    <ClInclude Include="ArmorEffect.h" />
     <ClInclude Include="AttackPointEffect.h" />
+    <ClInclude Include="BasicSquare.h" />
     <ClInclude Include="BloodAnguishAbility.h" />
+    <ClInclude Include="GameSquare.h" />
     <ClInclude Include="CharacterFactory.h" />
     <ClInclude Include="Creature.h" />
+    <ClInclude Include="GameBoard.h" />
+    <ClInclude Include="ImpassableBoardSquare.h" />
+    <ClInclude Include="MapEditor.h" />
+    <ClInclude Include="MapEditorHandler.h" />
     <ClInclude Include="MovementPointEffect.h" />
     <ClInclude Include="PhysicalDamageEffect.h" />
-    <ClInclude Include="EmptyPassive.h" />
-    <ClInclude Include="EnhancedBasicPassive.h" />
     <ClInclude Include="HealthDrainEffect.h" />
     <ClInclude Include="LifeHarvestAbility.h" />
     <ClInclude Include="AttackHealPassive.h" />
@@ -223,7 +234,9 @@
     <ClInclude Include="Position.h" />
     <ClInclude Include="Ability.h" />
     <ClInclude Include="ActionPointEffect.h" />
+    <ClInclude Include="SquareType.h" />
     <ClInclude Include="VoidParalyseAbility.h" />
+    <ClInclude Include="VoidRendAbility.h" />
     <ClInclude Include="VoidShotPassive.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -10,8 +10,8 @@ enum CharacterAction;
 class Ability : public CharacterObserver
 {
 public:
-	Ability(std::array<double, 3> levelValues, int range);
-	Ability(std::array<double, 3> levelValues, int range, double abilityPowerRatio);
+	Ability(std::array<double, 3> levelValues, double range);
+	Ability(std::array<double, 3> levelValues, double range, double abilityPowerRatio);
 
 	virtual std::unique_ptr<Ability> clone() = 0;  // Allows for copying of unique_ptrs to base class.
 
@@ -37,6 +37,7 @@ protected:
 
 	// Target validation functions.
 	virtual bool validTarget(Character &target) = 0;
+	// Need creature target validation function here.
 
 	// Ability effect logic.
 	virtual void applySelf() {};  // Effects on caster.
@@ -50,7 +51,7 @@ private:
 	double abilityPowerRatio = 0;
 	int level = 1;  // 1 for testing. should be 0.
 	int cooldown = 0;
-	int range = 0;  
+	double range = 0;  
 };
 
 
