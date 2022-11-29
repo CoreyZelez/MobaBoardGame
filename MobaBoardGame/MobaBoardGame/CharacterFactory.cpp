@@ -7,7 +7,7 @@
 #include "VoidParalyseAbility.h"
 #include "BloodAnguishAbility.h"
 
-Character CharacterFactory::createBloodlordKlaus(Position initPos, double multiplier)
+std::shared_ptr<Character> CharacterFactory::createBloodlordKlaus(Position initPos, double multiplier)
 {
 	// Klaus is a melee jungler.
 	// Klaus has no regen to force reliance on passive and abilities for heal.
@@ -56,12 +56,12 @@ Character CharacterFactory::createBloodlordKlaus(Position initPos, double multip
 		&LifeHarvestAbility({60, 110, 200}, 3, 0.5),
 		&BloodAnguishAbility({0.005, 0.0075, 0.01}) };
 
-	Character klaus(initPos, baseAttributes, arsenal);
-	klaus.initName("klaus");
+	std::shared_ptr<Character> klaus = std::make_shared<Character>(initPos, baseAttributes, arsenal);
+	klaus.get()->initName("klaus");
 	return klaus;
 }
 
-Character CharacterFactory::createVoidArcherLeanna(Position initPos, double multiplier)
+std::shared_ptr<Character> CharacterFactory::createVoidArcherLeanna(Position initPos, double multiplier)
 {
 	// Leanna is a ranged laner.
 	// 
@@ -108,7 +108,7 @@ Character CharacterFactory::createVoidArcherLeanna(Position initPos, double mult
 		&VoidParalyseAbility({80, 110, 185}, 4),
 		&VoidParalyseAbility({80, 110, 185}, 4) };
 
-	Character leanna(initPos, baseAttributes, arsenal);
-	leanna.initName("leanna");
+	std::shared_ptr<Character> leanna = std::make_shared<Character> (initPos, baseAttributes, arsenal);
+	leanna.get()->initName("leanna");
 	return leanna;
 }

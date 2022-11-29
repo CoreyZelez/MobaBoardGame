@@ -5,9 +5,12 @@ enum SquareType
 	// Impassable square types.
 	impassableForest,
 	deepWater,    
+	mountain,
+	lava,
 
 	// Passable square types.
-	grass
+	grass,
+	mountainFloor
 
 	// Special square types.
 };

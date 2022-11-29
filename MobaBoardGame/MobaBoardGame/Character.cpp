@@ -2,7 +2,7 @@
 #include "Character.h"
 
 Character::Character(Position position, std::array<const EntityAttributes, 6> baseAttributes, AbilityArsenal abilityArsenal)
-	: position(position), baseAttributes(baseAttributes), abilities(abilityArsenal)
+	: ActiveEntity(position), baseAttributes(baseAttributes), abilities(abilityArsenal)
 {
 
 }
@@ -13,11 +13,6 @@ void Character::init()
 	const int level = 5;  // ???
 	currAttributes = baseAttributes[level];  // Current attributes starts at level 0 base attributes.
 	abilities.initCharacter(*this);  // Grants each ability a reference to self.
-}
-
-void Character::initName(std::string name)
-{
-	this->name = name;
 }
 
 void Character::update()
@@ -43,9 +38,19 @@ int Character::getLevel() const
 	return levelInformation.level;
 }
 
+int Character::getMovementPoints() const
+{
+	return currAttributes.actionAttributes.movementPoints;
+}
+
+int Character::getActionPoints() const
+{
+	return currAttributes.actionAttributes.points;
+}
+
 void Character::basicAttack(Character &target)
 {
-	if(inRange(position, target.position, currAttributes.actionAttributes.range))
+	if(inRange(getPosition(), target.getPosition(), currAttributes.actionAttributes.range))
 	{
 		notifyObservers(preBasicAttackCharacter, target);
 
@@ -67,7 +72,7 @@ void Character::basicAttack(Character &target)
 void Character::printAttributes()
 {
 	std::cout << std::endl;
-	std::cout << name << std::endl;
+	std::cout << getName() << std::endl;
 	std::cout << "Health:         " << currAttributes.healthAttributes.health << std::endl;
 	std::cout << "movementPoints: " << currAttributes.actionAttributes.movementPoints << std::endl;
 	std::cout << "points:         " << currAttributes.actionAttributes.points << std::endl;
@@ -125,6 +130,28 @@ void Character::addEffect(std::unique_ptr<EntityEffect> &effect)
 	}
 }
 
+bool Character::move(Position position, int cost)
+{
+	// Temporary cost calculation. Make a more intelligent
+	// algorithm in the future.
+	if(cost == -1)
+	{
+		cost = std::abs(position.x - getPosition().x) + 
+			std::abs(position.y - getPosition().y);
+	}
+
+	if(cost <= currAttributes.actionAttributes.movementPoints &&
+		cost <= currAttributes.actionAttributes.points)
+	{
+		currAttributes.actionAttributes.movementPoints -= cost;
+		currAttributes.actionAttributes.points -= cost;
+		ActiveEntity::move(position);
+		return true;
+	}
+
+	return false;
+}
+
 void Character::useAbility1(Character &target)
 {
 	abilities.useAbility1(target);
@@ -149,3 +176,7 @@ bool Character::hasEffectType(EffectType type)
 {
 	return effects.hasEffectType(type);
 }
+
+
+
+

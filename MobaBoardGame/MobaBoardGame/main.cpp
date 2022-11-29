@@ -9,6 +9,9 @@
 #include "GameBoard.h"
 #include "MapEditor.h"
 #include "MapEditorHandler.h"
+#include "Game.h"
+#include "GameHandler.h"
+
 
 
 const int WINDOW_WIDTH = 1920; //1920;
@@ -21,13 +24,14 @@ int main()
 	window.setVerticalSyncEnabled(false);
 	sf::View view(sf::Vector2f(0.f, 0.f), sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
 
+	// Game data.
+	Game game;
+	GameHandler handler(game);
+
 	// Camera move data.
 	sf::Vector2f oldPos;
 	bool moving = false;
 	float zoom = 1;
-
-	MapEditor editor(121, 51);
-	MapEditorHandler handler(editor);
 
 	while(window.isOpen()) {
 		sf::Event event;
@@ -97,7 +101,8 @@ int main()
 		window.setView(view);
 		window.clear();
 
-		editor.draw(window);
+		game.draw(window);
+		game.update();
 		handler.handleInput(window);
 
 		window.display();
@@ -107,52 +112,13 @@ int main()
 	// CONSOLE TESTING
 	//////
 
-	CharacterFactory factory;
+	GameBoard board;
 
-	Character character1 = factory.createVoidArcherLeanna({ 2,2 }, 1);
-	Character character2 = factory.createBloodlordKlaus({1,1}, 1);
-
-	character1.init();
-	character2.init();
-
-	character1.printAttributes();
-	character2.printAttributes();
-
-	for(int i = 0; i < 14; ++i)
+	std::vector<Position> positions = board.getInSpecialRangePositions({ 20, 18 }, 5);
+	for(auto position : positions)
 	{
-		// leanna
-		character1.basicAttack(character2);
-
-		character1.update();
-		character2.update();
-
-		// klaus
-		character2.basicAttack(character1);
-
-		character1.update();
-		character2.update();
+		std::cout << "x:  " << position.x << " y: " << position.y << std::endl;
 	}
-
-	character1.printAttributes();
-	character2.printAttributes();
-
-	character2.useAbility2(character2);
-	character2.basicAttack(character1);
-	character1.update();
-	character2.update();
-	character1.printAttributes();
-	character2.printAttributes();
-
-	character2.basicAttack(character1);
-	character1.update();
-	character2.update();
-	character1.printAttributes();
-	character2.printAttributes();
-
-
-
-
-
 	////////////
 	// END CONSOLE TESTING
 	//////

@@ -1,4 +1,5 @@
 #pragma once
+#include "ActiveEntity.h"
 #include <list>
 #include <array>
 #include <string>
@@ -10,13 +11,9 @@
 #include "Position.h"
 
 
-enum Team
-{
-	blue,
-	red
-};
 
-class Character 
+
+class Character : public ActiveEntity
 {
 	using EntityEffect = Effect<EntityAttributes>;
 
@@ -25,17 +22,21 @@ public:
 	Character(Position position, std::array<const EntityAttributes, 6> baseAttributes, AbilityArsenal abilityArsenal);
 
 	void init();
-	void initName(std::string name);
 
 	// Getters
 	EntityAttributes getAttributes() const;
 	EntityAttributes getBaseAttributes() const;
 	int getLevel() const;
+	int getMovementPoints() const;
+	int getActionPoints() const;
+
 
 	// Game Actions
 	void update();
 	void basicAttack(Character &target);
 	void addEffect(std::unique_ptr<EntityEffect> &effect);
+	bool move(Position position, int cost);  // Cost determined elsewhere via modified bfs. True indicates move success.
+
 	// Abilities
 	void useAbility1(Character &target);  // Need to create useAbility functions for other object types e.g. creatures.
 	void useAbility2(Character &target);
@@ -63,9 +64,6 @@ private:
 	CharacterLevelInformation levelInformation;  // Curr level and xp.
 
 	// Core Attributes.
-	std::string name;
-	Team team;
-	Position position;
 	const std::array<const EntityAttributes, 6> baseAttributes;  // Position in array specifies level.
 	EntityAttributes currAttributes;  // Recalculated at begginning of each turn from baseAttributes and effects. (Health uniquely is not recalculated).
 

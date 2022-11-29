@@ -162,20 +162,26 @@
     <ClCompile Include="GameBoard.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="BasicSquare.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="MapEditor.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="MapEditorHandler.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="ImpassableBoardSquare.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="GameSquare.cpp">
       <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ImpassableSquare.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PassableSquare.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ActiveEntityImage.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameHandler.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,17 +284,26 @@
     <ClInclude Include="MapEditorHandler.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="ImpassableBoardSquare.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicSquare.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="SquareType.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="GameSquare.h">
       <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ImpassableSquare.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PassableSquare.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Team.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveEntityImage.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameHandler.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
