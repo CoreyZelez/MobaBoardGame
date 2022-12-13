@@ -2,7 +2,7 @@
 #include <array>
 #include <vector>
 #include <iostream>
-#include "Attributes.h"
+#include "EntityAttributes.h"
 #include "Character.h"
 #include "CharacterFactory.h"
 #include "GameSquare.h"
@@ -24,9 +24,17 @@ int main()
 	window.setVerticalSyncEnabled(false);
 	sf::View view(sf::Vector2f(0.f, 0.f), sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
 
+
+	const bool editorMode = true;
+
 	// Game data.
 	Game game;
-	GameHandler handler(game);
+	GameHandler gameHandler(game);
+
+	// Editor data.
+	MapEditor editor(101, 72);
+	MapEditorHandler editorHandler(editor);
+	editor.importMap("map V1");
 
 	// Camera move data.
 	sf::Vector2f oldPos;
@@ -97,28 +105,38 @@ int main()
 			}
 		}
 
+		// Draw and update game/editor.
 
 		window.setView(view);
 		window.clear();
 
-		game.draw(window);
-		game.update();
-		handler.handleInput(window);
+		if(editorMode)
+		{
+			editor.draw(window);
+			editorHandler.handleInput(window);
+		}
+		else
+		{
+			game.draw(window);
+			gameHandler.handleInput(window);
+			game.update();
+		}
 
 		window.display();
 	}
+
+	if(editorMode)
+	{
+		editor.exportMap("map V1");
+	}
+
 
 	////////////
 	// CONSOLE TESTING
 	//////
 
-	GameBoard board;
 
-	std::vector<Position> positions = board.getInSpecialRangePositions({ 20, 18 }, 5);
-	for(auto position : positions)
-	{
-		std::cout << "x:  " << position.x << " y: " << position.y << std::endl;
-	}
+
 	////////////
 	// END CONSOLE TESTING
 	//////

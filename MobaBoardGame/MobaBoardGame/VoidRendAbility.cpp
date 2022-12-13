@@ -2,24 +2,20 @@
 #include "Character.h"
 #include "PhysicalDamageEffect.h"
 #include "ArmorEffect.h"
-
-VoidRendAbility::VoidRendAbility(std::array<double, 3> levelValues, int duration)
-	: Ability(levelValues, range, abilityPowerRatio), duration(duration)
-{
-}
+#include <iostream>
 
 /* Level values are for physicalAttack reduction applied to target. */
-VoidRendAbility::VoidRendAbility(std::array<double, 3> levelValues, int duration, double armorMultiplier)
-	: Ability(levelValues, range, abilityPowerRatio), duration(duration), armorMultiplier(armorMultiplier)
+VoidRendAbility::VoidRendAbility(std::array<double, 3> statChangeValues)
+	: Ability(4, 2, 0.5), statChangeValues(statChangeValues)
 {
 }
 
 std::unique_ptr<Ability> VoidRendAbility::clone()
 {
-	return std::make_unique<VoidRendAbility>(*this);
+	return std::make_unique<VoidRendAbility>(statChangeValues);
 }
 
-void VoidRendAbility::update(TargetCharacterAction action, Character & target)
+void VoidRendAbility::update(TargetCharacterAction action, Character &target)
 {
 
 }
@@ -36,19 +32,23 @@ void VoidRendAbility::applyTarget(Character &target)
 
 	// Calculation of effects on target.
 	const double multiplier = calculateAbilityMultiplier(*getCharacter(), target);
-	int pdAmount = -getTrueValue() * multiplier;
-	int armorAmount = -getTrueValue() * multiplier * armorMultiplier;
-
-	std::unique_ptr<Effect<EntityAttributes>> effect1 = std::make_unique<PhysicalDamageEffect>(duration, pdAmount, voidInfliction);
-	std::unique_ptr<Effect<EntityAttributes>> effect2 = std::make_unique<ArmorEffect>(duration, armorAmount, voidInfliction);
+	int amount = getTrueAbilityPower(target) + (statChangeValues[level] * multiplier);
+	int pdAmount = -amount;
+	int armorAmount = -amount * armorMultiplier;
+	// Adds effects to target.
+	std::unique_ptr<Effect<EntityAttributes>> effect1 = std::make_unique<PhysicalDamageEffect>(duration, pdAmount);
+	std::unique_ptr<Effect<EntityAttributes>> effect2 = std::make_unique<ArmorEffect>(duration, armorAmount);
 	target.addEffect(effect1);
 	target.addEffect(effect2);
 
+	target.addStatusEffect(duration, voidInfliction);
+
+
 	// Absorption of stats for self.
-	armorAmount *= selfMultiplier;
-	pdAmount *= selfMultiplier;
-	std::unique_ptr<Effect<EntityAttributes>> effect3 = std::make_unique<PhysicalDamageEffect>(duration, pdAmount, voidInfliction);
-	std::unique_ptr<Effect<EntityAttributes>> effect4 = std::make_unique<ArmorEffect>(duration, selfMultiplier, voidInfliction);
+	armorAmount = amount * selfMultiplier;
+	pdAmount = amount *selfMultiplier;
+	std::unique_ptr<Effect<EntityAttributes>> effect3 = std::make_unique<PhysicalDamageEffect>(duration, pdAmount);
+	std::unique_ptr<Effect<EntityAttributes>> effect4 = std::make_unique<ArmorEffect>(duration, selfMultiplier);
 	getCharacter()->addEffect(effect3);
 	getCharacter()->addEffect(effect4);
 }

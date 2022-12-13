@@ -84,14 +84,8 @@
     <ClCompile Include="CharacterObserver.cpp">
       <Filter>Source Files\Character</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicalDamageEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Combat</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterFactory.cpp">
       <Filter>Source Files\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="ActiveEntity.cpp">
-      <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Creature.cpp">
       <Filter>Source Files\Entities</Filter>
@@ -99,35 +93,14 @@
     <ClCompile Include="Position.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="ActionPointEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="Attributes.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityEffects.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="ArmorEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="MovementPointEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Action</Filter>
     </ClCompile>
     <ClCompile Include="ParalyseEffect.cpp">
       <Filter>Source Files\Abilties\Effects\Action</Filter>
     </ClCompile>
     <ClCompile Include="HealthDrainEffect.cpp">
       <Filter>Source Files\Abilties\Effects\Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="AttackPointEffect.cpp">
-      <Filter>Source Files\Abilties\Effects\Action</Filter>
     </ClCompile>
     <ClCompile Include="VoidParalyseAbility.cpp">
       <Filter>Source Files\Abilties\Leanna</Filter>
@@ -181,6 +154,48 @@
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="GameHandler.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MapSaveHandler.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Minion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionPointEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackPointEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementPointEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmorEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalDamageEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityAttributes.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEntity.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterEffectsManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterAttributesSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MinionAttributesSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -200,20 +215,8 @@
     <ClInclude Include="Character.h">
       <Filter>Header Files\Character</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicalDamageEffect.h">
-      <Filter>Header Files\Abilities\Effects\Combat</Filter>
-    </ClInclude>
     <ClInclude Include="Action.h">
       <Filter>Header Files\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionPointEffect.h">
-      <Filter>Header Files\Abilities\Effects\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="MovementPointEffect.h">
-      <Filter>Header Files\Abilities\Effects\Action</Filter>
-    </ClInclude>
-    <ClInclude Include="ActiveEntity.h">
-      <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="CharacterFactory.h">
       <Filter>Header Files\Character</Filter>
@@ -224,25 +227,10 @@
     <ClInclude Include="Position.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Attributes.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="HealthDrainEffect.h">
       <Filter>Header Files\Abilities\Effects\Combat</Filter>
     </ClInclude>
-    <ClInclude Include="HealthEffect.h">
-      <Filter>Header Files\Abilities\Effects\Combat</Filter>
-    </ClInclude>
-    <ClInclude Include="ArmorEffect.h">
-      <Filter>Header Files\Abilities\Effects\Combat</Filter>
-    </ClInclude>
-    <ClInclude Include="AttackPointEffect.h">
-      <Filter>Header Files\Abilities\Effects\Action</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityEffects.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="VoidRendAbility.h">
@@ -303,6 +291,48 @@
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="GameHandler.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MapSaveHandler.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementPointEffect.h">
+      <Filter>Header Files\Abilities\Effects\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackPointEffect.h">
+      <Filter>Header Files\Abilities\Effects\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionPointEffect.h">
+      <Filter>Header Files\Abilities\Effects\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalDamageEffect.h">
+      <Filter>Header Files\Abilities\Effects\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthEffect.h">
+      <Filter>Header Files\Abilities\Effects\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="Minion.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorEffect.h">
+      <Filter>Header Files\Abilities\Effects\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityAttributes.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEntity.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterEffectsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterAttributesSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MinionAttributesSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

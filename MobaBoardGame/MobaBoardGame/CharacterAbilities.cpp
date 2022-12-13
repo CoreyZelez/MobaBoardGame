@@ -1,4 +1,5 @@
 #include "CharacterAbilities.h"
+#include <iostream>
 
 CharacterAbilities::CharacterAbilities(AbilityArsenal arsenal)
 	: passive(arsenal.passive->clone()),
@@ -19,14 +20,46 @@ void CharacterAbilities::update()
 	passive.get()->apply();
 	ability1.get()->update();
 	ability2.get()->update();
+	ability1.get()->reduceCooldown();
+	ability2.get()->reduceCooldown();
 }
 
-void CharacterAbilities::useAbility1(Character & target)
+int CharacterAbilities::getAbility1Range() const
 {
-	ability1.get()->use(target);
+	return ability1.get()->getRange();
 }
 
-void CharacterAbilities::useAbility2(Character & target)
+int CharacterAbilities::getAbility2Range() const
 {
-	ability2.get()->use(target);
+	return ability2.get()->getRange();
+}
+
+int CharacterAbilities::getAbility1PointCost() const
+{
+	return ability1.get()->getPointCost();
+}
+
+int CharacterAbilities::getAbility2PointCost() const
+{
+	return ability2.get()->getPointCost();
+}
+
+bool CharacterAbilities::ability1IsOnCooldown() const
+{
+	return ability1.get()->onCooldown();
+}
+
+bool CharacterAbilities::ability2IsOnCooldown() const
+{
+	return ability2.get()->onCooldown();
+}
+
+bool CharacterAbilities::useAbility1(Character & target)
+{
+	return ability1.get()->use(target);
+}
+
+bool CharacterAbilities::useAbility2(Character & target)
+{
+	return ability2.get()->use(target);
 }

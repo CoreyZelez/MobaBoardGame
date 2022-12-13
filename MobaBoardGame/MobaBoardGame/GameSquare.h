@@ -6,7 +6,7 @@
 const float GRID_SQUARE_SIZE = 100;
 const float GRID_OUTLINE_THICKNESS = 5;
 
-class ActiveEntity;
+class GameEntity;
 
 class GameSquare
 {
@@ -20,12 +20,12 @@ public:
 	const sf::RectangleShape &getRect() const;
 	Position getPosition() const;
 	SquareType getType() const;
-	const ActiveEntity *getOccupant() const;
+	const GameEntity *getOccupant() const;
 	bool isVacant() const;
 
 	// Setters
-	void setOccupant(ActiveEntity *occupant);
-	ActiveEntity *removeOccupant();  // Return the current occupant.
+	void setOccupant(GameEntity *occupant);
+	GameEntity *removeOccupant();  // Return the current occupant.
 
 	// Color changing
 	void mark(sf::Color color);
@@ -47,8 +47,8 @@ private:
 	void shallowWaterColor();
 
 	// Occupation members
-	ActiveEntity *occupant = nullptr;  // May be unsettable
-	bool occupiable;  // Whether square can be occupied by ActiveEntity.
+	GameEntity *occupant = nullptr;  // May be unsettable
+	bool occupiable;  // Whether square can be occupied by GameEntity.
 
 	// Square marking members
 	bool marked = false;  // When marked is a different color. Can indicate player may move here or use spell.

@@ -1,7 +1,7 @@
 #include "GameBoard.h"
 #include "ImpassableSquare.h"
 #include "PassableSquare.h"
-#include "ActiveEntity.h"
+#include "GameEntity.h"
 #include <set>
 #include <list>
 #include <cstdlib>
@@ -9,37 +9,48 @@
 #include <iostream>
 
 GameBoard::GameBoard()
+	: blueTeamSpawn()
 {
 	for(int x = 0; x < width; ++x)
 	{
 		std::vector<GameSquare> squareRow;
 		for(int y = 0; y < height; ++y)
 		{
-			sf::Color fillColor(100, 150, 125);
-			sf::Color outlineColor(100, 100, 150);
 			squareRow.push_back(PassableSquare({ x, y }, grass));
 		}
 		board.push_back(squareRow);
 	}
-
-	changeSquare({ 21, 18 }, mountain);
-	changeSquare({ 20, 17 }, mountain);
-	changeSquare({ 20, 19 }, mountain);
 }
 
 GameBoard::GameBoard(int width, int height)
 	: width(width), height(height)
 {
-	for(int row = 0; row < height; ++row)
+	for(int x = 0; x < width; ++x)
 	{
 		std::vector<GameSquare> squareRow;
-		for(int col = 0; col < width; ++col)
+		for(int y = 0; y < height; ++y)
 		{
-			sf::Color fillColor(100, 150, 125);
-			sf::Color outlineColor(100, 100, 150);
-			squareRow.push_back(ImpassableSquare({ col, row }, impassableForest));
+			squareRow.push_back(ImpassableSquare({ x, y }, impassableForest));
 		}
 		board.push_back(squareRow);
+	}
+
+	changeSquare({ width / 2, 0 }, lava);
+	changeSquare({ width / 2, height - 1 }, lava);
+}
+
+GameBoard::GameBoard(std::vector<std::vector<SquareType>> squaresTypes)
+	: GameBoard(squaresTypes.size(), squaresTypes[0].size())
+{
+	for(int x = 0; x < width; ++x)
+	{
+		std::vector<GameSquare> squareRow;
+		for(int y = 0; y < height; ++y)
+		{
+			SquareType squareType = squaresTypes[x][y];
+
+			changeSquare({ x, y }, squareType);
+		}
 	}
 }
 
@@ -52,6 +63,16 @@ void GameBoard::draw(sf::RenderWindow & window)
 			gameSquare.draw(window);
 		}
 	}
+}
+
+void GameBoard::initBlueSpawn(Position position)
+{
+	blueTeamSpawn = position;
+}
+
+void GameBoard::initRedSpawn(Position position)
+{
+	redTeamSpawn = position;
 }
 
 const GameSquare * GameBoard::getConstSquare(float x, float y) const
@@ -124,31 +145,44 @@ void GameBoard::changeSquare(Position position, SquareType type)
 	}
 }
 
-void GameBoard::markSquares(Position source, const int specialRange)
+void GameBoard::markSquares(Position source, const int specialRange, bool onlyVacant, bool enhanceOne, sf::Color color)
 {
-	const sf::Color color = sf::Color::Yellow;
 	resetMarkedSquares();
-	markedPositions = getInSpecialRangePositions(source, specialRange);
-	for(Position position : markedPositions)
+	markedNodes = getInSpecialRangePositions(source, specialRange, onlyVacant, enhanceOne);
+	for(Node node : markedNodes)
 	{
-		board[position.x][position.y].mark(color);
+		Position position = node.position;
+		if(onlyVacant)
+		{
+			board[position.x][position.y].mark(color);
+
+		}
+		else
+		{
+			board[position.x][position.y].mark(color);
+		}
 	}
 }
 
 void GameBoard::resetMarkedSquares()
 {
-	for(Position position : markedPositions)
+	for(Node node : markedNodes)
 	{
+		Position position = node.position;
 		board[position.x][position.y].unmark();
 	}
 
-	markedPositions.clear();
+	markedNodes.clear();
 }
 
 // Typically specialNum is the floor of (max / 2).
-std::vector<Position> GameBoard::getInSpecialRangePositions(Position source, const int max)
+std::list<Node> GameBoard::getInSpecialRangePositions(Position source, const int max, bool onlyVacant, bool enhanceOne)
 {
-	const int specialNum = max / 2;  // Max number of "bonus moves" that can be made. 
+	int specialNum = (((double)max) / 2) - 0.5;  // Max number of "bonus moves" that can be made. 
+	if(enhanceOne && max == 1)
+	{
+		specialNum = 1;
+	}
 	
 	// Performs bfs adding positions with depths <= max. Positions must be traversable on board.
 	const int minX = source.x - max;
@@ -183,32 +217,33 @@ std::vector<Position> GameBoard::getInSpecialRangePositions(Position source, con
 	
 	
 			// Adds position if applicable.
-			if(board[x][y].isVacant())
+			if(onlyVacant && board[x][y].isVacant())
+			{
+				candidates.push_back({ x, y });
+			}
+			else if(!onlyVacant)
 			{
 				candidates.push_back({ x, y });
 			}
 		}
 	}
-	
-	struct Node
-	{
-		Position position;
-		int depth = -1;
-	};
+
 	
 	// BFS
 	std::list<Position> traversed;
+	std::list<Node> traversedNodes;
 	std::list<Node> queue;  
 	// Handle start position.
 	traversed.push_back(source);  // For ensuring we don't traverse same node twice.
 	queue.push_back({ source, 0 });
-	
+	traversedNodes.push_back({ source, 0 });
+
 	std::list<Position>::iterator i;
 	
 	while(!queue.empty()) {
 		Node currNode = queue.front();
 		Position currPos = currNode.position;
-		const int currDepth = currNode.depth;
+		const int currDepth = currNode.value;
 		queue.pop_front();
 	
 		if(currDepth == max + specialNum)
@@ -237,15 +272,18 @@ std::vector<Position> GameBoard::getInSpecialRangePositions(Position source, con
 	
 			queue.push_back(Node({pos, currDepth + 1}));
 			traversed.push_back(pos);
+			traversedNodes.push_back(Node({ pos, currDepth + 1 }));
 		}
 	}
 	
-	std::vector<Position> validPositions;
-	for(Position position : traversed)
+	std::list<Node> validNodes;
+	for(Node node : traversedNodes)
 	{
+		Position position = node.position;
+		const int depth = node.value;
 		const int xDist = std::abs(position.x - source.x);
 		const int yDist = std::abs(position.y - source.y);
-		const int totalDist = xDist + yDist;
+		const int totalDist = node.value;  // I.e the depth.
 		for(int i = 0; i <= specialNum; ++i)
 		{
 			int trueMax = max;
@@ -254,18 +292,25 @@ std::vector<Position> GameBoard::getInSpecialRangePositions(Position source, con
 			{
 				trueMax += i;
 			}
-			else if(xDist >= 0 && yDist > i)
+			else if(xDist > 0 && yDist >= i)
 			{
 				trueMax += i;
 			}
-			if(totalDist <= trueMax)
+
+			if(totalDist > max && totalDist <= trueMax)
 			{
-				validPositions.push_back(position);
+				node.value = max;  // Analogous to changing cost for entity to travel to position.
+				validNodes.push_back(node);
+				break;
+			}
+			else if(totalDist <= max)
+			{
+				validNodes.push_back(node);
 				break;
 			}
 		}
 	}
-	return validPositions;
+	return validNodes;
 	
 }
 
@@ -295,6 +340,46 @@ GameSquare * GameBoard::getSquare(Position position)
 	return &board[position.x][position.y];
 }
 
+std::list<Node> GameBoard::getMarkedNodes()
+{
+	return markedNodes;
+}
+
+std::vector<std::vector<SquareType>> GameBoard::getSquaresTypes() const
+{
+	std::vector<std::vector<SquareType>> squaresTypes;
+
+	for(const auto &boardRow : board)
+	{
+		std::vector<SquareType> squareTypesRow;
+
+		for(const GameSquare &square : boardRow)
+		{
+			squareTypesRow.push_back(square.getType());
+		}
+
+		squaresTypes.push_back(squareTypesRow);
+	}
+
+	return squaresTypes;
+}
+
+Position GameBoard::getSpawn(Team team)
+{
+	switch(team)
+	{
+	case blue:
+
+		// IN ACTUALITY SHOULD USE BFS TO FIND FIRST EMPTY SQUARE AROUND SPAWN AND RETURN THAT.
+		return blueTeamSpawn;
+		break;
+
+	case red:
+		return redTeamSpawn;
+		break;
+	}
+}
+
 bool GameBoard::moveEntity(Position source, Position target)
 {
 	if(source == target)
@@ -310,13 +395,13 @@ bool GameBoard::moveEntity(Position source, Position target)
 
 	if(targetSquare->isVacant())
 	{
-		ActiveEntity *entity = sourceSquare->removeOccupant();
+		GameEntity *entity = sourceSquare->removeOccupant();
 		targetSquare->setOccupant(entity);
 		return true;
 	}
 }
 
-void GameBoard::initEntity(ActiveEntity * entity)
+void GameBoard::initEntity(GameEntity * entity)
 {
 	Position entityPosition = entity->getPosition();
 	GameSquare *square = &board[entityPosition.x][entityPosition.y];

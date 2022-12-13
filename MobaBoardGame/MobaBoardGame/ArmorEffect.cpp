@@ -5,12 +5,6 @@ ArmorEffect::ArmorEffect(int duration, int amount)
 {
 }
 
-ArmorEffect::ArmorEffect(int duration, int amount, EffectType type)
-	: Effect<EntityAttributes>(duration, type), amount(amount)
-{
-}
-
-
 std::unique_ptr<Effect<EntityAttributes>> ArmorEffect::clone()
 {
 	return std::make_unique<ArmorEffect>(*this);
@@ -18,5 +12,5 @@ std::unique_ptr<Effect<EntityAttributes>> ArmorEffect::clone()
 
 void ArmorEffect::apply(EntityAttributes &ea)
 {
-	ea.combatAttributes.physicalDamage += amount;
+	ea.combatAttributes.armor += amount;
 }

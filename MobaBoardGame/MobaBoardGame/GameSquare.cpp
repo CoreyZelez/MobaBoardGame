@@ -42,20 +42,20 @@ void GameSquare::unmark()
 	marked = false;
 }
 
-const ActiveEntity * GameSquare::getOccupant() const
+const GameEntity * GameSquare::getOccupant() const
 {
 	return occupant;
 }
 
-void GameSquare::setOccupant(ActiveEntity *occupant)
+void GameSquare::setOccupant(GameEntity *occupant)
 {
 	assert(isVacant());
 	this->occupant = occupant;
 }
 
-ActiveEntity * GameSquare::removeOccupant()
+GameEntity * GameSquare::removeOccupant()
 {
-	ActiveEntity *currEntity = occupant;
+	GameEntity *currEntity = occupant;
 	occupant = nullptr;
 	return currEntity;
 }

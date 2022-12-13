@@ -1,81 +1,76 @@
 #pragma once
-#include "ActiveEntity.h"
+#include "GameEntity.h"
 #include <list>
 #include <array>
 #include <string>
-#include "Attributes.h"
 #include "CharacterAbilities.h"
-#include "EntityEffects.h"
 #include "Effect.h"
-#include "Item.h"
-#include "Position.h"
+#include "GameBoard.h"
+#include "CharacterAttributesSystem.h"
 
-
-
-
-class Character : public ActiveEntity
+class Character : public GameEntity
 {
 	using EntityEffect = Effect<EntityAttributes>;
 
 public:
-	//Character(std::array<const EntityAttributes, 8> baseAttributes, CharacterAbilities abilities, Team team);
-	Character(Position position, std::array<const EntityAttributes, 6> baseAttributes, AbilityArsenal abilityArsenal);
+	Character(GameBoard &gameBoard, std::array<const EntityAttributes, 6> baseAttributes, 
+		AbilityArsenal abilityArsenal, Team team, sf::Color left, sf::Color right);
 
 	void init();
 
+	void setLastDamaged(Character *character);
+
 	// Getters
+	EntityAttributes& getAttributes();
 	EntityAttributes getAttributes() const;
 	EntityAttributes getBaseAttributes() const;
 	int getLevel() const;
-	int getMovementPoints() const;
-	int getActionPoints() const;
-
+	int getAbility1Range() const;
+	int getAbility2Range() const;
+	bool isAlive() const;
+	bool unableToBasicAttack() const;
+	bool unableToUseAbility1() const;
+	bool unableToUseAbility2() const;
 
 	// Game Actions
 	void update();
-	void basicAttack(Character &target);
+	bool basicAttack(Character &target);  // True represents successful (i.e in range) attack.
 	void addEffect(std::unique_ptr<EntityEffect> &effect);
+	void addStatusEffect(int duration, Status type);
 	bool move(Position position, int cost);  // Cost determined elsewhere via modified bfs. True indicates move success.
+	void deathReset();  // Called on hp <= 0. Respawns character and resets stats and effects.  
+	void spawn();
+	void takeDamage(int damage);
 
 	// Abilities
-	void useAbility1(Character &target);  // Need to create useAbility functions for other object types e.g. creatures.
-	void useAbility2(Character &target);
+	bool useAbility1(Character &target);  // Need to create useAbility functions for other object types e.g. creatures.
+	bool useAbility2(Character &target);
 
 	// Observer functions
 	void subscribeObserver(CharacterObserver *observer);
 	void unsubscribeObserver(CharacterObserver *observer);  
 
-	bool hasEffectType(EffectType type);
+	bool hasEffectType(Status type);
 
 	//testing functions.
 	void printAttributes();
 
 private:
 	// Functions.
-	void updateCurrAttributes();  
 	void notifyObservers(CharacterAction action);
 	void notifyObservers(TargetCharacterAction action, Character &target);
 	void notifyObservers(TargetCreatureAction action, Creature *creature);
 
-	void takeDamage(int damage);
-
-	// Level information.
-	const static std::array<int, 6> experienceForLevel; 
-	CharacterLevelInformation levelInformation;  // Curr level and xp.
-
-	// Core Attributes.
-	const std::array<const EntityAttributes, 6> baseAttributes;  // Position in array specifies level.
-	EntityAttributes currAttributes;  // Recalculated at begginning of each turn from baseAttributes and effects. (Health uniquely is not recalculated).
-
-	// Attribute modifiers.
-	EntityEffects effects;
-	std::array<Item, 4> items;
+	CharacterAttributesSystem attributesSystem;  // Handles effects, items and attributes.
 
 	// Abilities.
 	CharacterAbilities abilities;
 
 	// Observing objects.
 	std::list<CharacterObserver*> observers;  // consider rewriting code to use shared pointers.
+	Character *lastDamaged = nullptr;  // The last character to damage this character. 
+
+	GameBoard &gameBoard;
 };
 
 

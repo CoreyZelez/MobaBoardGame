@@ -5,15 +5,14 @@ enum CharacterAction
 	preReceiveCharacterBasicAttack,
 	postReceiveCharacterBasicAttack,
 
-	death,
-
-	killCharacter
+	death
 };
 
 enum TargetCharacterAction
 {
 	preBasicAttackCharacter,
 	postBasicAttackCharacter,
+	killCharacter
 };
 
 enum TargetCreatureAction

@@ -41,8 +41,8 @@ void AttackHealPassive::update(TargetCharacterAction action, Character &target)
 {
 	if(action == postBasicAttackCharacter)
 	{
-		HealthEffect healthEff(1, stacks);
-		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
+		const int maxHealth = getCharacter()->getBaseAttributes().healthAttributes.health;
+		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(1, stacks, maxHealth);
 		getCharacter()->addEffect(healthEffect);
 		stacks += characterStack;
 	}
@@ -55,8 +55,8 @@ void AttackHealPassive::update(TargetCreatureAction action, Creature *target)
 		const int healthIncrease = stacks * creatureMultiplier;
 		assert(healthIncrease >= 0);
 
-		HealthEffect healthEff(1, healthIncrease);
-		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(healthEff);
+		const int maxHealth = getCharacter()->getBaseAttributes().healthAttributes.health;
+		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(1, healthIncrease, maxHealth);
 		getCharacter()->addEffect(healthEffect);
 		stacks += creatureStack;
 	}

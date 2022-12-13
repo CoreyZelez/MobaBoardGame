@@ -9,7 +9,13 @@ public:
 	void handleInput(sf::RenderWindow &window);
 
 private:
+	bool timeBetweenInputValid();
+
+	bool inputLock = false;
+
 	Game &game;
-	bool rightLock = false;
+
+	const float minSecondsBetweenInput = 0.05f;
+	sf::Clock inputClock;
 };
 

@@ -1,14 +1,11 @@
 #include "PhysicalDamageEffect.h"
+#include <iostream>
 
 PhysicalDamageEffect::PhysicalDamageEffect(int duration, int amount)
 	: Effect<EntityAttributes>(duration), amount(amount)
 {
 }
 
-PhysicalDamageEffect::PhysicalDamageEffect(int duration, int amount, EffectType type)
-	: Effect<EntityAttributes>(duration, type), amount(amount)
-{
-}
 
 std::unique_ptr<Effect<EntityAttributes>> PhysicalDamageEffect::clone()
 {

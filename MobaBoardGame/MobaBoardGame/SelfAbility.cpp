@@ -1,14 +1,13 @@
 #include "SelfAbility.h"
 
 
-
-SelfAbility::SelfAbility(std::array<double, 3> levelValues)
-	: Ability(levelValues, 0)
+SelfAbility::SelfAbility(int pointCost, std::array<double, 3> abilityPowerRatios)
+	: Ability(0, pointCost, abilityPowerRatios)
 {
 }
 
-SelfAbility::SelfAbility(std::array<double, 3> levelValues, double abilityPowerRatio)
-	: Ability(levelValues, 0, abilityPowerRatio)
+SelfAbility::SelfAbility(int pointCost, double abilityPowerRatio)
+	: Ability(0, pointCost, abilityPowerRatio)
 {
 }
 

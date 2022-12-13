@@ -1,23 +1,46 @@
 #include <memory>
 #include "Ability.h"
 #include "PassiveAbility.h"
-#include "EmptyPassive.h"
 #include "Character.h"
+#include <iostream>
 
 
-Ability::Ability(std::array<double, 3> levelValues, double range)
-	: levelValues(levelValues), range(range)
+Ability::Ability(int range, int pointCost, double abilityPowerRatio)
+	: range(range), pointCost(pointCost)
+{
+	abilityPowerRatios = { abilityPowerRatio , abilityPowerRatio , abilityPowerRatio };
+}
+
+Ability::Ability(int range, int pointCost, std::array<double, 3> abilityPowerRatios)
+	: range(range), pointCost(pointCost), abilityPowerRatios(abilityPowerRatios)
 {
 }
 
-Ability::Ability(std::array<double, 3> levelValues, double range, double abilityPowerRatio)
-	: levelValues(levelValues), range(range), abilityPowerRatio(abilityPowerRatio)
-{
-}
 
 int Ability::getLevel() const
 {
 	return level;
+}
+
+int Ability::getRange() const
+{
+	return range;
+}
+
+int Ability::getPointCost() const
+{
+	return pointCost;
+}
+
+bool Ability::onCooldown() const
+{
+	assert(cooldown >= 0);
+	return cooldown > 0;
+}
+
+std::array<double, 3> Ability::getAbilityPowerRatios() const
+{
+	return abilityPowerRatios;
 }
 
 
@@ -28,24 +51,6 @@ void Ability::initCharacter(Character &character)
 	character.subscribeObserver(this);
 }
 
-
-
-std::array<double, 3> Ability::getLevelValues() const
-{
-	return levelValues;
-}
-
-int Ability::getTrueValue()
-{
-	const int abilityPower = character->getAttributes().abilityAttributes.abilityPower;
-	const int level = getLevel() - 1;
-	return levelValues[level] + (abilityPowerRatio * abilityPower);
-}
-
-double Ability::getAbilityPowerRatio() const
-{
-	return abilityPowerRatio;
-}
 
 bool Ability::use(Character &target)
 {
@@ -60,7 +65,29 @@ bool Ability::use(Character &target)
 	return false;
 }
 
+void Ability::reduceCooldown()
+{
+	assert(cooldown >= 0);
 
+	if(cooldown > 0)
+	{
+		--cooldown;
+	}
+}
+
+
+
+int Ability::getTrueAbilityPower() const
+{
+	const int level = this->level - 1;
+	const int abilityPower = character->getAttributes().abilityAttributes.abilityPower;
+	return abilityPower * abilityPowerRatios[level];
+}
+
+int Ability::getTrueAbilityPower(Character &target) const
+{
+	return getTrueAbilityPower() * calculateAbilityMultiplier(*character, target);
+}
 
 Character *const Ability::getCharacter()
 {

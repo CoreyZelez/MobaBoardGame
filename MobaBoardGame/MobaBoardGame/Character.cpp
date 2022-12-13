@@ -1,76 +1,170 @@
 #include <iostream>
 #include "Character.h"
+#include "CharacterAttributesSystem.h"
 
-Character::Character(Position position, std::array<const EntityAttributes, 6> baseAttributes, AbilityArsenal abilityArsenal)
-	: ActiveEntity(position), baseAttributes(baseAttributes), abilities(abilityArsenal)
+Character::Character(GameBoard &gameBoard, std::array<const EntityAttributes, 6> baseAttributes, 
+	AbilityArsenal abilityArsenal, Team team, sf::Color left, sf::Color right)
+	: GameEntity(team, left, right), 
+	gameBoard(gameBoard), 
+	attributesSystem(*this, baseAttributes), 
+	abilities(abilityArsenal)
 {
 
 }
 
 void Character::init()
 {
-	// const int level = levelInformation.level - 1;  // ???
-	const int level = 5;  // ???
-	currAttributes = baseAttributes[level];  // Current attributes starts at level 0 base attributes.
+	EntityAttributes &currAttributes = attributesSystem.getAttributes();
+	const EntityAttributes baseAttributes = attributesSystem.getBaseAttributes();
 	abilities.initCharacter(*this);  // Grants each ability a reference to self.
+	setHealth(currAttributes.healthAttributes.health, baseAttributes.healthAttributes.health);  // MUST BE RECALLED WHEN LEVELING UP!!!
+	spawn();
+	std::cout << currAttributes.healthAttributes.health << " " << baseAttributes.healthAttributes.health << std::endl;
 }
+
+void Character::setLastDamaged(Character *character)
+{
+	assert(character != nullptr);
+	lastDamaged = character;
+}
+
 
 void Character::update()
 {
-	updateCurrAttributes();
-	effects.update(currAttributes);  // Applys each effect and updates them.
+	// MOVE TO ATTRIBUTES SYSTEM START
+	/// updateCurrAttributes();
+	/// effects.update(*this, currAttributes);  // Applys each effect and updates them.  /// Make effects hold charcter refernce rather than using parameters.
+	// MOVE TO ATTRIBUTES SYSTEM END.
+
+	attributesSystem.update();
+
 	abilities.update();
+	// printAttributes();
+}
+
+EntityAttributes & Character::getAttributes()
+{
+	return attributesSystem.getAttributes();
 }
 
 EntityAttributes Character::getAttributes() const
 {
-	return currAttributes;
+	return attributesSystem.getAttributes();
 }
 
 EntityAttributes Character::getBaseAttributes() const
 {
-	const int level = getLevel() - 1;
-	return baseAttributes[level];
+	return attributesSystem.getBaseAttributes();
+
 }
 
 int Character::getLevel() const
 {
-	return levelInformation.level;
+	return attributesSystem.getLevel();
 }
 
-int Character::getMovementPoints() const
+int Character::getAbility1Range() const
 {
-	return currAttributes.actionAttributes.movementPoints;
+	return abilities.getAbility1Range();
 }
 
-int Character::getActionPoints() const
+int Character::getAbility2Range() const
 {
-	return currAttributes.actionAttributes.points;
+	return abilities.getAbility2Range();
 }
 
-void Character::basicAttack(Character &target)
+bool Character::isAlive() const
 {
-	if(inRange(getPosition(), target.getPosition(), currAttributes.actionAttributes.range))
+	return attributesSystem.isAlive() > 0;
+}
+
+bool Character::unableToBasicAttack() const
+{
+	const EntityAttributes currAttributes = attributesSystem.getAttributes();
+	const int points = currAttributes.actionAttributes.points;
+	const int attackPoints = currAttributes.actionAttributes.attackPoints;
+	const int attackCost = currAttributes.actionAttributes.attackCost;
+	return (attackCost > points || attackCost > attackPoints);
+
+}
+
+bool Character::unableToUseAbility1() const
+{
+	const EntityAttributes currAttributes = attributesSystem.getAttributes();
+
+	if(abilities.ability1IsOnCooldown())
+	{
+		return true;
+	}
+
+	const int points = currAttributes.actionAttributes.points;
+	const int attackPoints = currAttributes.actionAttributes.attackPoints;
+	const int pointCost = abilities.getAbility1PointCost();
+	return (pointCost > points || pointCost > attackPoints);
+}
+
+bool Character::unableToUseAbility2() const
+{
+	const EntityAttributes currAttributes = attributesSystem.getAttributes();
+
+	if(abilities.ability2IsOnCooldown())
+	{
+		return true;
+	}
+	const int points = currAttributes.actionAttributes.points;
+	const int attackPoints = currAttributes.actionAttributes.attackPoints;
+	const int pointCost = abilities.getAbility2PointCost();
+	return (pointCost > points || pointCost > attackPoints);
+}
+
+bool Character::basicAttack(Character &target)
+{
+	EntityAttributes &currAttributes = attributesSystem.getAttributes();
+
+	int &attackPoints = currAttributes.actionAttributes.attackPoints;
+	int &points = currAttributes.actionAttributes.points;
+	const int attackCost = currAttributes.actionAttributes.attackCost;
+	const int range = currAttributes.actionAttributes.range;
+
+	if(inRange(getPosition(), target.getPosition(), range)
+		&& attackPoints >= attackCost && points >= attackCost)
 	{
 		notifyObservers(preBasicAttackCharacter, target);
 
 		// Update action points.
-		currAttributes.actionAttributes.attackPoints -= currAttributes.actionAttributes.attackCost;
-		currAttributes.actionAttributes.points -= currAttributes.actionAttributes.attackCost;
+		attackPoints -= attackCost;
+		points -= attackCost;
 
 		// Deal damage.
-		const double mult = calculatePhysicalDamageMultiplier(target.currAttributes.combatAttributes.armor,
+		const double mult = calculatePhysicalDamageMultiplier(target.getAttributes().combatAttributes.armor,
 			currAttributes.combatAttributes.armorPenetration,
 			currAttributes.combatAttributes.lethality);
 		const int damage = mult * (double)currAttributes.combatAttributes.physicalDamage;
-		target.takeDamage(damage);
+
+		if(damage >= 0)
+		{
+			target.lastDamaged = this;  
+			target.takeDamage(damage);
+		}
 
 		notifyObservers(postBasicAttackCharacter, target);
+
+		// Handles death.
+		if(!target.isAlive())
+		{
+			target.deathReset();
+		}
+
+		return true;
 	}
+
+	return false;
 }
 
 void Character::printAttributes()
 {
+	const EntityAttributes currAttributes = attributesSystem.getAttributes();
+
 	std::cout << std::endl;
 	std::cout << getName() << std::endl;
 	std::cout << "Health:         " << currAttributes.healthAttributes.health << std::endl;
@@ -78,13 +172,6 @@ void Character::printAttributes()
 	std::cout << "points:         " << currAttributes.actionAttributes.points << std::endl;
 	std::cout << std::endl;
 
-}
-
-void Character::updateCurrAttributes()
-{
-	const int health = currAttributes.healthAttributes.health;  // Health is not recalculated.
-	currAttributes = baseAttributes[levelInformation.level];
-	currAttributes.healthAttributes.health = health;
 }
 
 void Character::notifyObservers(CharacterAction action)
@@ -97,6 +184,10 @@ void Character::notifyObservers(CharacterAction action)
 
 void Character::notifyObservers(TargetCharacterAction action, Character &character)
 {
+	if(action == killCharacter)
+	{
+		std::cout << std::endl << "YOU KILL A CHARACTER!!" << std::endl;
+	}
 	for(auto &observer : observers)
 	{
 		observer->update(action, character);
@@ -113,6 +204,8 @@ void Character::notifyObservers(TargetCreatureAction action, Creature *creature)
 
 void Character::takeDamage(int damage)
 {
+	EntityAttributes &currAttributes = attributesSystem.getAttributes();
+	assert(damage >= 0);
 	notifyObservers(preReceiveCharacterBasicAttack);
 	currAttributes.healthAttributes.health -= damage;
 	notifyObservers(postReceiveCharacterBasicAttack);
@@ -120,46 +213,122 @@ void Character::takeDamage(int damage)
 
 void Character::addEffect(std::unique_ptr<EntityEffect> &effect)
 {
-	// Applys effect and updates it.
-	effect.get()->update(currAttributes);
+	attributesSystem.addEffect(effect);
 
-	// Adds effect if duration not 0 after initial update.
-	if(!effect.get()->isOver())
+	// Handles death.
+	if(!this->isAlive())
 	{
-		effects.add(effect);
+		this->deathReset();
+		return;
 	}
+}
+
+void Character::addStatusEffect(int duration, Status type)
+{
+	attributesSystem.addStatusEffect(duration, type);
 }
 
 bool Character::move(Position position, int cost)
 {
-	// Temporary cost calculation. Make a more intelligent
-	// algorithm in the future.
-	if(cost == -1)
-	{
-		cost = std::abs(position.x - getPosition().x) + 
-			std::abs(position.y - getPosition().y);
-	}
+	EntityAttributes &currAttributes = attributesSystem.getAttributes();
 
 	if(cost <= currAttributes.actionAttributes.movementPoints &&
 		cost <= currAttributes.actionAttributes.points)
 	{
 		currAttributes.actionAttributes.movementPoints -= cost;
 		currAttributes.actionAttributes.points -= cost;
-		ActiveEntity::move(position);
+		GameEntity::move(position);
 		return true;
 	}
 
 	return false;
 }
 
-void Character::useAbility1(Character &target)
+void Character::deathReset()
 {
-	abilities.useAbility1(target);
+	attributesSystem.reset();
+	spawn();
+
+	notifyObservers(death);
+
+	if(lastDamaged != nullptr)
+	{
+		lastDamaged->notifyObservers(killCharacter, *this);
+		lastDamaged = nullptr;
+		// Characters should contain moneyInformation object that subscribes to character.
+		// On the above notification, grants money.
+	}
 }
 
-void Character::useAbility2(Character & target)
+void Character::spawn()
 {
-	abilities.useAbility2(target);
+	const Position currPosition = getPosition();
+	GameSquare *currSquare = gameBoard.getSquare(currPosition);
+	currSquare->removeOccupant();
+
+	const Position spawnPosition = gameBoard.getSpawn(getTeam());
+
+	GameSquare *spawnSquare = gameBoard.getSquare(spawnPosition);
+	assert(spawnSquare->isVacant());
+	spawnSquare->setOccupant(this);
+
+	GameEntity::move(spawnPosition);
+}
+
+bool Character::useAbility1(Character &target)
+{
+	EntityAttributes &currAttributes = attributesSystem.getAttributes();
+
+	const int abilityPointCost = abilities.getAbility1PointCost();  // Cost for attack points and points to cast ability.
+	int &points = currAttributes.actionAttributes.points;
+	int &attackPoints = currAttributes.actionAttributes.attackPoints;
+	const int range = abilities.getAbility1Range();
+
+	// Determines whether enough points and attack points to cast ability.
+	if(abilityPointCost > points || abilityPointCost > attackPoints || !inRange(getPosition(), target.getPosition(), range))
+	{
+		return false;
+	}
+
+	// abilities.getAbility1Cost()  /// for mana if you choose to implement. then handle as required.
+	bool successfulAbilityUse = abilities.useAbility1(target);
+
+	if(successfulAbilityUse)
+	{
+		points -= abilityPointCost;
+		attackPoints -= abilityPointCost;
+		return true;
+	}
+
+	return false;
+}
+
+bool Character::useAbility2(Character &target)
+{
+	EntityAttributes &currAttributes = attributesSystem.getAttributes();
+
+	const int abilityPointCost = abilities.getAbility2PointCost();  // Cost for attack points and points to cast ability.
+	int &points = currAttributes.actionAttributes.points;
+	int &attackPoints = currAttributes.actionAttributes.attackPoints;
+	const int range = abilities.getAbility2Range();
+
+	// Determines whether enough points and attack points to cast ability.
+	if(abilityPointCost > points || abilityPointCost > attackPoints || !inRange(getPosition(), target.getPosition(), range))
+	{
+		return false;
+	}
+
+	// abilities.getAbility1Cost()  /// for mana if you choose to implement. then handle as required.
+	bool successfulAbilityUse = abilities.useAbility2(target);
+
+	if(successfulAbilityUse)
+	{
+		points -= abilityPointCost;
+		attackPoints -= abilityPointCost;
+		return true;
+	}
+
+	return false;
 }
 
 void Character::subscribeObserver(CharacterObserver *observer)
@@ -172,9 +341,9 @@ void Character::unsubscribeObserver(CharacterObserver *observer)
 	observers.remove(observer);
 }
 
-bool Character::hasEffectType(EffectType type)
+bool Character::hasEffectType(Status type)
 {
-	return effects.hasEffectType(type);
+	return attributesSystem.hasEffectType(type);
 }
 
 

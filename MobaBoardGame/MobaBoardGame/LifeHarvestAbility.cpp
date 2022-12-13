@@ -4,14 +4,15 @@
 #include "HealthDrainEffect.h"
 #include "Character.h"
 
-LifeHarvestAbility::LifeHarvestAbility(std::array<double, 3> levelValues, int duration, double absorbRatio)
-	: Ability(levelValues, 3, 0.5), duration(duration), absorbRatio(absorbRatio)
+LifeHarvestAbility::LifeHarvestAbility(std::array<double, 3> damageValues)
+	: Ability(3, 2, 0.5), damageValues(damageValues)
 {
+
 }
 
 std::unique_ptr<Ability> LifeHarvestAbility::clone()
 {
-	return std::make_unique<LifeHarvestAbility>(getLevelValues(), duration, absorbRatio);
+	return std::make_unique<LifeHarvestAbility>(damageValues);
 }
 
 bool LifeHarvestAbility::validTarget(Character &character)
@@ -31,7 +32,9 @@ void LifeHarvestAbility::applyTarget(Character &target)
 
 	// Determines damage amount.
 	const int level = getLevel() - 1;
-	const int amount = getTrueValue() * multiplier;
+	const int amount = (damageValues[level] * multiplier) + (getTrueAbilityPower());
+	std::cout << damageValues[level] << "    " << getTrueAbilityPower() << std::endl;
+	std::cout << std::endl << multiplier << "      " <<"amoUNT >" << amount << std::endl;
 
 	// Determines drainRate
 	double absorbRatio;  // Percent of health drained that is "harvested".
@@ -55,5 +58,5 @@ void LifeHarvestAbility::applyTarget(Character &target)
 
 int LifeHarvestAbility::calculateCooldown() const
 {
-	return 3;
+	return 10;
 }

@@ -1,13 +1,15 @@
  #include "CharacterFactory.h"
 #include "Character.h"
-#include "Attributes.h"
+#include "EntityAttributes.h"
 #include "LifeHarvestAbility.h"
 #include "VoidShotPassive.h"
 #include "AttackHealPassive.h"
 #include "VoidParalyseAbility.h"
 #include "BloodAnguishAbility.h"
+#include "VoidRendAbility.h"
 
-std::shared_ptr<Character> CharacterFactory::createBloodlordKlaus(Position initPos, double multiplier)
+
+std::shared_ptr<Character> CharacterFactory::createBloodlordKlaus(GameBoard &gameBoard, Team team, double multiplier)
 {
 	// Klaus is a melee jungler.
 	// Klaus has no regen to force reliance on passive and abilities for heal.
@@ -21,19 +23,19 @@ std::shared_ptr<Character> CharacterFactory::createBloodlordKlaus(Position initP
 	HealthAttributes ha5 = { 740, 0 };
 	HealthAttributes ha6 = { 880, 0 };
 
-	CombatAttributes ca1 = { 40, 10, 5, 20 };  // phyDmg, armorPen, lethality, armor
-	CombatAttributes ca2 = { 48, 12, 9, 28 }; 
+	CombatAttributes ca1 = { 51, 10, 5, 20 };  // phyDmg, armorPen, lethality, armor
+	CombatAttributes ca2 = { 59, 12, 9, 28 }; 
 	CombatAttributes ca3 = { 62, 15, 26, 40 };  
 	CombatAttributes ca4 = { 70, 17, 31, 44 };  
 	CombatAttributes ca5 = { 82, 20, 34, 50 };  
 	CombatAttributes ca6 = { 88, 25, 40, 65 };  
 
-	ActionAttributes aca1 = { 3, 3, 3, 1, 2, 1.5 };  // points, movPoints, attPoints, movCost, attCost, range
-	ActionAttributes aca2 = { 3, 3, 3, 1, 2, 1.5 };
-	ActionAttributes aca3 = { 4, 4, 4, 1, 2, 1.5 };
-	ActionAttributes aca4 = { 4, 4, 4, 1, 2, 1.5 };
-	ActionAttributes aca5 = { 4, 4, 4, 1, 2, 1.5 };
-	ActionAttributes aca6 = { 4, 4, 4, 1, 2, 1.5 };
+	ActionAttributes aca1 = { 4, 4, 2, 1, 2, 1 };  // points, movPoints, attPoints, movCost, attCost, range
+	ActionAttributes aca2 = { 4, 4, 2, 1, 2, 1 };
+	ActionAttributes aca3 = { 5, 5, 2, 1, 1, 1 };
+	ActionAttributes aca4 = { 5, 5, 2, 1, 1, 1 };
+	ActionAttributes aca5 = { 5, 5, 2, 1, 1, 1 };
+	ActionAttributes aca6 = { 5, 5, 2, 1, 1, 1 };
 
 	AbilityAttributes aa1 = { 20, 8, 10 };  // abilityPower, abiltyPen, abilityResist
 	AbilityAttributes aa2 = { 26, 13, 20 };
@@ -53,15 +55,20 @@ std::shared_ptr<Character> CharacterFactory::createBloodlordKlaus(Position initP
 
 	// Abilities
 	AbilityArsenal arsenal = { &AttackHealPassive(),
-		&LifeHarvestAbility({60, 110, 200}, 3, 0.5),
-		&BloodAnguishAbility({0.005, 0.0075, 0.01}) };
+		&LifeHarvestAbility({80, 130, 200}),
+		&BloodAnguishAbility({0.005, 0.0075, 0.015}) };
 
-	std::shared_ptr<Character> klaus = std::make_shared<Character>(initPos, baseAttributes, arsenal);
+	sf::Color left(140, 0, 0);
+	sf::Color right(140, 0, 165);
+
+	std::shared_ptr<Character> klaus = std::make_shared<Character>(gameBoard, baseAttributes, arsenal, team, left, right);
+
 	klaus.get()->initName("klaus");
+
 	return klaus;
 }
 
-std::shared_ptr<Character> CharacterFactory::createVoidArcherLeanna(Position initPos, double multiplier)
+std::shared_ptr<Character> CharacterFactory::createVoidArcherLeanna(GameBoard &gameBoard, Team team, double multiplier)
 {
 	// Leanna is a ranged laner.
 	// 
@@ -79,12 +86,12 @@ std::shared_ptr<Character> CharacterFactory::createVoidArcherLeanna(Position ini
 	CombatAttributes ca5 = { 69, 24, 11, 47 };
 	CombatAttributes ca6 = { 74, 25, 14, 53 };
 
-	ActionAttributes aca1 = { 3, 3, 2, 1, 2, 3.3 };  // points, movPoints, attPoints, movCost, attCost, range
-	ActionAttributes aca2 = { 3, 3, 2, 1, 2, 3.3 };
-	ActionAttributes aca3 = { 3, 3, 2, 1, 2, 3.3 };
-	ActionAttributes aca4 = { 3, 3, 2, 1, 2, 3.3 };
-	ActionAttributes aca5 = { 3, 3, 2, 1, 2, 3.3 };
-	ActionAttributes aca6 = { 3, 3, 2, 1, 2, 3.3 };
+	ActionAttributes aca1 = { 4, 4, 2, 1, 2, 3.3 };  // points, movPoints, attPoints, movCost, attCost, range
+	ActionAttributes aca2 = { 4, 4, 2, 1, 2, 3.3 };
+	ActionAttributes aca3 = { 4, 4, 2, 1, 2, 3.3 };
+	ActionAttributes aca4 = { 4, 4, 2, 1, 2, 3.3 };
+	ActionAttributes aca5 = { 4, 4, 2, 1, 2, 3.3 };
+	ActionAttributes aca6 = { 4, 4, 2, 1, 2, 3.3 };
 
 	AbilityAttributes aa1 = { 33, 15, 10 };  // magicPower, magicPen, magicResist
 	AbilityAttributes aa2 = { 40, 18, 15 };
@@ -103,12 +110,15 @@ std::shared_ptr<Character> CharacterFactory::createVoidArcherLeanna(Position ini
 	const std::array<const EntityAttributes, 6> baseAttributes = { cha1, cha2, cha3, cha4, cha5, cha6 };
 
 	// abilities
-	const std::array<int, 6> voidShotTrueDamage = { 39, 50, 62, 74, 90, 122 };
+	const std::array<int, 6> voidShotTrueDamage = { 24, 31, 40, 55, 74, 96 };
 	AbilityArsenal arsenal = { &VoidShotPassive(voidShotTrueDamage, 5, 4),
-		&VoidParalyseAbility({80, 110, 185}, 4),
-		&VoidParalyseAbility({80, 110, 185}, 4) };
+		&VoidParalyseAbility({50, 88, 154}),
+	    &VoidRendAbility({10, 16, 26}) };
 
-	std::shared_ptr<Character> leanna = std::make_shared<Character> (initPos, baseAttributes, arsenal);
+	sf::Color left(0, 0, 0);
+	sf::Color right(140, 0, 140);
+	std::shared_ptr<Character> leanna = std::make_shared<Character> (gameBoard, baseAttributes, arsenal, team, left, right);
 	leanna.get()->initName("leanna");
+
 	return leanna;
 }

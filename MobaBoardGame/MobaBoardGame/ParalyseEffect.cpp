@@ -1,13 +1,8 @@
 #include "ParalyseEffect.h"
-#include "Attributes.h"
+#include "EntityAttributes.h"
 
 ParalyseEffect::ParalyseEffect(int duration)
 	: Effect(duration)
-{
-}
-
-ParalyseEffect::ParalyseEffect(int duration, EffectType type)
-	: Effect(duration, type)
 {
 }
 

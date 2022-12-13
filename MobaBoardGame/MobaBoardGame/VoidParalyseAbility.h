@@ -1,9 +1,11 @@
 #pragma once
 #include "Ability.h"
+
+/* Paralyses enemy. Gives them void infliction.*/
 class VoidParalyseAbility : public Ability
 {
 public:
-	VoidParalyseAbility(std::array<double, 3> levelValues, int duration);
+	VoidParalyseAbility(std::array<double, 3> damageValues);
 
 	virtual std::unique_ptr<Ability> clone();
 
@@ -14,7 +16,7 @@ protected:
 	int calculateCooldown() const;
 
 private:
-	int duration;
-	double absorbRatio;
+	std::array<double, 3> damageValues;  // Base damage for each level.
+	const int duration = 4;  // Paralyse duration.
 };
 

@@ -3,13 +3,12 @@
 class VoidRendAbility : public Ability
 {
 public:
-	VoidRendAbility(std::array<double, 3> levelValues, int duration);
-	VoidRendAbility(std::array<double, 3> levelValues, int duration, double armorMultiplier);
+	VoidRendAbility(std::array<double, 3> statChangeValues);
 	virtual std::unique_ptr<Ability> clone();  
 
 	// Observer functions.
 	virtual void update(TargetCharacterAction action, Character &target);
-	virtual void update(TargetCreatureAction action, Creature *target) {};  // To be implemented when add creatures.
+	virtual void update(TargetCreatureAction action, Creature *target) {};  // To be implemented when add creatures. MAYBE NOT FOR THIS ABILITY.
 
 protected:
 	// Target validation functions.
@@ -21,11 +20,9 @@ protected:
 	virtual int calculateCooldown() const;  // Cooldown after ability use.
 
 private:
-	const int range = 4;
-	const double abilityPowerRatio = 1;
-	double armorMultiplier = 1;
-	double selfMultiplier = 0.5;  // Percent of stats absorbed.
-	int duration = 5;  // Suggested duration.
-
+	std::array<double, 3> statChangeValues;
+	const double armorMultiplier = 1;
+	const double selfMultiplier = 0.5;  // Percent of stats absorbed.
+	const int duration = 5;  // Suggested duration.
 };
 

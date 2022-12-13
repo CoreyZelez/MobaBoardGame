@@ -11,12 +11,13 @@ public:
 
 	std::unique_ptr<PassiveAbility> clone();
 
+	void update(CharacterAction action);
 	void update(TargetCharacterAction action, Character &target);
 	void update(TargetCreatureAction action, Creature *target);
 
 private:
 	int stackTrigger;  // Num stacks to get enhanced attack.
-	int duration;  // How many turns the enhanced attack can be held.
+	int duration = 4;  // How many turns the enhanced attack can be held.
 	int stacks = 0;  // Basic attacks grant stacks.
 	std::array<int, 6> trueDamage;  // Total true damage applied over duration for a given character level.
 };

@@ -1,6 +1,6 @@
 #pragma once
 #include "Effect.h"
-#include "Attributes.h"
+#include "EntityAttributes.h"
 class AttackPointEffect : public Effect<EntityAttributes>
 {
 public:
