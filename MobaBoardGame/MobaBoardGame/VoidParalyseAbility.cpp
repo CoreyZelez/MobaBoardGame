@@ -56,5 +56,5 @@ void VoidParalyseAbility::applySelf()
 
 int VoidParalyseAbility::calculateCooldown() const
 {
-	return 13;
+	return 18;
 }

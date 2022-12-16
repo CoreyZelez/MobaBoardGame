@@ -8,6 +8,7 @@ class ActiveEntityImage
 {
 public:
 	ActiveEntityImage(Position position, Team team, sf::Color left, sf::Color right);
+	ActiveEntityImage(Position position, Team team);
 
 	void updatePosition(Position position);
 	void updateHealthBar(); // In future include shield.

@@ -1,5 +1,6 @@
 #pragma once
 #include "GameEntity.h"
+#include "MinionAttributesSystem.h"
 #include <array>
 
 class PassiveAbility;
@@ -7,18 +8,19 @@ class PassiveAbility;
 class Minion : public GameEntity
 {
 public:
-	Minion(std::list<Position> path, std::array<EntityAttributes, 6> baseAttributes);
+	Minion(GameBoard &gameBoard, const std::vector<Position> path, Team team);
 
 	void move();  // Moves to next position in path.
 
 private:
-	EntityAttributes currAttributes;
-	std::array<EntityAttributes, 6> baseAttributes;
-	
-	std::list<Position> path;
+	MinionAttributesSystem attributesSystem;
+
+	const std::vector<Position> path;
 	int positionNum;  // Should have path[positionNum] = actual position.
 
 	std::unique_ptr<PassiveAbility> passive;  // Grants bonus stats based on health.
+
+	GameBoard &gameBoard;
 
 };
 

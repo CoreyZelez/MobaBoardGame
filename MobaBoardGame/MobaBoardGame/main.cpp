@@ -25,7 +25,7 @@ int main()
 	sf::View view(sf::Vector2f(0.f, 0.f), sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
 
 
-	const bool editorMode = true;
+	const bool editorMode = false;
 
 	// Game data.
 	Game game;

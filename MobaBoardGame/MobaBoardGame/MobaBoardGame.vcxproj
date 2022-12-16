@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttributesSystem.cpp" />
     <ClCompile Include="CharacterAttributesSystem.cpp" />
     <ClCompile Include="CharacterEffectsManager.cpp" />
     <ClCompile Include="GameEntity.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="ActiveEntityImage.cpp" />
     <ClCompile Include="Minion.cpp" />
     <ClCompile Include="MinionAttributesSystem.cpp" />
+    <ClCompile Include="MinionEffectsManager.cpp" />
     <ClCompile Include="StatusEffect.cpp" />
     <ClCompile Include="GameHandler.cpp" />
     <ClCompile Include="GameSquare.cpp" />
@@ -209,8 +211,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="AttributesSystem.h" />
     <ClInclude Include="CharacterAttributesSystem.h" />
     <ClInclude Include="CharacterEffectsManager.h" />
+    <ClInclude Include="EffectsManager.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="ArmorEffect.h" />
     <ClInclude Include="AttackPointEffect.h" />
@@ -218,6 +222,7 @@
     <ClInclude Include="ActiveEntityImage.h" />
     <ClInclude Include="Minion.h" />
     <ClInclude Include="MinionAttributesSystem.h" />
+    <ClInclude Include="MinionEffectsManager.h" />
     <ClInclude Include="StatusEffect.h" />
     <ClInclude Include="GameHandler.h" />
     <ClInclude Include="GameSquare.h" />

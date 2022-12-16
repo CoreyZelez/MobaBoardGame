@@ -21,6 +21,7 @@ ActiveEntityImage::ActiveEntityImage(Position position, Team team, sf::Color lef
 	backSquare.setPosition(sf::Vector2f(x, y));
 	backSquare.setSize(sf::Vector2f(BACK_SQUARE_SIZE, BACK_SQUARE_SIZE));
 	backSquare.setOutlineThickness(GRID_OUTLINE_THICKNESS);
+	initBackColor(team);
 
 	// Healthbar
 	y += BACK_SQUARE_SIZE - BAR_THICKNESS;
@@ -44,9 +45,27 @@ ActiveEntityImage::ActiveEntityImage(Position position, Team team, sf::Color lef
 	rightSquare.setPosition(sf::Vector2f(x, y));
 	rightSquare.setSize(sf::Vector2f(INNER_SQUARE_WIDTH, INNER_SQUARE_HEIGHT));
 	rightSquare.setFillColor(right);
+}
 
+ActiveEntityImage::ActiveEntityImage(Position position, Team team)
+{
 	// Back square
+	const int halfDecrement = SIZE_DECREMENT / 2;
+	int x = (GRID_SQUARE_SIZE + GRID_OUTLINE_THICKNESS) * position.x + halfDecrement;
+	int y = (GRID_SQUARE_SIZE + GRID_OUTLINE_THICKNESS) * position.y + halfDecrement;
+	backSquare.setPosition(sf::Vector2f(x, y));
+	backSquare.setSize(sf::Vector2f(BACK_SQUARE_SIZE, BACK_SQUARE_SIZE));
+	backSquare.setOutlineThickness(GRID_OUTLINE_THICKNESS);
 	initBackColor(team);
+
+	// Healthbar
+	y += BACK_SQUARE_SIZE - BAR_THICKNESS;
+	healthBarBack.setPosition(sf::Vector2f(x, y));
+	healthBarBack.setSize(sf::Vector2f(BACK_SQUARE_SIZE, BAR_THICKNESS));
+	healthBarBack.setFillColor(sf::Color::Red);
+	healthBarFront.setPosition(sf::Vector2f(x, y));
+	healthBarFront.setFillColor(sf::Color::Green);
+	healthBarFront.setSize(sf::Vector2f(0, BAR_THICKNESS));
 }
 
 void ActiveEntityImage::initBackColor(Team team)

@@ -1,57 +1,18 @@
 #include "CharacterEffectsManager.h"
-#include "Character.h"
 #include "Effect.h"
-#include "Character.h"
 #include "StatusEffect.h"
+#include "Character.h"
 #include <iostream>
 
 CharacterEffectsManager::CharacterEffectsManager(Character &character)
-	: character(character)
-{
-}
-
-void CharacterEffectsManager::add(const std::unique_ptr<EntityEffect> &effect)
-{
-	effects.emplace_back(effect.get()->clone());
-}
-
-void CharacterEffectsManager::add(int duration, Status type)
-{
-	statusEffects.push_back(StatusEffect(duration, type));
-}
-
-bool CharacterEffectsManager::hasEffectType(Status type) const
-{
-	for(const auto &statusEffect : statusEffects)
-	{
-		if(statusEffect.getType() == type)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-
-std::list<std::unique_ptr<EntityEffect>>& CharacterEffectsManager::getEffects()
-{
-	return effects;
-}
-
-std::list<StatusEffect>& CharacterEffectsManager::getStatusEffects()
-{
-	return statusEffects;
-}
-
-void CharacterEffectsManager::clear()
-{
-	effects.clear();
-}
+	: EffectsManager<Character>(character)
+{}
 
 void CharacterEffectsManager::update()
 {
-	using EntityEffect = Effect<EntityAttributes>;  // Remove template.
+	using EntityEffect = Effect<EntityAttributes>; 
+
+	Character &character = getSubject();
 
 	std::list<std::unique_ptr<EntityEffect>>& effects = getEffects();
 	std::list<StatusEffect>& statusEffects = getStatusEffects();

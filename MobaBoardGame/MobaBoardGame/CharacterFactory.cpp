@@ -51,7 +51,7 @@ std::shared_ptr<Character> CharacterFactory::createBloodlordKlaus(GameBoard &gam
 	EntityAttributes cha5 = { aca5, ha5, ca5, aa5 };
 	EntityAttributes cha6 = { aca6, ha6, ca6, aa6 };
 
-	const std::array<const EntityAttributes, 6> baseAttributes = { cha1, cha2, cha3, cha4, cha5, cha6};
+	const std::vector<EntityAttributes> baseAttributes = { cha1, cha2, cha3, cha4, cha5, cha6};
 
 	// Abilities
 	AbilityArsenal arsenal = { &AttackHealPassive(),
@@ -107,7 +107,7 @@ std::shared_ptr<Character> CharacterFactory::createVoidArcherLeanna(GameBoard &g
 	EntityAttributes cha5 = { aca5, ha5, ca5, aa5 };
 	EntityAttributes cha6 = { aca6, ha6, ca6, aa6 };
 
-	const std::array<const EntityAttributes, 6> baseAttributes = { cha1, cha2, cha3, cha4, cha5, cha6 };
+	const std::vector<EntityAttributes> baseAttributes = { cha1, cha2, cha3, cha4, cha5, cha6 };
 
 	// abilities
 	const std::array<int, 6> voidShotTrueDamage = { 24, 31, 40, 55, 74, 96 };
@@ -119,6 +119,5 @@ std::shared_ptr<Character> CharacterFactory::createVoidArcherLeanna(GameBoard &g
 	sf::Color right(140, 0, 140);
 	std::shared_ptr<Character> leanna = std::make_shared<Character> (gameBoard, baseAttributes, arsenal, team, left, right);
 	leanna.get()->initName("leanna");
-
 	return leanna;
 }

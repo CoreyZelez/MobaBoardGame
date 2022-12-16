@@ -1,39 +1,15 @@
 #pragma once
 #include "EntityAttributes.h"
-#include "StatusEffect.h"
+#include "AttributesSystem.h"
 
 class Minion;
 
-class MinionAttributesSystem
+class MinionAttributesSystem : public AttributesSystem<Minion>
 {
 public:
-	using EntityEffect = Effect<EntityAttributes>;
+	MinionAttributesSystem(Minion &minion, int level);
 
-public:
-	MinionAttributesSystem(Minion &minion, EntityAttributes baseAttributes);
+	//void merge(MinionAttributesSystem);
 
-	EntityAttributes& getAttributes();
-	EntityAttributes getAttributes() const;
-	EntityAttributes getBaseAttributes() const;
-	int getLevel() const;
-
-	void update();
-
-	bool isAlive() const;
-	bool hasEffectType(Status type) const;
-
-	void addEffect(std::unique_ptr<EntityEffect> &effect);
-	void addStatusEffect(int duration, Status type);
-	void reset();
-
-private:
-	void resetCurrAttributes();
-
-	Minion &minion;
-
-	EntityAttributes baseAttributes;  // Changed upon minion merges.
-	EntityAttributes currAttributes;  // Recalculated at begginning of each turn from baseAttributes and effects. (Health uniquely is not recalculated).
-
-	MinionEffectsManager effects;
 };
 

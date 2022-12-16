@@ -1,6 +1,11 @@
 #include "GameEntity.h"
 #include <iostream>
 
+GameEntity::GameEntity(Team team)
+	: team(team), image(position, team)
+{
+}
+
 GameEntity::GameEntity(Team team, sf::Color left, sf::Color right)
 	: team(team), image(position, team, left, right)
 {

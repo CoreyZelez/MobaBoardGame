@@ -13,7 +13,7 @@ class Character : public GameEntity
 	using EntityEffect = Effect<EntityAttributes>;
 
 public:
-	Character(GameBoard &gameBoard, std::array<const EntityAttributes, 6> baseAttributes, 
+	Character(GameBoard &gameBoard, std::vector<EntityAttributes>,
 		AbilityArsenal abilityArsenal, Team team, sf::Color left, sf::Color right);
 
 	void init();

@@ -19,6 +19,7 @@ class GameEntity
 	using EntityEffect = Effect<EntityAttributes>;
 
 public:
+	GameEntity(Team team);
 	GameEntity(Team team, sf::Color left, sf::Color right);
 	void initName(std::string name);
 

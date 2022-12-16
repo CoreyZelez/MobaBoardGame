@@ -2,7 +2,7 @@
 #include "Character.h"
 #include "CharacterAttributesSystem.h"
 
-Character::Character(GameBoard &gameBoard, std::array<const EntityAttributes, 6> baseAttributes, 
+Character::Character(GameBoard &gameBoard, std::vector< EntityAttributes> baseAttributes, 
 	AbilityArsenal abilityArsenal, Team team, sf::Color left, sf::Color right)
 	: GameEntity(team, left, right), 
 	gameBoard(gameBoard), 
@@ -31,15 +31,15 @@ void Character::setLastDamaged(Character *character)
 
 void Character::update()
 {
-	// MOVE TO ATTRIBUTES SYSTEM START
-	/// updateCurrAttributes();
-	/// effects.update(*this, currAttributes);  // Applys each effect and updates them.  /// Make effects hold charcter refernce rather than using parameters.
-	// MOVE TO ATTRIBUTES SYSTEM END.
+	std::cout << std::endl;
+	printAttributes();
 
 	attributesSystem.update();
 
+	printAttributes();
+	std::cout << std::endl;
+
 	abilities.update();
-	// printAttributes();
 }
 
 EntityAttributes & Character::getAttributes()
@@ -246,7 +246,7 @@ bool Character::move(Position position, int cost)
 
 void Character::deathReset()
 {
-	attributesSystem.reset();
+	attributesSystem.deathReset();
 	spawn();
 
 	notifyObservers(death);
