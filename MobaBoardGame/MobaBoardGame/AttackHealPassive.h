@@ -11,12 +11,13 @@ public:
 
 	void update();  // Called at end of turn.
 	void update(CharacterAction action);
-	void update(TargetCharacterAction action, Character &target);
-	void update(TargetCreatureAction action, Creature *target);
+	void update(CharacterAction action, Character &target);
+	void update(CharacterAction action, Creature *target);
+	void update(CharacterAction action, Minion &target);
 
 private:
-	double creatureMultiplier = 0.5;  // Less heal from creatures.
-	int creatureStack;
+	double creatureMinionMultiplier = 0.5;  // Less heal from creatures.
+	int creatureMinionStack;
 	int characterStack;
 	double stacks = 0;
 	const double decayAmount = 0.15;

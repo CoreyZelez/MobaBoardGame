@@ -2,21 +2,14 @@
 
 enum CharacterAction
 {
-	preReceiveCharacterBasicAttack,
-	postReceiveCharacterBasicAttack,
+	preBasicAttackDamageCalculation,
+	preBasicAttackDamageDealt,
+	postBasicAttackDamageDealt,
 
+	preAbilityDamageCalculation,
+	postAbilityDamageDealt,
+
+	basicAttack,  // is this used?
+	kill,
 	death
-};
-
-enum TargetCharacterAction
-{
-	preBasicAttackCharacter,
-	postBasicAttackCharacter,
-	killCharacter
-};
-
-enum TargetCreatureAction
-{
-	preBasicAttackCreature,
-	postBasicAttackCreature,
 };

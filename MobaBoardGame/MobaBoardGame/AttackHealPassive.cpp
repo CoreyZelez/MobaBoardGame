@@ -5,8 +5,8 @@
 
 
 
-AttackHealPassive::AttackHealPassive(int characterStack, int creatureStack)
-	: creatureStack(creatureStack), characterStack(characterStack)
+AttackHealPassive::AttackHealPassive(int characterStack, int creatureMinionStack)
+	: creatureMinionStack(creatureMinionStack), characterStack(characterStack)
 {
 }
 
@@ -37,28 +37,39 @@ std::unique_ptr<PassiveAbility> AttackHealPassive::clone()
 	return std::make_unique<AttackHealPassive>(*this);
 }
 
-void AttackHealPassive::update(TargetCharacterAction action, Character &target)
+void AttackHealPassive::update(CharacterAction action, Character &target)
 {
-	if(action == postBasicAttackCharacter)
+	if(action == postBasicAttackDamageDealt)
 	{
-		const int maxHealth = getCharacter()->getBaseAttributes().healthAttributes.health;
-		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(1, stacks, maxHealth);
-		getCharacter()->addEffect(healthEffect);
+		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(1, stacks, *getCharacter());
+		getCharacter()->addEffect(std::move(healthEffect));
 		stacks += characterStack;
 	}
 }
 
-void AttackHealPassive::update(TargetCreatureAction action, Creature *target)
+void AttackHealPassive::update(CharacterAction action, Minion &target)
 {
-	if(action == postBasicAttackCreature)
+	if(action == postBasicAttackDamageDealt)
 	{
-		const int healthIncrease = stacks * creatureMultiplier;
+		const int healthIncrease = stacks * creatureMinionMultiplier;
 		assert(healthIncrease >= 0);
 
-		const int maxHealth = getCharacter()->getBaseAttributes().healthAttributes.health;
-		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(1, healthIncrease, maxHealth);
-		getCharacter()->addEffect(healthEffect);
-		stacks += creatureStack;
+		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(1, healthIncrease, *getCharacter());
+		getCharacter()->addEffect(std::move(healthEffect));
+		stacks += creatureMinionStack;
+	}
+}
+
+void AttackHealPassive::update(CharacterAction action, Creature *target)
+{
+	if(action == postBasicAttackDamageDealt)
+	{
+		const int healthIncrease = stacks * creatureMinionMultiplier;
+		assert(healthIncrease >= 0);
+
+		std::unique_ptr<Effect<EntityAttributes>> healthEffect = std::make_unique<HealthEffect>(1, healthIncrease, *getCharacter());
+		getCharacter()->addEffect(std::move(healthEffect));
+		stacks += creatureMinionStack;
 	}
 }
 

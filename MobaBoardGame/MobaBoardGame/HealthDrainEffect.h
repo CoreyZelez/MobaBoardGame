@@ -12,7 +12,7 @@ public:
 	std::unique_ptr<Effect<EntityAttributes>> clone();
 
 protected:
-	void apply(EntityAttributes &ea);
+	void apply();
 
 private:
 	const int amountPT;  // Amount of health lost per turn.

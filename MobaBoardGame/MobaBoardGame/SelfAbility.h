@@ -11,7 +11,6 @@ public:
 	SelfAbility(int pointCost, double abilityPowerRatio);
 	SelfAbility(int pointCost, std::array<double, 3> abilityPowerRatios);
 
-
 	virtual std::unique_ptr<Ability> clone() = 0;  // Allows for copying of unique_ptrs to base class.
 
 protected:

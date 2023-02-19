@@ -2,8 +2,8 @@
 #include <array>
 #include "PassiveAbility.h"
 
-/* Causes basic attack to deal true damage over time whilst also slowing the target (after stacks reached).
-Damage bonus to a void shot on a voidInfliction target. */
+/* Upon reaching stacks, next basic attack is void shot that slows target and deals true damage over time.
+ Damage bonus to a void shot on a voidInflicted target. */
 class VoidShotPassive : public PassiveAbility
 {
 public:
@@ -12,8 +12,8 @@ public:
 	std::unique_ptr<PassiveAbility> clone();
 
 	void update(CharacterAction action);
-	void update(TargetCharacterAction action, Character &target);
-	void update(TargetCreatureAction action, Creature *target);
+	void update(CharacterAction action, Character &target);
+	void update(CharacterAction action, Creature *target);
 
 private:
 	int stackTrigger;  // Num stacks to get enhanced attack.

@@ -8,7 +8,7 @@ public:
 
 	std::unique_ptr<Effect<EntityAttributes>> clone();
 
-	void apply(EntityAttributes &ea);  // Deals health damage.
+	void apply();  // Deals health damage.
 
 private:
 	int amount;  // attackPoint stat increase.

@@ -28,7 +28,7 @@ double calculateAbilityMultiplier(const Character &caster, const Character &targ
 	}
 	else
 	{
-		return 2 - (100 / (100 - (double)trueResist));  // That is max multiplier is 2.
+		return 3 - (2 * (100 / (100 - (double)trueResist)));  // That is max multiplier is 2.
 	}
 }
 
@@ -42,7 +42,7 @@ double calculateAbilityMultiplier(int magicPenetration, int magicResist)
 	}
 	else
 	{
-		return 2 - (100 / (100 - (double)trueResist));  // That is max multiplier is 2.
+		return 3 - (2 *  (100 / (100 - (double)trueResist)));  // That is max multiplier is 2.
 	}
 }
 

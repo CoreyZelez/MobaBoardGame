@@ -1,5 +1,7 @@
 #pragma once
 #include "Ability.h"
+
+/* Absorbs Armor and physical damage stats from target. Applys void infliction.*/
 class VoidRendAbility : public Ability
 {
 public:
@@ -7,8 +9,8 @@ public:
 	virtual std::unique_ptr<Ability> clone();  
 
 	// Observer functions.
-	virtual void update(TargetCharacterAction action, Character &target);
-	virtual void update(TargetCreatureAction action, Creature *target) {};  // To be implemented when add creatures. MAYBE NOT FOR THIS ABILITY.
+	virtual void update(CharacterAction action, Character &target);
+	virtual void update(CharacterAction action, Creature *target) {};  // To be implemented when add creatures. MAYBE NOT FOR THIS ABILITY.
 
 protected:
 	// Target validation functions.

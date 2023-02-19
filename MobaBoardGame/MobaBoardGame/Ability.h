@@ -24,12 +24,6 @@ public:
 	bool onCooldown() const;
 	std::array<double, 3> getAbilityPowerRatios() const;
 
-
-	// Observer functions
-	virtual void update(CharacterAction action) {};
-	virtual void update(TargetCharacterAction action, Character &target) {};  
-	virtual void update(TargetCreatureAction action, Creature *target) {};
-
 	// Ability functions for each target type
 	bool use(Character &target);
 
@@ -39,8 +33,8 @@ public:
 
 protected:
 	// Getters
-	int getTrueAbilityPower() const;  // True ability power on non target abilities.
-	int getTrueAbilityPower(Character &target) const;  // True ability power on target abilities.
+	int getTrueAbilityPower() const;  // True ability power on non target abilities (or sub-abilities).
+	int getTrueAbilityPower(Character &target) const;  // True ability power on target abilities (or sub-abilities).
 	Character * const getCharacter();
 
 	// Target validation functions.
@@ -56,7 +50,7 @@ private:
 	// Attributes.
 	Character *character;
 	double range;
-	std::array<double, 3> abilityPowerRatios = { 0 };
+	std::array<double, 3> abilityPowerRatios;
 	const int pointCost = 2;  // Consumes attack and action points.
 	int level = 1;  // 1 for testing. should be 0.
 	int cooldown = 0;

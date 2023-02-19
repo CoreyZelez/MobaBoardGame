@@ -75,7 +75,7 @@ void GameBoard::initRedSpawn(Position position)
 	redTeamSpawn = position;
 }
 
-const GameSquare * GameBoard::getConstSquare(float x, float y) const
+const GameSquare * GameBoard::getSquare(float x, float y) const
 {
 	for(const std::vector<GameSquare> &row : board)
 	{
@@ -408,4 +408,25 @@ void GameBoard::initEntity(GameEntity * entity)
 	assert(square->isVacant());
 	square->setOccupant(entity); 
 
+}
+
+void GameBoard::swapPositions(GameEntity *entity1, GameEntity *entity2)
+{
+	const Position pos1 = entity1->getPosition();
+	const Position pos2 = entity2->getPosition();
+	GameSquare *square1 = getSquare(pos1);
+	GameSquare *square2 = getSquare(pos2);
+
+	assert(square1->getOccupant() == entity1);
+	assert(square2->getOccupant() == entity2);
+
+	// Swaps positions on board.
+	square1->removeOccupant();
+	square2->removeOccupant();
+	square1->setOccupant(entity2);
+	square2->setOccupant(entity1);
+
+	// Updates position member.
+	entity1->GameEntity::move(pos2);
+	entity2->GameEntity::move(pos1);
 }

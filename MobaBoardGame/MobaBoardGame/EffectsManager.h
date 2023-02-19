@@ -23,9 +23,20 @@ public:
 		return t;
 	}
 
-	void add(const std::unique_ptr<EntityEffect> &effect)  // Adds effect to effects.
+	void initCurrAttributes(EntityAttributes &currAttributes)
 	{
-		effects.emplace_back(effect.get()->clone());
+		this->currAttributes = &currAttributes;
+	}
+
+	EntityAttributes &getCurrAttributes()
+	{
+		return *currAttributes;
+	}
+
+	void add(std::unique_ptr<EntityEffect> effect)  // Adds effect to effects.
+	{
+		//effects.emplace_back(effect.get()->clone());
+		effects.emplace_back(std::move(effect));
 	}
 
 	void add(int duration, Status type)  // Adds statusEffect to statusEffects.
@@ -67,6 +78,7 @@ protected:
 
 private:
 	T &t;
+	EntityAttributes *currAttributes = nullptr;
 	std::list<std::unique_ptr<EntityEffect>> effects;
 	std::list<StatusEffect> statusEffects;
 

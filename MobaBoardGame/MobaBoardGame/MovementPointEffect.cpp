@@ -11,7 +11,8 @@ std::unique_ptr<Effect<EntityAttributes>> MovementPointEffect::clone()
 	return std::make_unique<MovementPointEffect>(*this);
 }
 
-void MovementPointEffect::apply(EntityAttributes &ea)
+void MovementPointEffect::apply()
 {
+	EntityAttributes &ea = getT();
 	ea.actionAttributes.movementPoints += amount;
 }

@@ -8,15 +8,22 @@ template<class T> class Effect
 {
 public:
 	explicit Effect(int duration) : duration(duration) {};
-	Effect(int duration, Character *sender) : duration(duration), sender(sender) {};
+	Effect(int duration, Character &sender): duration(duration), sender(&sender) {};
+	Effect(int duration, Character &sender, Character &receiver): duration(duration), sender(&sender), receiver(&receiver){};
+	virtual ~Effect() = default;
 
 	virtual std::unique_ptr<Effect<T>> clone() = 0;  // Allows for copying of unique_ptrs to base class.
 	
-	void update(T &t)  // Applys effect and updates effect.
+	void update()  // Applys effect and updates effect.
 	{
 		assert(duration > 0);
-		apply(t);
+		apply();
 		updateDuration();
+	}
+
+	void initT(T &t)
+	{
+		this->t = &t;
 	}
 
 	bool isOver()
@@ -24,10 +31,17 @@ public:
 		return duration == 0;
 	}
 
-	Character *getSender() { return sender; }
+	Character* getSender() { return sender; };
+	Character* getReceiver() { return receiver; };
 
 protected:
-	virtual void apply(T &t) = 0;  // Modifies t, representative of effect.
+	virtual void apply() = 0;  // Used to alter t in some way.
+
+	T& getT() 
+	{ 
+		assert(t != nullptr);
+		return *t; 
+	}
 
 private:
 	void updateDuration()
@@ -35,7 +49,9 @@ private:
 		--duration;
 	}
 
+	T* t = nullptr;
 	int duration;
-	Character *sender = nullptr;  // Only relevant if effect sent by character.
+	Character *sender = nullptr; 
+	Character *receiver = nullptr; 
 };
 

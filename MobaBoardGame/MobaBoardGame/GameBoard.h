@@ -31,7 +31,7 @@ public:
 	void initRedSpawn(Position position);
 
 	// Getters
-	const GameSquare *getConstSquare(float x, float y) const;  // Returns gameSquare containing global coord x,y.
+	const GameSquare *getSquare(float x, float y) const;  // Returns gameSquare containing global coord x,y.
 	GameSquare *getSquare(float x, float y);  // Returns gameSquare containing point x, y in global coord.
 	GameSquare *getSquare(Position position);  // Returns gameSquare with given position.
 	std::list<Node> getMarkedNodes();
@@ -41,6 +41,7 @@ public:
 	// Entities
 	bool moveEntity(Position source, Position target);  // True indicates success.
 	void initEntity(GameEntity *entity);
+	void swapPositions(GameEntity *entity1, GameEntity *entity2);
 
 	// Squares
 	void changeSquare(float x, float y, SquareType type);

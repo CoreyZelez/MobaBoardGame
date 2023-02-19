@@ -12,7 +12,8 @@ std::unique_ptr<Effect<EntityAttributes>> PhysicalDamageEffect::clone()
 	return std::make_unique<PhysicalDamageEffect>(*this);
 }
 
-void PhysicalDamageEffect::apply(EntityAttributes &ea)
+void PhysicalDamageEffect::apply()
 {
+	EntityAttributes &ea = getT();
 	ea.combatAttributes.physicalDamage += amount;
 }

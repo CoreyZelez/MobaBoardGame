@@ -1,17 +1,18 @@
 #pragma once
 #include <vector>
 #include "GameBoard.h"
-#include <vector>
 #include "Character.h"
+#include "Minion.h"
+#include "MinionSpawner.h"
 
 enum GameState
 {
-	move,  // Occurrs initially upon character selection.
-	basicAttack,
-	ability1,
-	ability2,
-	buyMenu,
-	nothingSelected
+	moveState,  // Occurrs initially upon character selection.
+	basicAttackState,
+	ability1State,
+	ability2State,
+	buyMenuState,
+	nothingSelectedState
 };
 
 class Game
@@ -23,14 +24,20 @@ public:
 	void draw(sf::RenderWindow &window);
 
 	void setTurnEnd();
+	GameBoard& getBoard();
+	Character* getCharacterAt(Position position);
+	Minion* getMinionAt(Position position);
+
+	// Entity Removal.
+	void remove(Minion &minion);
 
 	// Selection
-	void selectCharacter(float x, float y);
+	bool selectCharacter(float x, float y);
 	bool characterIsSelected() const;
 	void resetSelections();
-
 	void markSquares(GameState state);  // May be able to remove parameters.
 
+	// Game state.
 	void setState(GameState state);
 	GameState getState();
 
@@ -48,9 +55,14 @@ private:
 	int selectedCharacterNum = -1;  // Represents position in getCharacter array. -1 indicates no character selected.
 
 	std::unique_ptr<GameBoard> gameBoard;
+
 	std::vector<std::shared_ptr<Character>> characters;
+
+	std::vector<MinionSpawner> minionSpawners;
+	std::list<std::unique_ptr<Minion>> minions;
+
 	Team currTeam = blue;  // team that can move.
 	bool endTurn = false;
-	GameState currState = nothingSelected;
+	GameState currState = nothingSelectedState;
 };
 

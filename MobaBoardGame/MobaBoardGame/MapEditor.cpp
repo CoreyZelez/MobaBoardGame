@@ -13,7 +13,7 @@ void MapEditor::draw(sf::RenderWindow & window)
 
 void MapEditor::changeSquare(float x, float y)
 {
-	const GameSquare *square = board.get()->getConstSquare(x, y);
+	const GameSquare *square = board.get()->getSquare(x, y);
 	if(square == nullptr || square->getType() == currentType)
 	{
 		return;

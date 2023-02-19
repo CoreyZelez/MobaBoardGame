@@ -10,7 +10,8 @@ std::unique_ptr<Effect<EntityAttributes>> ArmorEffect::clone()
 	return std::make_unique<ArmorEffect>(*this);
 }
 
-void ArmorEffect::apply(EntityAttributes &ea)
+void ArmorEffect::apply()
 {
+	EntityAttributes &ea = getT();
 	ea.combatAttributes.armor += amount;
 }

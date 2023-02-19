@@ -35,12 +35,20 @@ struct AbilityAttributes
 	int abilityResist;
 };
 
+struct SpecialAttributes
+{
+	double damageMultiplier = 1;
+	double basicAttackDamageMultiplier = 1;
+	double abilityDamageMultiplier = 1;
+};
+
 struct EntityAttributes
 {
 	ActionAttributes actionAttributes;
 	HealthAttributes healthAttributes;
 	CombatAttributes combatAttributes;
 	AbilityAttributes abilityAttributes;
+	SpecialAttributes specialAttributes;
 };
 
 

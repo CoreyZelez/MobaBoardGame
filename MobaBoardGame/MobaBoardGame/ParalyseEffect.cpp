@@ -11,8 +11,9 @@ std::unique_ptr<Effect<EntityAttributes>> ParalyseEffect::clone()
 	return std::make_unique<ParalyseEffect>(*this);
 }
 
-void ParalyseEffect::apply(EntityAttributes &ea)
+void ParalyseEffect::apply()
 {
+	EntityAttributes &ea = getT();
 	ea.actionAttributes.movementPoints = 0;
 	ea.actionAttributes.attackPoints = 0;
 }

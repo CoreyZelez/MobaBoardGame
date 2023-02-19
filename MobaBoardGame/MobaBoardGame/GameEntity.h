@@ -12,34 +12,35 @@
 #include "ActiveEntityImage.h"
 
 
-/* An GameEntity is an entity that can occupy an OccupiableSquare such that no other ActiveEntities may also 
+/* An GameEntity is an entity that can occupy an OccupiableSquare such that no other GameEntity may also 
    occupy the given square. Examples include characters, creatures or towres. */
 class GameEntity
 {
 	using EntityEffect = Effect<EntityAttributes>;
 
 public:
-	GameEntity(Team team);
-	GameEntity(Team team, sf::Color left, sf::Color right);
+	GameEntity(Team team, ActiveEntityImage image);
+
 	void initName(std::string name);
 
-	Team getTeam();
-	std::string getName();
+	Team getTeam() const;
+	std::string getName() const;
 	Position getPosition() const;
 
 	bool isAt(float x, float y) const;
+	bool isAt(Position position) const;
 
 	void draw(sf::RenderWindow &window);
 
-	virtual void move(Position position);  
+	void move(Position position);
 
 protected:
-	void setHealth(const int &currHealth, const int maxHealth);  // Only to be called on entities containing health. 
+	void setHealth(const int &currHealth, const int &maxHealth);  // Only to be called on entities containing health. (bad design)
 
 private:
+	ActiveEntityImage image;
 	std::string name;
 	Team team;
 	Position position = { 0, 0 };  // Default value for initialisation.
-	ActiveEntityImage image;
 };
 

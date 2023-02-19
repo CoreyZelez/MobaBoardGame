@@ -11,5 +11,8 @@ public:
 	CharacterEffectsManager(Character &character);
 
 	void update();  // Calls update on each effect.
+
+private:
+
 };
 

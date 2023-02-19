@@ -33,14 +33,17 @@ void VoidParalyseAbility::applyTarget(Character &target)
 
 	const int level = getLevel() - 1;
 	assert(level >= 0);
+
+	const double abilityDamageMultiplier = getCharacter()->getAttributes().specialAttributes.abilityDamageMultiplier;
+	const double damageMultiplier = getCharacter()->getAttributes().specialAttributes.damageMultiplier;
+	const double priorMultiplier = abilityDamageMultiplier * damageMultiplier;  // Damage multiplier based on special attributes of character.
 	const double multiplier = calculateAbilityMultiplier(*getCharacter(), target);
 	const int trueAbilityPower = getTrueAbilityPower(target); 
-	const int damage = (multiplier * damageValues[level]) + trueAbilityPower;
-	const int maxHealth = target.getBaseAttributes().healthAttributes.health;
-	std::unique_ptr<Effect<EntityAttributes>> effect2 = std::make_unique<HealthEffect>(1, -damage, maxHealth);
+	const int damage = priorMultiplier * ((multiplier * damageValues[level]) + trueAbilityPower);
+	std::unique_ptr<Effect<EntityAttributes>> effect2 = std::make_unique<HealthEffect>(1, -damage, target);
 
-	target.addEffect(effect1);
-	target.addEffect(effect2);
+	target.addEffect(std::move(effect1));
+	target.addEffect(std::move(effect2));
 
 	target.addStatusEffect(duration, voidInfliction);
 

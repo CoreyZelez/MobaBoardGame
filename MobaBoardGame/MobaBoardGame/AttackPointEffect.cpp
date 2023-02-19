@@ -10,7 +10,8 @@ std::unique_ptr<Effect<EntityAttributes>> AttackPointEffect::clone()
 	return std::make_unique<AttackPointEffect>(*this);
 }
 
-void AttackPointEffect::apply(EntityAttributes &ea)
+void AttackPointEffect::apply()
 {
+	EntityAttributes &ea = getT();
 	ea.actionAttributes.attackPoints += amount;
 }

@@ -1,19 +1,19 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Team.h"
-
-class Position;
+#include "Position.h"
 
 class ActiveEntityImage
 {
 public:
-	ActiveEntityImage(Position position, Team team, sf::Color left, sf::Color right);
-	ActiveEntityImage(Position position, Team team);
+	ActiveEntityImage(Team team, sf::Color left, sf::Color right);  // For characters.
+	ActiveEntityImage(Team team, bool isMinion);  // For minions.
+	ActiveEntityImage();  // For neutrals.
 
 	void updatePosition(Position position);
 	void updateHealthBar(); // In future include shield.
 
-	void setHealth(const int &currHealth, int maxHealth);
+	void setHealth(const int &currHealth, const int maxHealth);
 
 	bool isAt(float x, float y) const;  // Returns true if supplied coordinates lie inside backSquare.
 
@@ -29,8 +29,8 @@ private:
 	sf::RectangleShape healthBarFront;
 	sf::RectangleShape healthBarBack;
 
+	bool isMinion = false;  // minions healthbar is unique.
 	const int *currHealth = nullptr;
 	int maxHealth;
-
 };
 

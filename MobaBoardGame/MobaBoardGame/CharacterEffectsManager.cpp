@@ -17,18 +17,18 @@ void CharacterEffectsManager::update()
 	std::list<std::unique_ptr<EntityEffect>>& effects = getEffects();
 	std::list<StatusEffect>& statusEffects = getStatusEffects();
 
-	EntityAttributes &attributes = character.getAttributes();
-
 	// Updates each effect and removes effects that have duration 0.
 	auto effect = effects.begin();
 	while(effect != effects.end())
 	{
-		const int preHealth = attributes.healthAttributes.health;
-		effect->get()->update(attributes);
-		const int postHealth = attributes.healthAttributes.health;
+		EntityAttributes &currAttributes = getCurrAttributes();
+		const int preHealth = currAttributes.healthAttributes.health;
+		effect->get()->update();
+		const int postHealth = currAttributes.healthAttributes.health;
 
 		if(preHealth > postHealth)
 		{
+			/// Suspicious code. what if effect is sent by minion?
 			Character *sender = effect->get()->getSender();
 			if(sender != nullptr)  // I.E. effect is sent by a character.
 			{

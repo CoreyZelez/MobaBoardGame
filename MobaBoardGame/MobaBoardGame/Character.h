@@ -7,6 +7,9 @@
 #include "Effect.h"
 #include "GameBoard.h"
 #include "CharacterAttributesSystem.h"
+#include "CharacterStatistics.h"
+
+class Minion;
 
 class Character : public GameEntity
 {
@@ -21,9 +24,8 @@ public:
 	void setLastDamaged(Character *character);
 
 	// Getters
-	EntityAttributes& getAttributes();
-	EntityAttributes getAttributes() const;
-	EntityAttributes getBaseAttributes() const;
+	const EntityAttributes &getAttributes() const;  // Return currAttributes reference.
+	const EntityAttributes &getBaseAttributes() const;
 	int getLevel() const;
 	int getAbility1Range() const;
 	int getAbility2Range() const;
@@ -35,12 +37,14 @@ public:
 	// Game Actions
 	void update();
 	bool basicAttack(Character &target);  // True represents successful (i.e in range) attack.
-	void addEffect(std::unique_ptr<EntityEffect> &effect);
+	bool basicAttack(Minion &target);  // True represents successful (i.e in range) attack.
+	void addEffect(std::unique_ptr<EntityEffect> effect);
 	void addStatusEffect(int duration, Status type);
-	bool move(Position position, int cost);  // Cost determined elsewhere via modified bfs. True indicates move success.
+	bool move(float x, float y);  // Cost determined elsewhere via modified bfs. True indicates move success.
+	bool move(Position position);
 	void deathReset();  // Called on hp <= 0. Respawns character and resets stats and effects.  
 	void spawn();
-	void takeDamage(int damage);
+	int takeDamage(int damage);  // Returns true damage dealt i.e. min(damage, health).
 
 	// Abilities
 	bool useAbility1(Character &target);  // Need to create useAbility functions for other object types e.g. creatures.
@@ -58,10 +62,13 @@ public:
 private:
 	// Functions.
 	void notifyObservers(CharacterAction action);
-	void notifyObservers(TargetCharacterAction action, Character &target);
-	void notifyObservers(TargetCreatureAction action, Creature *creature);
+	void notifyObservers(CharacterAction action, int quantity);
+	void notifyObservers(CharacterAction action, Character &target);
+	void notifyObservers(CharacterAction action, Creature *creature);
+	void notifyObservers(CharacterAction action, Minion &minion);
 
 	CharacterAttributesSystem attributesSystem;  // Handles effects, items and attributes.
+	CharacterStatistics stats;
 
 	// Abilities.
 	CharacterAbilities abilities;

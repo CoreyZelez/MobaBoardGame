@@ -15,14 +15,14 @@ std::unique_ptr<Ability> VoidRendAbility::clone()
 	return std::make_unique<VoidRendAbility>(statChangeValues);
 }
 
-void VoidRendAbility::update(TargetCharacterAction action, Character &target)
+void VoidRendAbility::update(CharacterAction action, Character &target)
 {
 
 }
 
 bool VoidRendAbility::validTarget(Character &target)
 {
-	return &target != getCharacter();
+	return target.getTeam() != getCharacter()->getTeam();
 }
 
 void VoidRendAbility::applyTarget(Character &target)
@@ -38,19 +38,17 @@ void VoidRendAbility::applyTarget(Character &target)
 	// Adds effects to target.
 	std::unique_ptr<Effect<EntityAttributes>> effect1 = std::make_unique<PhysicalDamageEffect>(duration, pdAmount);
 	std::unique_ptr<Effect<EntityAttributes>> effect2 = std::make_unique<ArmorEffect>(duration, armorAmount);
-	target.addEffect(effect1);
-	target.addEffect(effect2);
-
+	target.addEffect(std::move(effect1));
+	target.addEffect(std::move(effect2));
 	target.addStatusEffect(duration, voidInfliction);
-
 
 	// Absorption of stats for self.
 	armorAmount = amount * selfMultiplier;
 	pdAmount = amount *selfMultiplier;
 	std::unique_ptr<Effect<EntityAttributes>> effect3 = std::make_unique<PhysicalDamageEffect>(duration, pdAmount);
 	std::unique_ptr<Effect<EntityAttributes>> effect4 = std::make_unique<ArmorEffect>(duration, selfMultiplier);
-	getCharacter()->addEffect(effect3);
-	getCharacter()->addEffect(effect4);
+	getCharacter()->addEffect(std::move(effect3));
+	getCharacter()->addEffect(std::move(effect4));
 }
 
 int VoidRendAbility::calculateCooldown() const

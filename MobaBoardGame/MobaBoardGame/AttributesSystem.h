@@ -12,19 +12,22 @@ class AttributesSystem
 
 public:
 	AttributesSystem(std::unique_ptr<EffectsManager<T>> effectsManager, std::vector<EntityAttributes> coreBaseAttributes)
-		: effectsManager(std::move(effectsManager))
-		, baseAttributes(coreBaseAttributes)
+		: effectsManager(std::move(effectsManager)), baseAttributes(coreBaseAttributes)
 	{
+		assert(level == 1);  // Can comment out for testing purposes.
+		currAttributes = getBaseAttributes();  // Current attributes starts at level 0 base attributes.
+
+		this->effectsManager.get()->initCurrAttributes(currAttributes);
 	};
 
+	// Getters
 	EntityAttributes& getAttributes() { return currAttributes;  }
-	EntityAttributes getAttributes() const { return currAttributes; } 
-	EntityAttributes getBaseAttributes() const 
+	const EntityAttributes& getAttributes() const { return currAttributes; } 
+	const EntityAttributes& getBaseAttributes() const 
 	{ 
 		const int levelIndex = level - 1;
 		return baseAttributes[levelIndex];
 	}
-
 	int getLevel() const { return level; }
 
 	void update()
@@ -35,17 +38,26 @@ public:
 
 	bool isAlive() const { return currAttributes.healthAttributes.health > 0; }
 
+	bool canAttack() const
+	{
+		const int attackCost = currAttributes.actionAttributes.attackCost;
+		return currAttributes.actionAttributes.points >= attackCost && currAttributes.actionAttributes.attackPoints >= attackCost;
+	}
+
 	bool hasEffectType(Status type) const { return effectsManager.get()->hasEffectType(type); }
 
-	void addEffect(std::unique_ptr<EntityEffect> &effect)
+	void addEffect(std::unique_ptr<EntityEffect> effect)
 	{
+		// Stores currAttributes in effect so they can be altered.
+		effect.get()->initT(currAttributes);  
+
 		// Applys effect and updates it.
-		effect.get()->update(currAttributes);
+		effect.get()->update();
 
 		// Adds effect if duration not 0 after initial update.
 		if(!effect.get()->isOver())
 		{
-			effectsManager.get()->add(effect);
+			effectsManager.get()->add(std::move(effect));
 		}
 	}
 
@@ -68,15 +80,11 @@ protected:
 
 	void updateCurrAttributes()
 	{
-		// IN FUTURE NEED TO INCORPORATE ITEMS.
-		///////////////////////////////////////
-
-		EntityAttributes &currAttributes = getAttributes();
 		const int level = getLevel() - 1;
 		const int health = currAttributes.healthAttributes.health;  // Health is not recalculated.
 		currAttributes = getBaseAttributes();
-		assert(health <= currAttributes.healthAttributes.health);  // Health cannot be more than base health.
-		currAttributes.healthAttributes.health = health;
+		// assert(health <= currAttributes.healthAttributes.health);  // Health cannot be more than base health (NOT FOR MINIONS).
+		currAttributes.healthAttributes.health = health;  // Health is not set to base attributes value.
 	}
 
 private:

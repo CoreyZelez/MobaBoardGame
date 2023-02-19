@@ -24,7 +24,6 @@ int main()
 	window.setVerticalSyncEnabled(false);
 	sf::View view(sf::Vector2f(0.f, 0.f), sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
 
-
 	const bool editorMode = false;
 
 	// Game data.
@@ -32,9 +31,9 @@ int main()
 	GameHandler gameHandler(game);
 
 	// Editor data.
-	MapEditor editor(101, 72);
+	MapEditor editor(65, 56);  //101 72
 	MapEditorHandler editorHandler(editor);
-	editor.importMap("map V1");
+	editor.importMap("3v3 1.0");
 
 	// Camera move data.
 	sf::Vector2f oldPos;
@@ -127,7 +126,7 @@ int main()
 
 	if(editorMode)
 	{
-		editor.exportMap("map V1");
+		editor.exportMap("3v3 1.0");
 	}
 
 

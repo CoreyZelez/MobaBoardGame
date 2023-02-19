@@ -8,6 +8,8 @@
 #include "HealthEffect.h"
 
 
+const int ABSORBTION_RATIO = 0.5;
+
 BloodAnguishAbility::BloodAnguishAbility(std::array<double, 3> abilityPowerRatios)
 	: SelfAbility(0, abilityPowerRatios)
 {
@@ -24,31 +26,32 @@ void BloodAnguishAbility::applySelf()
 	active = true;
 
 	std::unique_ptr<Effect<EntityAttributes>> effect1 = std::make_unique<ActionPointEffect>(1, 3);
-	getCharacter()->addEffect(effect1);
+	getCharacter()->addEffect(std::move(effect1));
 	std::unique_ptr<Effect<EntityAttributes>> effect2 = std::make_unique<MovementPointEffect>(1, 3);
-	getCharacter()->addEffect(effect2);
+	getCharacter()->addEffect(std::move(effect2));
 	std::unique_ptr<Effect<EntityAttributes>> effect3 = std::make_unique<AttackPointEffect>(1, 2);
-	getCharacter()->addEffect(effect3);
+	getCharacter()->addEffect(std::move(effect3));
 }
 
 int BloodAnguishAbility::calculateCooldown() const
 {
-	return 22;
+	return 28;
 }
 
-void BloodAnguishAbility::update(TargetCharacterAction action, Character &target)
+void BloodAnguishAbility::update(CharacterAction action, Character &target)
 {
 	if(!active)
 	{
 		return;
 	}
 
-	if(action == preBasicAttackCharacter)
+	if(action == preBasicAttackDamageCalculation)
 	{
 		// Determine ratio to add physical damage stats to character. Dependant on target health and magic stats of both characters. 
-		health = target.getAttributes().healthAttributes.health;  // Stores health of target prior to attack for health absorbtion calculation.
-		const int maxHealth = target.getBaseAttributes().healthAttributes.health;
-		double healthRatio = ((double)maxHealth / (double)health);
+		const int targetCurrHealth = target.getAttributes().healthAttributes.health;  // Stores health of target prior to attack for health absorbtion calculation.
+		const int targetMaxHealth = target.getBaseAttributes().healthAttributes.health;
+		double healthRatioReductionFactor = 0.3;
+		double healthRatio = ((double)targetMaxHealth / (double)targetCurrHealth) * healthRatioReductionFactor;
 
 		const int trueAbilityPower = getTrueAbilityPower(target);
 		const double powerMultiplier = 1 + trueAbilityPower;  // TrueAbilityPower is expectedly very small as it is a multiplier of stats.
@@ -65,41 +68,44 @@ void BloodAnguishAbility::update(TargetCharacterAction action, Character &target
 		// Increase characters physical damage stats.
 		const int physicalDamage = getCharacter()->getAttributes().combatAttributes.physicalDamage;
 		physicalDamageIncrease = physicalDamage * finalRatio;
+		assert(physicalDamageIncrease >= 0);
 		std::unique_ptr<Effect<EntityAttributes>> effect = std::make_unique<PhysicalDamageEffect>(1, physicalDamageIncrease);
-		getCharacter()->addEffect(effect);
+		getCharacter()->addEffect(std::move(effect));
 	}
-	else if(action == postBasicAttackCharacter)
-	{
-		// Remove physical damage bonus.
-		std::unique_ptr<Effect<EntityAttributes>> negateEffect = std::make_unique<PhysicalDamageEffect>(1, -physicalDamageIncrease);
-		getCharacter()->addEffect(negateEffect);
-		physicalDamageIncrease = 0;
-
-		// Character absorbs all damage from basic attack.
-		const int currHealth = target.getAttributes().healthAttributes.health;
-		if(currHealth < 0)
-		{
-			const int maxHealth = getCharacter()->getBaseAttributes().healthAttributes.health;
-			std::unique_ptr<Effect<EntityAttributes>> effect = std::make_unique<HealthEffect>(1, health, maxHealth);
-			getCharacter()->addEffect(effect);
-		}
-		else
-		{
-			const int healthDiff = health - currHealth;
-			const int maxHealth = getCharacter()->getBaseAttributes().healthAttributes.health;
-			assert(healthDiff > 0);
-			std::unique_ptr<Effect<EntityAttributes>> effect = std::make_unique<HealthEffect>(1, healthDiff, maxHealth);
-			getCharacter()->addEffect(effect);
-		}
-	}
-	else if(action == killCharacter)
+	else if(action == kill)
 	{
 		std::unique_ptr<Effect<EntityAttributes>> effect1 = std::make_unique<ActionPointEffect>(1, 2);
-		getCharacter()->addEffect(effect1);
+		getCharacter()->addEffect(std::move(effect1));
 		std::unique_ptr<Effect<EntityAttributes>> effect2 = std::make_unique<MovementPointEffect>(1, 2);
-		getCharacter()->addEffect(effect2);
+		getCharacter()->addEffect(std::move(effect2));
 		std::unique_ptr<Effect<EntityAttributes>> effect3 = std::make_unique<AttackPointEffect>(1, 2);
-		getCharacter()->addEffect(effect3);
+		getCharacter()->addEffect(std::move(effect3));
+	}
+}
+
+/* 
+Quantity parameter specifies true damage dealt from basic attack to character (minion?).
+*/
+void BloodAnguishAbility::update(CharacterAction action, int quantity)
+{
+	if(!active)
+	{
+		return;
+	}
+
+	if(action == postBasicAttackDamageDealt)
+	{
+		assert(quantity >= 0);
+
+		// Remove physical damage bonus.
+		std::unique_ptr<Effect<EntityAttributes>> negateEffect = std::make_unique<PhysicalDamageEffect>(1, -physicalDamageIncrease);
+		getCharacter()->addEffect(std::move(negateEffect));
+		physicalDamageIncrease = 0;
+
+		// Add health effect.
+		quantity *= ABSORBTION_RATIO;  // Half of health damage is absorbed.
+		std::unique_ptr<Effect<EntityAttributes>> effect = std::make_unique<HealthEffect>(1, quantity, *getCharacter());
+		getCharacter()->addEffect(std::move(negateEffect));
 	}
 }
 

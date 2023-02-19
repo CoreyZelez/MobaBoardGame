@@ -12,8 +12,9 @@ const int INNER_SQUARE_WIDTH = (BACK_SQUARE_SIZE  / 2) - INNER_SQUARE_DIFF;
 const int INNER_SQUARE_HEIGHT = BACK_SQUARE_SIZE - BAR_THICKNESS - INNER_SQUARE_DIFF;
 
 
-ActiveEntityImage::ActiveEntityImage(Position position, Team team, sf::Color left, sf::Color right)
+ActiveEntityImage::ActiveEntityImage(Team team, sf::Color left, sf::Color right)
 {
+	const Position position = { 0, 0 };  // For initialisation.
 	// Back square
 	const int halfDecrement = SIZE_DECREMENT / 2;
 	int x = (GRID_SQUARE_SIZE + GRID_OUTLINE_THICKNESS) * position.x + halfDecrement;
@@ -47,8 +48,11 @@ ActiveEntityImage::ActiveEntityImage(Position position, Team team, sf::Color lef
 	rightSquare.setFillColor(right);
 }
 
-ActiveEntityImage::ActiveEntityImage(Position position, Team team)
+ActiveEntityImage::ActiveEntityImage(Team team, bool isMinion)
+	: isMinion(isMinion)
 {
+	const Position position = { 0, 0 };  // For initialisation.
+
 	// Back square
 	const int halfDecrement = SIZE_DECREMENT / 2;
 	int x = (GRID_SQUARE_SIZE + GRID_OUTLINE_THICKNESS) * position.x + halfDecrement;
@@ -67,6 +71,7 @@ ActiveEntityImage::ActiveEntityImage(Position position, Team team)
 	healthBarFront.setFillColor(sf::Color::Green);
 	healthBarFront.setSize(sf::Vector2f(0, BAR_THICKNESS));
 }
+
 
 void ActiveEntityImage::initBackColor(Team team)
 {
@@ -123,23 +128,35 @@ void ActiveEntityImage::updatePosition(Position position)
 
 void ActiveEntityImage::updateHealthBar()
 {
-	if(currHealth == nullptr)
+	assert(currHealth != nullptr && *currHealth > 0);
+
+	if(!isMinion)
 	{
-		return;
-	}
+		double healthPercent = (double)*currHealth / (double)maxHealth;
 
-	double healthPercent = (double)*currHealth / (double)maxHealth;
-	if(healthPercent > 1)
+		if(healthPercent > 1)
+		{
+			healthPercent = 1;
+		}
+
+		int length = (double)BACK_SQUARE_SIZE * healthPercent;
+
+		healthBarFront.setSize(sf::Vector2f(length, BAR_THICKNESS));
+	}
+	else
 	{
-		healthPercent = 1;
+		const int reductionValue = 250;  // affects reduction of bar as currHealth reduces.
+		double ratio = (double)*currHealth / (double)(reductionValue + *currHealth);
+
+		assert(ratio > 0);
+
+		int length = (double)BACK_SQUARE_SIZE * ratio;
+
+		healthBarFront.setSize(sf::Vector2f(length, BAR_THICKNESS));
 	}
-
-	int length = (double)BACK_SQUARE_SIZE * healthPercent;
-
-	healthBarFront.setSize(sf::Vector2f(length, BAR_THICKNESS));
 }
 
-void ActiveEntityImage::setHealth(const int &currHealth, int maxHealth)
+void ActiveEntityImage::setHealth(const int &currHealth, const int maxHealth)
 {
 	this->currHealth = &currHealth;
 	this->maxHealth = maxHealth;
@@ -159,7 +176,10 @@ void ActiveEntityImage::draw(sf::RenderWindow &window)
 	if(currHealth != nullptr)
 	{
 		updateHealthBar();
-		window.draw(healthBarBack);
+		if(!isMinion)
+		{
+			window.draw(healthBarBack);
+		}
 		window.draw(healthBarFront);
 	}
 }

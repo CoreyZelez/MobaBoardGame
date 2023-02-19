@@ -33,8 +33,6 @@ void LifeHarvestAbility::applyTarget(Character &target)
 	// Determines damage amount.
 	const int level = getLevel() - 1;
 	const int amount = (damageValues[level] * multiplier) + (getTrueAbilityPower());
-	std::cout << damageValues[level] << "    " << getTrueAbilityPower() << std::endl;
-	std::cout << std::endl << multiplier << "      " <<"amoUNT >" << amount << std::endl;
 
 	// Determines drainRate
 	double absorbRatio;  // Percent of health drained that is "harvested".
@@ -53,10 +51,10 @@ void LifeHarvestAbility::applyTarget(Character &target)
 
 	const int damagePerTurn = (double)amount / (double)duration;
 	std::unique_ptr<Effect<EntityAttributes>> effect = std::make_unique<HealthDrainEffect>(duration, damagePerTurn, absorbRatio, *getCharacter());
-	target.addEffect(effect);
+	target.addEffect(std::move(effect));
 }
 
 int LifeHarvestAbility::calculateCooldown() const
 {
-	return 10;
+	return 16;
 }

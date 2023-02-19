@@ -16,12 +16,6 @@
     <Filter Include="Header Files\Abilities">
       <UniqueIdentifier>{536b8461-f988-41f7-8abe-d41f4387c6ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Character">
-      <UniqueIdentifier>{c57db608-b69b-407d-816c-43988bbf1379}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Character">
-      <UniqueIdentifier>{b591860c-4644-4268-9cdf-c0b59e5d62e7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Abilities\Effects">
       <UniqueIdentifier>{429a9ca3-a1d9-477a-9d29-a65a2175281b}</UniqueIdentifier>
     </Filter>
@@ -49,23 +43,77 @@
     <Filter Include="Header Files\Abilities\Effects\Action">
       <UniqueIdentifier>{313f80a4-a7a7-4177-b29b-cab959a0b9c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Abilities\Leanna">
-      <UniqueIdentifier>{647abecb-9c5f-415c-bed3-70fa3957a524}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Abilities\Klaus">
-      <UniqueIdentifier>{8b9670d5-3f59-485f-937a-f627af5a89cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Abilties\Leanna">
-      <UniqueIdentifier>{db5aaaa6-bfe6-4333-b8b2-4aca648ff4d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Abilties\Klaus">
-      <UniqueIdentifier>{d83742ed-7236-477a-ba87-69a9dfe68b2b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Game">
       <UniqueIdentifier>{da9bdf23-700a-4c94-9b12-28edeca71054}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{25b2c442-8211-473f-8b6d-754c225bc6da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Character">
+      <UniqueIdentifier>{b591860c-4644-4268-9cdf-c0b59e5d62e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Creature">
+      <UniqueIdentifier>{a9414abe-4eb3-4931-9866-998a16a52641}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Map Editor">
+      <UniqueIdentifier>{f9d47d2e-55cc-4540-9bb2-6c47b9946c2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Game Board">
+      <UniqueIdentifier>{6ccea71a-7463-44e7-9e9f-5c89216f2992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\Character">
+      <UniqueIdentifier>{c57db608-b69b-407d-816c-43988bbf1379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\Minion">
+      <UniqueIdentifier>{57d80874-eebf-4b0e-abd5-5205e37e0ba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\Creature">
+      <UniqueIdentifier>{d58b4102-c60f-40ee-8811-6be444c7797c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Items">
+      <UniqueIdentifier>{6779b1a3-11ce-46e4-950d-a4e5477c1fc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items">
+      <UniqueIdentifier>{2b328302-a9ec-4825-9fc8-b50955f5a775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Map Editor">
+      <UniqueIdentifier>{3213021a-3143-4760-821e-2ceed985ea2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Game Board">
+      <UniqueIdentifier>{ba6c161a-cc81-4a2a-807b-0476b16d65ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Characters">
+      <UniqueIdentifier>{1d212f65-69b8-4681-bf25-8788f8b03919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Characters\Leanna">
+      <UniqueIdentifier>{647abecb-9c5f-415c-bed3-70fa3957a524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Characters\Adar">
+      <UniqueIdentifier>{7eb97074-0936-4c8d-a905-dee4603abef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities\Characters\Klaus">
+      <UniqueIdentifier>{8b9670d5-3f59-485f-937a-f627af5a89cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Characters">
+      <UniqueIdentifier>{3e74cdc5-7c7c-4c07-92f3-783153d8a32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Characters\Klaus">
+      <UniqueIdentifier>{d83742ed-7236-477a-ba87-69a9dfe68b2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Characters\Leanna">
+      <UniqueIdentifier>{db5aaaa6-bfe6-4333-b8b2-4aca648ff4d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Abilties\Characters\Adar">
+      <UniqueIdentifier>{0febbe02-5b67-4fa6-a71f-7fa53c9ab37a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\Tower">
+      <UniqueIdentifier>{d66baba7-67ec-4094-afb6-5124fdd9ca2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Tower">
+      <UniqueIdentifier>{601ab888-fa98-4d0d-b28b-cc5ecb28eb7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Creature\Minion">
+      <UniqueIdentifier>{39ddaf5c-dfae-418e-ad58-8aafdad292c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -76,24 +124,15 @@
       <Filter>Source Files\Abilties\Effects</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>Source Files\Character</Filter>
+      <Filter>Source Files\Entities\Character</Filter>
     </ClCompile>
     <ClCompile Include="CharacterAbilities.cpp">
-      <Filter>Source Files\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="CharacterObserver.cpp">
-      <Filter>Source Files\Character</Filter>
+      <Filter>Source Files\Entities\Character</Filter>
     </ClCompile>
     <ClCompile Include="CharacterFactory.cpp">
-      <Filter>Source Files\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Creature.cpp">
-      <Filter>Source Files\Entities</Filter>
+      <Filter>Source Files\Entities\Character</Filter>
     </ClCompile>
     <ClCompile Include="Position.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="ParalyseEffect.cpp">
@@ -103,22 +142,22 @@
       <Filter>Source Files\Abilties\Effects\Combat</Filter>
     </ClCompile>
     <ClCompile Include="VoidParalyseAbility.cpp">
-      <Filter>Source Files\Abilties\Leanna</Filter>
+      <Filter>Source Files\Abilties\Characters\Leanna</Filter>
     </ClCompile>
     <ClCompile Include="VoidRendAbility.cpp">
-      <Filter>Source Files\Abilties\Leanna</Filter>
+      <Filter>Source Files\Abilties\Characters\Leanna</Filter>
     </ClCompile>
     <ClCompile Include="VoidShotPassive.cpp">
-      <Filter>Source Files\Abilties\Leanna</Filter>
+      <Filter>Source Files\Abilties\Characters\Leanna</Filter>
     </ClCompile>
     <ClCompile Include="AttackHealPassive.cpp">
-      <Filter>Source Files\Abilties\Klaus</Filter>
+      <Filter>Source Files\Abilties\Characters\Klaus</Filter>
     </ClCompile>
     <ClCompile Include="LifeHarvestAbility.cpp">
-      <Filter>Source Files\Abilties\Klaus</Filter>
+      <Filter>Source Files\Abilties\Characters\Klaus</Filter>
     </ClCompile>
     <ClCompile Include="BloodAnguishAbility.cpp">
-      <Filter>Source Files\Abilties\Klaus</Filter>
+      <Filter>Source Files\Abilties\Characters\Klaus</Filter>
     </ClCompile>
     <ClCompile Include="SelfAbility.cpp">
       <Filter>Source Files\Abilties</Filter>
@@ -132,38 +171,11 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="GameBoard.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="MapEditor.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="MapEditorHandler.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSquare.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="ImpassableSquare.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="PassableSquare.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="ActiveEntityImage.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="GameHandler.cpp">
       <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="MapSaveHandler.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="StatusEffect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Minion.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ActionPointEffect.cpp">
       <Filter>Source Files\Abilties\Effects\Action</Filter>
@@ -189,20 +201,71 @@
     <ClCompile Include="GameEntity.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="CharacterEffectsManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterAttributesSystem.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entities\Character</Filter>
     </ClCompile>
-    <ClCompile Include="MinionAttributesSystem.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CharacterEffectsManager.cpp">
+      <Filter>Source Files\Entities\Character</Filter>
     </ClCompile>
-    <ClCompile Include="AttributesSystem.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Minion.cpp">
+      <Filter>Source Files\Entities\Creature\Minion</Filter>
     </ClCompile>
     <ClCompile Include="MinionEffectsManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entities\Creature\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="MinionAttributesSystem.cpp">
+      <Filter>Source Files\Entities\Creature\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="MinionSpawner.cpp">
+      <Filter>Source Files\Entities\Creature\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Creature.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="MapSaveHandler.cpp">
+      <Filter>Source Files\Map Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditorHandler.cpp">
+      <Filter>Source Files\Map Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditor.cpp">
+      <Filter>Source Files\Map Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSquare.cpp">
+      <Filter>Source Files\Game\Game Board</Filter>
+    </ClCompile>
+    <ClCompile Include="GameBoard.cpp">
+      <Filter>Source Files\Game\Game Board</Filter>
+    </ClCompile>
+    <ClCompile Include="ImpassableSquare.cpp">
+      <Filter>Source Files\Game\Game Board</Filter>
+    </ClCompile>
+    <ClCompile Include="PassableSquare.cpp">
+      <Filter>Source Files\Game\Game Board</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusEffect.cpp">
+      <Filter>Source Files\Abilties\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="DisorientingStrikePassive.cpp">
+      <Filter>Source Files\Abilties\Characters\Adar</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Source Files\Entities\Tower</Filter>
+    </ClCompile>
+    <ClCompile Include="AbilityResistEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="ResistantSentinelAbility.cpp">
+      <Filter>Source Files\Abilties\Characters\Adar</Filter>
+    </ClCompile>
+    <ClCompile Include="IntimidationAbility.cpp">
+      <Filter>Source Files\Abilties\Characters\Adar</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetedDamageReductionEffect.cpp">
+      <Filter>Source Files\Abilties\Effects\Combat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -210,25 +273,22 @@
       <Filter>Header Files\Abilities\Effects</Filter>
     </ClInclude>
     <ClInclude Include="CharacterAbilities.h">
-      <Filter>Header Files\Character</Filter>
+      <Filter>Header Files\Entities\Character</Filter>
     </ClInclude>
     <ClInclude Include="CharacterObserver.h">
-      <Filter>Header Files\Character</Filter>
+      <Filter>Header Files\Entities\Character</Filter>
     </ClInclude>
     <ClInclude Include="ParalyseEffect.h">
       <Filter>Header Files\Abilities\Effects\Action</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
-      <Filter>Header Files\Character</Filter>
+      <Filter>Header Files\Entities\Character</Filter>
     </ClInclude>
     <ClInclude Include="Action.h">
-      <Filter>Header Files\Character</Filter>
+      <Filter>Header Files\Entities\Character</Filter>
     </ClInclude>
     <ClInclude Include="CharacterFactory.h">
-      <Filter>Header Files\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Creature.h">
-      <Filter>Header Files\Entities</Filter>
+      <Filter>Header Files\Entities\Character</Filter>
     </ClInclude>
     <ClInclude Include="Position.h">
       <Filter>Header Files\Entities</Filter>
@@ -236,58 +296,31 @@
     <ClInclude Include="HealthDrainEffect.h">
       <Filter>Header Files\Abilities\Effects\Combat</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="VoidRendAbility.h">
-      <Filter>Header Files\Abilities\Leanna</Filter>
+      <Filter>Header Files\Abilities\Characters\Leanna</Filter>
     </ClInclude>
     <ClInclude Include="VoidParalyseAbility.h">
-      <Filter>Header Files\Abilities\Leanna</Filter>
+      <Filter>Header Files\Abilities\Characters\Leanna</Filter>
     </ClInclude>
     <ClInclude Include="VoidShotPassive.h">
-      <Filter>Header Files\Abilities\Leanna</Filter>
+      <Filter>Header Files\Abilities\Characters\Leanna</Filter>
     </ClInclude>
     <ClInclude Include="AttackHealPassive.h">
-      <Filter>Header Files\Abilities\Klaus</Filter>
+      <Filter>Header Files\Abilities\Characters\Klaus</Filter>
     </ClInclude>
     <ClInclude Include="LifeHarvestAbility.h">
-      <Filter>Header Files\Abilities\Klaus</Filter>
+      <Filter>Header Files\Abilities\Characters\Klaus</Filter>
     </ClInclude>
     <ClInclude Include="BloodAnguishAbility.h">
-      <Filter>Header Files\Abilities\Klaus</Filter>
+      <Filter>Header Files\Abilities\Characters\Klaus</Filter>
     </ClInclude>
     <ClInclude Include="Ability.h">
-      <Filter>Header Files\Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="SelfAbility.h">
       <Filter>Header Files\Abilities</Filter>
     </ClInclude>
     <ClInclude Include="PassiveAbility.h">
       <Filter>Header Files\Abilities</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="GameBoard.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="MapEditor.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="MapEditorHandler.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="SquareType.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSquare.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="ImpassableSquare.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="PassableSquare.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Team.h">
@@ -298,12 +331,6 @@
     </ClInclude>
     <ClInclude Include="GameHandler.h">
       <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="MapSaveHandler.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="StatusEffect.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MovementPointEffect.h">
       <Filter>Header Files\Abilities\Effects\Action</Filter>
@@ -320,9 +347,6 @@
     <ClInclude Include="HealthEffect.h">
       <Filter>Header Files\Abilities\Effects\Combat</Filter>
     </ClInclude>
-    <ClInclude Include="Minion.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="ArmorEffect.h">
       <Filter>Header Files\Abilities\Effects\Combat</Filter>
     </ClInclude>
@@ -332,23 +356,86 @@
     <ClInclude Include="GameEntity.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterEffectsManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="AttributesSystem.h">
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="CharacterAttributesSystem.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Entities\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterEffectsManager.h">
+      <Filter>Header Files\Entities\Character</Filter>
     </ClInclude>
     <ClInclude Include="MinionAttributesSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectsManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AttributesSystem.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Entities\Minion</Filter>
     </ClInclude>
     <ClInclude Include="MinionEffectsManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Entities\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="MinionSpawner.h">
+      <Filter>Header Files\Entities\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Minion.h">
+      <Filter>Header Files\Entities\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectsManager.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Creature.h">
+      <Filter>Header Files\Entities\Creature</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusEffect.h">
+      <Filter>Header Files\Abilities\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditor.h">
+      <Filter>Header Files\Map Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="MapSaveHandler.h">
+      <Filter>Header Files\Map Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditorHandler.h">
+      <Filter>Header Files\Map Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="GameBoard.h">
+      <Filter>Header Files\Game\Game Board</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSquare.h">
+      <Filter>Header Files\Game\Game Board</Filter>
+    </ClInclude>
+    <ClInclude Include="PassableSquare.h">
+      <Filter>Header Files\Game\Game Board</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareType.h">
+      <Filter>Header Files\Game\Game Board</Filter>
+    </ClInclude>
+    <ClInclude Include="ImpassableSquare.h">
+      <Filter>Header Files\Game\Game Board</Filter>
+    </ClInclude>
+    <ClInclude Include="DisorientingStrikePassive.h">
+      <Filter>Header Files\Abilities\Characters\Adar</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
+      <Filter>Header Files\Entities\Tower</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterStatistics.h">
+      <Filter>Header Files\Entities\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="AbilityResistEffect.h">
+      <Filter>Header Files\Abilities\Effects\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="IntimidationAbility.h">
+      <Filter>Header Files\Abilities\Characters\Adar</Filter>
+    </ClInclude>
+    <ClInclude Include="ResistantSentinelAbility.h">
+      <Filter>Header Files\Abilities\Characters\Adar</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetedDamageReductionEffect.h">
+      <Filter>Header Files\Abilities\Effects\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="SelfAbility.h">
+      <Filter>Header Files\Abilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

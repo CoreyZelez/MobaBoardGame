@@ -163,17 +163,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AttributesSystem.cpp" />
+    <ClCompile Include="AbilityResistEffect.cpp" />
     <ClCompile Include="CharacterAttributesSystem.cpp" />
     <ClCompile Include="CharacterEffectsManager.cpp" />
+    <ClCompile Include="DisorientingStrikePassive.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="ArmorEffect.cpp" />
     <ClCompile Include="AttackPointEffect.cpp" />
     <ClCompile Include="BloodAnguishAbility.cpp" />
     <ClCompile Include="ActiveEntityImage.cpp" />
+    <ClCompile Include="IntimidationAbility.cpp" />
     <ClCompile Include="Minion.cpp" />
     <ClCompile Include="MinionAttributesSystem.cpp" />
     <ClCompile Include="MinionEffectsManager.cpp" />
+    <ClCompile Include="MinionSpawner.cpp" />
+    <ClCompile Include="TargetedDamageReductionEffect.cpp" />
+    <ClCompile Include="ResistantSentinelAbility.cpp" />
     <ClCompile Include="StatusEffect.cpp" />
     <ClCompile Include="GameHandler.cpp" />
     <ClCompile Include="GameSquare.cpp" />
@@ -194,7 +199,6 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="EntityAttributes.cpp" />
     <ClCompile Include="CharacterAbilities.cpp" />
-    <ClCompile Include="CharacterObserver.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="HealthEffect.cpp" />
@@ -205,24 +209,32 @@
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="Ability.cpp" />
     <ClCompile Include="ActionPointEffect.cpp" />
+    <ClCompile Include="Tower.cpp" />
     <ClCompile Include="VoidParalyseAbility.cpp" />
     <ClCompile Include="VoidRendAbility.cpp" />
     <ClCompile Include="VoidShotPassive.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbilityResistEffect.h" />
     <ClInclude Include="Action.h" />
     <ClInclude Include="AttributesSystem.h" />
     <ClInclude Include="CharacterAttributesSystem.h" />
     <ClInclude Include="CharacterEffectsManager.h" />
+    <ClInclude Include="DisorientingStrikePassive.h" />
     <ClInclude Include="EffectsManager.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="ArmorEffect.h" />
     <ClInclude Include="AttackPointEffect.h" />
     <ClInclude Include="BloodAnguishAbility.h" />
     <ClInclude Include="ActiveEntityImage.h" />
+    <ClInclude Include="IntimidationAbility.h" />
     <ClInclude Include="Minion.h" />
     <ClInclude Include="MinionAttributesSystem.h" />
     <ClInclude Include="MinionEffectsManager.h" />
+    <ClInclude Include="MinionSpawner.h" />
+    <ClInclude Include="CharacterStatistics.h" />
+    <ClInclude Include="TargetedDamageReductionEffect.h" />
+    <ClInclude Include="ResistantSentinelAbility.h" />
     <ClInclude Include="StatusEffect.h" />
     <ClInclude Include="GameHandler.h" />
     <ClInclude Include="GameSquare.h" />
@@ -255,6 +267,7 @@
     <ClInclude Include="ActionPointEffect.h" />
     <ClInclude Include="SquareType.h" />
     <ClInclude Include="Team.h" />
+    <ClInclude Include="Tower.h" />
     <ClInclude Include="VoidParalyseAbility.h" />
     <ClInclude Include="VoidRendAbility.h" />
     <ClInclude Include="VoidShotPassive.h" />

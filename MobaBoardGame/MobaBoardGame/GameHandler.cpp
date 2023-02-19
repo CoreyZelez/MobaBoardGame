@@ -40,7 +40,7 @@ void GameHandler::handleInput(sf::RenderWindow & window)
 
 	switch(currState)
 	{
-	case nothingSelected:	
+	case nothingSelectedState:
 		if(!inputLock && sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
 			inputLock = true;
@@ -51,7 +51,7 @@ void GameHandler::handleInput(sf::RenderWindow & window)
 			game.selectCharacter(worldPos.x, worldPos.y);  // Game attempts to select character at coords.
 		}
 		break;
-	case move:
+	case moveState:
 		if(!inputLock && sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
 			inputLock = true;
@@ -60,33 +60,38 @@ void GameHandler::handleInput(sf::RenderWindow & window)
 			sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
 
 			bool successfulCharacterMove = game.moveSelectedCharacter(worldPos.x, worldPos.y);
+
 			if(successfulCharacterMove == true)
 			{
-				game.setState(move);
+				game.setState(moveState);
+			}
+			else if(game.selectCharacter(worldPos.x, worldPos.y))  // Attempts to change selection to character of same team.
+			{
+				break;
 			}
 			else
 			{
-				game.setState(nothingSelected);
+				game.setState(nothingSelectedState);
 			}
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			inputLock = true;
-			game.setState(basicAttack);
+			game.setState(basicAttackState);
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 		{
 			inputLock = true;
-			game.setState(ability1);
+			game.setState(ability1State);
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			inputLock = true;
-			game.setState(ability2);
+			game.setState(ability2State);
 		}
 		break;
 
-	case basicAttack:
+	case basicAttackState:
 		if(!inputLock && sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
 			inputLock = true;
@@ -97,30 +102,30 @@ void GameHandler::handleInput(sf::RenderWindow & window)
 			bool successfulAttack = game.selectedCharacterDoAttack(worldPos.x, worldPos.y);
 			if(successfulAttack == true)
 			{
-				game.setState(move);
+				game.setState(moveState);
 			}
 			else
 			{
-				game.setState(nothingSelected);
+				game.setState(nothingSelectedState);
 			}
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			inputLock = true;
-			game.setState(move);
+			game.setState(moveState);
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 		{
 			inputLock = true;
-			game.setState(ability1);
+			game.setState(ability1State);
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			inputLock = true;
-			game.setState(ability2);
+			game.setState(ability2State);
 		}
 		break;
-	case ability1:
+	case ability1State:
 		if(!inputLock && sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
 			inputLock = true;
@@ -131,30 +136,30 @@ void GameHandler::handleInput(sf::RenderWindow & window)
 			bool successfulAbilityUse = game.selectedCharacterUseAbility1(worldPos.x, worldPos.y);
 			if(successfulAbilityUse == true)
 			{
-				game.setState(move);
+				game.setState(moveState);
 			}
 			else
 			{
-				game.setState(nothingSelected);
+				game.setState(nothingSelectedState);
 			}
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			inputLock = true;
-			game.setState(basicAttack);
+			game.setState(basicAttackState);
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 		{
 			inputLock = true;
-			game.setState(move);
+			game.setState(moveState);
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			inputLock = true;
-			game.setState(ability2);
+			game.setState(ability2State);
 		}
 		break;
-	case ability2:
+	case ability2State:
 		if(!inputLock && sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
 			inputLock = true;
@@ -165,27 +170,27 @@ void GameHandler::handleInput(sf::RenderWindow & window)
 			bool successfulAbilityUse = game.selectedCharacterUseAbility2(worldPos.x, worldPos.y);
 			if(successfulAbilityUse == true)
 			{
-				game.setState(move);
+				game.setState(moveState);
 			}
 			else
 			{
-				game.setState(nothingSelected);
+				game.setState(nothingSelectedState);
 			}
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			inputLock = true;
-			game.setState(basicAttack);
+			game.setState(basicAttackState);
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 		{
 			inputLock = true;
-			game.setState(ability1);
+			game.setState(ability1State);
 		}
 		else if(!inputLock && sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			inputLock = true;
-			game.setState(move);
+			game.setState(moveState);
 		}
 		break;
 	}

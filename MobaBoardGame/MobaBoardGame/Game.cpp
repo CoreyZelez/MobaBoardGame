@@ -2,27 +2,107 @@
 #include "CharacterFactory.h"
 #include "MapSaveHandler.h"
 #include <iostream>
+#include <algorithm>
+#include <random>
+
+//Game::Game()
+//{
+//	// Init board.
+//	MapSaveHandler saveHandler;
+//	gameBoard = saveHandler.readBoardFile("map V1");
+//	gameBoard.get()->initBlueSpawn({ 50, 12 });
+//	gameBoard.get()->initRedSpawn({ 51, 13 });
+//
+//	CharacterFactory factory;
+//
+//	// Blue team.
+//	std::shared_ptr<Character> character1 = factory.createVoidArcherLeanna(*gameBoard.get(), blue, 1);
+//	character1.get()->init();
+//
+//	// Red team.
+//	std::shared_ptr<Character> character2 = std::shared_ptr<Character>(factory.createBloodlordKlaus(*gameBoard.get(), red, 1));
+//	character2.get()->init();           
+//
+//	characters.push_back(character1);
+//	characters.push_back(character2);
+//
+//	// Creates bot lane path.
+//	std::vector<Position> path1;
+//	for(int i = 0; i < 19; ++i)
+//	{
+//		path1.push_back({ 48 - (2 * i), 8 + i });
+//		path1.push_back({ 47 - (2 * i), 8 + i });
+//	}
+//	for(int i = 0; i < 18; ++i)
+//	{
+//		path1.push_back({ 10, 27 + i });
+//	}
+//	for(int i = 0; i < 19; ++i)
+//	{
+//		path1.push_back({ 11 + (2 * i), 45 + i });
+//		path1.push_back({ 12 + (2 * i), 45 + i });
+//	}
+//
+//	// Creates reversal of path1.
+//	std::vector<Position> path1Reverse = path1;
+//	std::reverse(path1Reverse.begin(), path1Reverse.end());
+//
+//	MinionSpawner minionSpawnerBlue1(*this, blue, path1);
+//	MinionSpawner minionSpawnerRed1(*this, red, path1Reverse);
+//	minionSpawners.push_back(minionSpawnerBlue1);
+//	minionSpawners.push_back(minionSpawnerRed1);
+//}
 
 Game::Game()
 {
 	// Init board.
 	MapSaveHandler saveHandler;
-	gameBoard = saveHandler.readBoardFile("map V1.1");
-	gameBoard.get()->initBlueSpawn({ 50, 12 });
-	gameBoard.get()->initRedSpawn({ 51, 13 });
+	gameBoard = saveHandler.readBoardFile("3v3 1.0");
+	gameBoard.get()->initBlueSpawn({ 32, 3 });
+	gameBoard.get()->initRedSpawn({ 32, 52 });
 
 	CharacterFactory factory;
 
 	// Blue team.
-	std::shared_ptr<Character> character1 = factory.createVoidArcherLeanna(*gameBoard.get(), blue, 1);
+	std::shared_ptr<Character> character1 = factory.createVoidArcherLeanna(*gameBoard.get(), blue);
 	character1.get()->init();
 
+	std::shared_ptr<Character> character2 = factory.createAdominusSentinelAdar(*gameBoard.get(), blue);
+	character2.get()->init();
+
 	// Red team.
-	std::shared_ptr<Character> character2 = std::shared_ptr<Character>(factory.createBloodlordKlaus(*gameBoard.get(), red, 1));
-	character2.get()->init();           
+	std::shared_ptr<Character> character4 = std::shared_ptr<Character>(factory.createBloodlordKlaus(*gameBoard.get(), red));
+	character4.get()->init();           
 
 	characters.push_back(character1);
 	characters.push_back(character2);
+
+	characters.push_back(character4);
+
+	// Creates bot lane path.
+	std::vector<Position> path1;
+	for(int i = 0; i < 17; ++i)
+	{
+		path1.push_back({ 31, 3 + i });
+	}
+	for(int i = 0; i < 16; ++i)
+	{
+		path1.push_back({ 32, 20 + i });
+	}
+	for(int i = 0; i < 17; ++i)
+	{
+		path1.push_back({ 33, 36 + i });
+	}
+
+
+	// Creates reversal of path1.
+	std::vector<Position> path1Reverse = path1;
+	std::reverse(path1Reverse.begin(), path1Reverse.end());
+
+	MinionSpawner minionSpawnerBlue1(*this, blue, path1);
+	MinionSpawner minionSpawnerRed1(*this, red, path1Reverse);
+	minionSpawners.push_back(minionSpawnerBlue1);
+	minionSpawners.push_back(minionSpawnerRed1);
 }
 
 void Game::update()
@@ -34,14 +114,32 @@ void Game::update()
 		return;
 	}
 
-	for(const auto &character : characters)
+	for(auto &character : characters)
 	{
 		character.get()->update();
 	}
 
+	// Randomises minion order.
+	//auto rng = std::default_random_engine{};
+	//std::shuffle(std::begin(minions), std::end(minions), rng);
+	for(auto &minion : minions)
+	{
+		minion.get()->update();
+	}
+
+	for(MinionSpawner &spawner : minionSpawners)  // Make spawner a template class.
+	{
+		if(spawner.canSpawn())
+		{
+			minions.push_back(spawner.spawnMinion());  // spawn minion can become spawn when class is templated.
+			minions.back().get()->initImageHealth();
+		}
+
+		spawner.update();
+	}
+
 	switchCurrTeam();
 	resetSelections();
-
 	endTurn = false;
 }
 
@@ -49,9 +147,14 @@ void Game::draw(sf::RenderWindow &window)
 {
 	gameBoard.get()->draw(window);
 
-	for(const auto &character : characters)
+	for(auto &character : characters)
 	{
 		character.get()->draw(window);
+	}
+
+	for(auto &minion : minions)
+	{
+		minion.get()->draw(window);
 	}
 }
 
@@ -61,49 +164,12 @@ bool Game::moveSelectedCharacter(float x, float y)
 	{
 		return false;
 	}
-	assert(selectedCharacterNum != -1);  // There must be a selected character.
 
 	Character &character = *characters[selectedCharacterNum].get();
 
 	assert(character.getTeam() == currTeam);
 
-	Position characterPosition = character.getPosition();
-
-	GameSquare *sourceSquare = gameBoard.get()->getSquare(characterPosition);
-	GameSquare *targetSquare = gameBoard.get()->getSquare(x, y);
-
-	if(sourceSquare == targetSquare)
-	{
-		return false;
-	}
-
-	assert(sourceSquare->getOccupant() == &character);  // Character position consistent with board.
-
-	Position target = targetSquare->getPosition();
-
-	assert(target == gameBoard.get()->globalCoordsToPosition(x, y));  // Sanity check.
-
-	if(targetSquare->isVacant())
-	{
-		std::list<Node> markedNodes = gameBoard.get()->getMarkedNodes();
-		auto it = std::find_if(markedNodes.begin(), markedNodes.end(), [target](Node node)
-		{ return node.position == target; });
-
-		if(it != markedNodes.end())
-		{
-			int cost = it->value;
-			assert(character.move(target, cost));  // Move character. Must be successful.
-
-			gameBoard.get()->moveEntity(characterPosition, target);
-
-			assert(gameBoard.get()->getSquare(target)->getOccupant() == &character);
-			assert(sourceSquare->isVacant());
-
-			return true;
-		}
-	}
-
-	return false;
+	return character.move(x, y);
 }
 
 void Game::unselectCharacter()
@@ -127,10 +193,59 @@ void Game::switchCurrTeam()
 void Game::setTurnEnd()
 {
 	endTurn = true;
-	setState(nothingSelected);
+	setState(nothingSelectedState);
 }
 
-void Game::selectCharacter(float x, float y)
+GameBoard & Game::getBoard()
+{
+	return *gameBoard.get();
+}
+
+Character * Game::getCharacterAt(Position position)
+{
+	for(auto &character : characters)
+	{
+		if(character.get()->isAt(position))
+		{
+			return character.get();
+		}
+	}
+
+	return nullptr;
+}
+
+Minion* Game::getMinionAt(Position position)
+{
+	for(auto &minion : minions)
+	{
+		if(minion.get()->isAt(position))
+		{
+			return minion.get();
+		}
+	}
+
+	return nullptr;
+}
+
+void Game::remove(Minion &minion)
+{
+	auto iter = minions.cbegin();
+	while(iter != minions.end())
+	{
+		if(iter->get() == &minion)
+		{
+			GameSquare *square = gameBoard->getSquare(iter->get()->getPosition());
+			square->removeOccupant();
+			minions.erase(iter);
+			return;
+		}
+		++iter;
+	}
+
+	assert(false);  // Should never be called on non-existent minion.
+}
+
+bool Game::selectCharacter(float x, float y)
 {
 	for(int charNum = 0; charNum < characters.size(); ++charNum)
 	{
@@ -142,15 +257,16 @@ void Game::selectCharacter(float x, float y)
 			if(character.getTeam() != currTeam)
 			{
 				selectedCharacterNum = -1;
-				return;
+				return false;
 			}
-			setState(move);
+			setState(moveState);
 
-			return;
+			return true;
 		}
 	}
 
 	selectedCharacterNum = -1;
+	return false;
 }
 
 bool Game::characterIsSelected() const
@@ -183,7 +299,7 @@ void Game::markSquares(GameState state)
 
 	switch(state)
 	{
-	case move:
+	case moveState:
 		if(actionPoints > movementPoints)
 		{
 			gameBoard.get()->markSquares(character.getPosition(), movementPoints, true, false, sf::Color::Yellow);
@@ -194,7 +310,7 @@ void Game::markSquares(GameState state)
 		}
 		break;
 
-	case basicAttack:
+	case basicAttackState:
 		// Determines color. Grey if not enough action points.
 		if(character.unableToBasicAttack())
 		{
@@ -206,7 +322,7 @@ void Game::markSquares(GameState state)
 		gameBoard.get()->markSquares(position, range, false, true, sf::Color::Magenta);
 		break;
 
-	case ability1:
+	case ability1State:
 		// Color squares grey if not enough action points.
 		if(character.unableToUseAbility1())
 		{
@@ -218,7 +334,7 @@ void Game::markSquares(GameState state)
 		gameBoard.get()->markSquares(position, ability1Range, false, true, sf::Color(255, 0, 120));
 		break;
 
-	case ability2:
+	case ability2State:
 		// Color squares grey if not enough action points.
 		if(character.unableToUseAbility2())
 		{
@@ -236,95 +352,95 @@ void Game::setState(GameState nextState)
 {
 	switch(currState)
 	{
-	case nothingSelected:
+	case nothingSelectedState:
 		switch(nextState)
 		{
-		case move:
-			markSquares(move); 
+		case moveState:
+			markSquares(moveState);
 		}
 
-	case move:
+	case moveState:
 		switch(nextState)
 		{
-		case nothingSelected:
+		case nothingSelectedState:
 			resetSelections();
 			break;
-		case move:
+		case moveState:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(move);
+			markSquares(moveState);
 			break;
-		case basicAttack:
+		case basicAttackState:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(basicAttack);
+			markSquares(basicAttackState);
 			break;
-		case ability1:
+		case ability1State:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(ability1);
+			markSquares(ability1State);
 			break;
-		case ability2:
+		case ability2State:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(ability2);
+			markSquares(ability2State);
 			break;
 		}
 		break;
 
-	case basicAttack:
+	case basicAttackState:
 		switch(nextState)
 		{
-		case move:
+		case moveState:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(move);
+			markSquares(moveState);
 			break;
-		case ability1:
+		case ability1State:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(ability1);
+			markSquares(ability1State);
 			break;
-		case ability2:
+		case ability2State:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(ability2);
+			markSquares(ability2State);
 			break;
-		case nothingSelected:
+		case nothingSelectedState:
 			resetSelections();
 			break;
 		}
 
-	case ability1:
+	case ability1State:
 		switch(nextState)
 		{
-		case move:
+		case moveState:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(move);
+			markSquares(moveState);
 			break;
-		case basicAttack:
+		case basicAttackState:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(basicAttack);
+			markSquares(basicAttackState);
 			break;
-		case nothingSelected:
+		case nothingSelectedState:
 			resetSelections();
 			break;
-		case ability2:
+		case ability2State:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(ability2);
+			markSquares(ability2State);
 			break;
 		}
 
-	case ability2:
+	case ability2State:
 		switch(nextState)
 		{
-		case move:
+		case moveState:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(move);
+			markSquares(moveState);
 			break;
-		case basicAttack:
+		case basicAttackState:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(basicAttack);
+			markSquares(basicAttackState);
 			break;
-		case nothingSelected:
+		case nothingSelectedState:
 			resetSelections();
 			break;
-		case ability1:
+		case ability1State:
 			gameBoard.get()->resetMarkedSquares();
-			markSquares(ability1);
+			markSquares(ability1State);
 			break;
 		}
 		break;
@@ -340,19 +456,30 @@ GameState Game::getState()
 
 bool Game::selectedCharacterDoAttack(float x, float y)
 {
+	Character &character = *characters[selectedCharacterNum].get();
+	assert(currTeam == character.getTeam());
+
+	// Handles attack on character.
 	for(int charNum = 0; charNum < characters.size(); ++charNum)
 	{
 		if(characters[charNum].get()->isAt(x, y))
 		{
-			Character &character = *characters[selectedCharacterNum].get();
 			Character &target = *characters[charNum].get();
-
-			assert(currTeam == character.getTeam());
 
 			if(target.getTeam() == currTeam)
 			{
 				return false;
 			}
+
+			return character.basicAttack(target);
+		}
+	}
+
+	for(auto &minion : minions)
+	{
+		if(minion.get()->isAt(x, y))
+		{
+			Minion &target = *minion.get();
 
 			return character.basicAttack(target);
 		}

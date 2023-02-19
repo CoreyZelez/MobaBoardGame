@@ -5,8 +5,8 @@
 
 struct EntityAttributes;
 
-HealthEffect::HealthEffect(int duration, int amountPT, int maxHealth)
-	: Effect<EntityAttributes>(duration), amountPT(amountPT), maxHealth(maxHealth)
+HealthEffect::HealthEffect(int duration, int amountPT, const Character &character)
+	: Effect<EntityAttributes>(duration), amountPT(amountPT), maxHealth(character.getBaseAttributes().healthAttributes.health)
 {
 }
 
@@ -15,8 +15,9 @@ std::unique_ptr<Effect<EntityAttributes>> HealthEffect::clone()
 	return std::make_unique<HealthEffect>(*this);
 }
 
-void HealthEffect::apply(EntityAttributes &ea)
+void HealthEffect::apply()
 {
+	EntityAttributes &ea = getT();
 	ea.healthAttributes.health += amountPT;
 	if(ea.healthAttributes.health > maxHealth)
 	{

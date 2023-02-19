@@ -1,8 +1,250 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (RiskTypeGame.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Ability.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\ability.cpp(27): warning C4244: 'return': conversion from 'const double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\ability.cpp(84): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\ability.cpp(89): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+  AbilityResistEffect.cpp
+  ActionPointEffect.cpp
+  ActiveEntityImage.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(9): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(22): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(29): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(32): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(37): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(38): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(44): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(46): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(58): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(59): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(60): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(67): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(70): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(109): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(110): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(111): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(115): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(116): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(119): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(120): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(121): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(124): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(125): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(126): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(142): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(144): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(153): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.cpp(155): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  ArmorEffect.cpp
+  AttackHealPassive.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\attackhealpassive.cpp(54): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\attackhealpassive.cpp(54): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\attackhealpassive.cpp(67): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\attackhealpassive.cpp(67): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(2539): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\attackhealpassive.cpp(44): note: see reference to function template instantiation 'std::unique_ptr<HealthEffect,std::default_delete<_Ty>> std::make_unique<HealthEffect,int,double&,Character&,0>(int &&,double &,Character &)' being compiled
+          with
+          [
+              _Ty=HealthEffect
+          ]
+  AttackPointEffect.cpp
+  AttributesSystem.cpp
+  BloodAnguishAbility.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\bloodanguishability.cpp(11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\bloodanguishability.cpp(70): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Character.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\character.cpp(70): warning C4804: '>': unsafe use of type 'bool' in operation
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\character.cpp(140): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\character.cpp(140): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\character.cpp(181): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\character.cpp(181): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  CharacterAttributesSystem.cpp
+  CharacterEffectsManager.cpp
+  CharacterFactory.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(92): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(92): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(93): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(93): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(94): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(94): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(95): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(95): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(96): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(96): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(97): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\characterfactory.cpp(97): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Creature.cpp
+  DisorientingStrikePassive.cpp
+  Effect.cpp
+  EntityAttributes.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\entityattributes.cpp(6): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Game.cpp
+  GameBoard.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\gameboard.cpp(44): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\gameboard.cpp(181): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  GameEntity.cpp
+  Generating Code...
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\gameboard.cpp(381): warning C4715: 'GameBoard::getSpawn': not all control paths return a value
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\gameboard.cpp(402): warning C4715: 'GameBoard::moveEntity': not all control paths return a value
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\game.cpp(487): warning C4715: 'Game::selectedCharacterDoAttack': not all control paths return a value
+  Compiling...
+  GameHandler.cpp
+  HealthDrainEffect.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\healthdraineffect.cpp(28): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\healthdraineffect.cpp(28): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\healthdraineffect.cpp(36): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\healthdraineffect.cpp(36): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  HealthEffect.cpp
+  IntimidationAbility.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(2539): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+  d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\intimidationability.cpp(37): note: see reference to function template instantiation 'std::unique_ptr<HealthEffect,std::default_delete<_Ty>> std::make_unique<HealthEffect,int,double&,Character&,0>(int &&,double &,Character &)' being compiled
+          with
+          [
+              _Ty=HealthEffect
+          ]
+  LifeHarvestAbility.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\lifeharvestability.cpp(35): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\lifeharvestability.cpp(35): warning C4244: 'initializing': conversion from '_Ty' to 'const int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\lifeharvestability.cpp(52): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\lifeharvestability.cpp(52): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
   Minion.cpp
-d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\activeentityimage.h(5): warning C4099: 'Position': type name first seen using 'struct' now seen using 'class'
-  d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\position.h(2): note: see declaration of 'Position'
-d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minion.cpp(6): error C2280: 'MinionAttributesSystem::MinionAttributesSystem(void)': attempting to reference a deleted function
-  d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minionattributessystem.h(12): note: compiler has generated 'MinionAttributesSystem::MinionAttributesSystem' here
-  d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minionattributessystem.h(12): note: 'MinionAttributesSystem::MinionAttributesSystem(void)': function was implicitly deleted because a base class 'AttributesSystem<Minion>' has either no appropriate default constructor or overload resolution was ambiguous
-  d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minionattributessystem.h(7): note: see declaration of 'AttributesSystem<Minion>'
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minion.cpp(78): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minion.cpp(284): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minion.cpp(284): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minion.cpp(306): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minion.cpp(306): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minion.cpp(341): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minion.cpp(341): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minion.cpp(363): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\minion.cpp(363): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  MinionAttributesSystem.cpp
+  MinionEffectsManager.cpp
+  MinionSpawner.cpp
+  MovementPointEffect.cpp
+  ParalyseEffect.cpp
+  PassiveAbility.cpp
+  PhysicalDamageEffect.cpp
+  ResistantSentinelAbility.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\resistantsentinelability.cpp(21): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\resistantsentinelability.cpp(22): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+  SelfAbility.cpp
+  StatusEffect.cpp
+  TargetedDamageReductionEffect.cpp
+  Tower.cpp
+  VoidParalyseAbility.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidparalyseability.cpp(42): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidparalyseability.cpp(42): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  VoidRendAbility.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidrendability.cpp(35): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidrendability.cpp(37): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidrendability.cpp(46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidrendability.cpp(47): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(2539): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
+  d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidrendability.cpp(49): note: see reference to function template instantiation 'std::unique_ptr<ArmorEffect,std::default_delete<_Ty>> std::make_unique<ArmorEffect,const int&,const double&,0>(const int &,const double &)' being compiled
+          with
+          [
+              _Ty=ArmorEffect
+          ]
+  Generating Code...
+  Compiling...
+  VoidShotPassive.cpp
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidshotpassive.cpp(42): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidshotpassive.cpp(42): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidshotpassive.cpp(59): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidshotpassive.cpp(59): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidshotpassive.cpp(60): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\mobaboardgame\mobaboardgame\mobaboardgame\voidshotpassive.cpp(60): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  main.cpp
+  Generating Code...
+  MobaBoardGame.vcxproj -> D:\Projects\MobaBoardGame\MobaBoardGame\x64\Debug\MobaBoardGame.exe
