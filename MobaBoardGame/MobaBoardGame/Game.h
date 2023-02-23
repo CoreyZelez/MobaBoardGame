@@ -49,6 +49,9 @@ public:
 
 private:
 	// Functions
+	void removeDeadMinions();
+	void updateMinions();
+
 	void unselectCharacter();
 	void switchCurrTeam();
 
@@ -59,7 +62,7 @@ private:
 	std::vector<std::shared_ptr<Character>> characters;
 
 	std::vector<MinionSpawner> minionSpawners;
-	std::list<std::unique_ptr<Minion>> minions;
+	std::vector<std::shared_ptr<Minion>> minions;
 
 	Team currTeam = blue;  // team that can move.
 	bool endTurn = false;

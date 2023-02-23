@@ -112,7 +112,7 @@
     <Filter Include="Source Files\Entities\Tower">
       <UniqueIdentifier>{601ab888-fa98-4d0d-b28b-cc5ecb28eb7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Entities\Creature\Minion">
+    <Filter Include="Source Files\Entities\Minion">
       <UniqueIdentifier>{39ddaf5c-dfae-418e-ad58-8aafdad292c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -208,16 +208,16 @@
       <Filter>Source Files\Entities\Character</Filter>
     </ClCompile>
     <ClCompile Include="Minion.cpp">
-      <Filter>Source Files\Entities\Creature\Minion</Filter>
+      <Filter>Source Files\Entities\Minion</Filter>
     </ClCompile>
     <ClCompile Include="MinionEffectsManager.cpp">
-      <Filter>Source Files\Entities\Creature\Minion</Filter>
+      <Filter>Source Files\Entities\Minion</Filter>
     </ClCompile>
     <ClCompile Include="MinionAttributesSystem.cpp">
-      <Filter>Source Files\Entities\Creature\Minion</Filter>
+      <Filter>Source Files\Entities\Minion</Filter>
     </ClCompile>
     <ClCompile Include="MinionSpawner.cpp">
-      <Filter>Source Files\Entities\Creature\Minion</Filter>
+      <Filter>Source Files\Entities\Minion</Filter>
     </ClCompile>
     <ClCompile Include="Creature.cpp">
       <Filter>Source Files\Entities\Creature</Filter>

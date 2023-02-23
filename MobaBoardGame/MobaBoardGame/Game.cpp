@@ -5,53 +5,6 @@
 #include <algorithm>
 #include <random>
 
-//Game::Game()
-//{
-//	// Init board.
-//	MapSaveHandler saveHandler;
-//	gameBoard = saveHandler.readBoardFile("map V1");
-//	gameBoard.get()->initBlueSpawn({ 50, 12 });
-//	gameBoard.get()->initRedSpawn({ 51, 13 });
-//
-//	CharacterFactory factory;
-//
-//	// Blue team.
-//	std::shared_ptr<Character> character1 = factory.createVoidArcherLeanna(*gameBoard.get(), blue, 1);
-//	character1.get()->init();
-//
-//	// Red team.
-//	std::shared_ptr<Character> character2 = std::shared_ptr<Character>(factory.createBloodlordKlaus(*gameBoard.get(), red, 1));
-//	character2.get()->init();           
-//
-//	characters.push_back(character1);
-//	characters.push_back(character2);
-//
-//	// Creates bot lane path.
-//	std::vector<Position> path1;
-//	for(int i = 0; i < 19; ++i)
-//	{
-//		path1.push_back({ 48 - (2 * i), 8 + i });
-//		path1.push_back({ 47 - (2 * i), 8 + i });
-//	}
-//	for(int i = 0; i < 18; ++i)
-//	{
-//		path1.push_back({ 10, 27 + i });
-//	}
-//	for(int i = 0; i < 19; ++i)
-//	{
-//		path1.push_back({ 11 + (2 * i), 45 + i });
-//		path1.push_back({ 12 + (2 * i), 45 + i });
-//	}
-//
-//	// Creates reversal of path1.
-//	std::vector<Position> path1Reverse = path1;
-//	std::reverse(path1Reverse.begin(), path1Reverse.end());
-//
-//	MinionSpawner minionSpawnerBlue1(*this, blue, path1);
-//	MinionSpawner minionSpawnerRed1(*this, red, path1Reverse);
-//	minionSpawners.push_back(minionSpawnerBlue1);
-//	minionSpawners.push_back(minionSpawnerRed1);
-//}
 
 Game::Game()
 {
@@ -119,20 +72,15 @@ void Game::update()
 		character.get()->update();
 	}
 
-	// Randomises minion order.
-	//auto rng = std::default_random_engine{};
-	//std::shuffle(std::begin(minions), std::end(minions), rng);
-	for(auto &minion : minions)
-	{
-		minion.get()->update();
-	}
+	updateMinions();
 
 	for(MinionSpawner &spawner : minionSpawners)  // Make spawner a template class.
 	{
 		if(spawner.canSpawn())
 		{
-			minions.push_back(spawner.spawnMinion());  // spawn minion can become spawn when class is templated.
-			minions.back().get()->initImageHealth();
+			std::shared_ptr<Minion> minion = spawner.spawnMinion();
+			minion.get()->initImageHealth();
+			minions.push_back(minion);  // spawn minion can become spawn when class is templated.
 		}
 
 		spawner.update();
@@ -154,6 +102,10 @@ void Game::draw(sf::RenderWindow &window)
 
 	for(auto &minion : minions)
 	{
+		if(minion.get() == nullptr)
+		{
+			continue;
+		}
 		minion.get()->draw(window);
 	}
 }
@@ -170,6 +122,36 @@ bool Game::moveSelectedCharacter(float x, float y)
 	assert(character.getTeam() == currTeam);
 
 	return character.move(x, y);
+}
+
+void Game::removeDeadMinions()
+{
+	auto minion = minions.begin();
+	while(minion != minions.end())
+	{
+		if(minion->get() == nullptr)
+		{
+			minion = minions.erase(minion);
+		}
+		else
+		{
+			++minion;
+		}
+	}
+}
+
+void Game::updateMinions()
+{
+	for(auto &minion : minions)
+	{
+		// assert(minion.get() != nullptr);
+		if(minion.get() != nullptr)
+		{
+			minion.get()->update();
+		}
+	}
+
+	removeDeadMinions();
 }
 
 void Game::unselectCharacter()
@@ -218,7 +200,11 @@ Minion* Game::getMinionAt(Position position)
 {
 	for(auto &minion : minions)
 	{
-		if(minion.get()->isAt(position))
+		if(minion.get() == nullptr)  
+		{
+			continue;
+		}
+		else if(minion.get()->isAt(position))
 		{
 			return minion.get();
 		}
@@ -229,14 +215,14 @@ Minion* Game::getMinionAt(Position position)
 
 void Game::remove(Minion &minion)
 {
-	auto iter = minions.cbegin();
+	auto iter = minions.begin();
 	while(iter != minions.end())
 	{
 		if(iter->get() == &minion)
 		{
 			GameSquare *square = gameBoard->getSquare(iter->get()->getPosition());
 			square->removeOccupant();
-			minions.erase(iter);
+			iter->reset();
 			return;
 		}
 		++iter;
@@ -477,6 +463,10 @@ bool Game::selectedCharacterDoAttack(float x, float y)
 
 	for(auto &minion : minions)
 	{
+		if(minion.get() != nullptr)
+		{
+			continue;
+		}
 		if(minion.get()->isAt(x, y))
 		{
 			Minion &target = *minion.get();
@@ -488,18 +478,24 @@ bool Game::selectedCharacterDoAttack(float x, float y)
 
 bool Game::selectedCharacterUseAbility1(float x, float y)
 {
-	for(int charNum = 0; charNum < characters.size(); ++charNum)
+	Character &character = *characters[selectedCharacterNum].get();
+	assert(currTeam == character.getTeam());
+
+	for(auto &target : characters)
 	{
-		if(characters[charNum].get()->isAt(x, y))
+		if(target.get()->isAt(x, y))
 		{
-			Character &character = *characters[selectedCharacterNum].get();
-			Character &target = *characters[charNum].get();
-
-			assert(currTeam == character.getTeam());
-
-			return character.useAbility1(target);  // True indicates valid target and ability gets used.
+			return character.useAbility1(*target.get());  // True indicates valid target and ability gets used.
 		}
 	}
+	// for(auto &target : minions)
+	// {
+	// 	if(target.get()->isAt(x, y))
+	// 	{
+	// 
+	// 		return character.useAbility1(*target.get());  // True indicates valid target and ability gets used.
+	// 	}
+	// }
 
 	return false;  
 }

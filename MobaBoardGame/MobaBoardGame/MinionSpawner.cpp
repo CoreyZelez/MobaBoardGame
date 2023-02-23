@@ -22,7 +22,7 @@ bool MinionSpawner::canSpawn()
 	return time == spawnTime;
 }
 
-std::unique_ptr<Minion> MinionSpawner::spawnMinion()
+std::shared_ptr<Minion> MinionSpawner::spawnMinion()
 {
 	assert(time == spawnTime);
 	time = 0;
@@ -59,5 +59,5 @@ std::unique_ptr<Minion> MinionSpawner::spawnMinion()
 
 	std::vector<EntityAttributes> coreBaseAttributes = { cha1, cha2, cha3, cha4, cha5, cha6 };
 
-	return std::make_unique<Minion>(game, team, minionPath, minionLevel, coreBaseAttributes);
+	return std::make_shared<Minion>(game, team, minionPath, minionLevel, coreBaseAttributes);
 }

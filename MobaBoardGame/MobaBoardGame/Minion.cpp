@@ -74,45 +74,33 @@ int Minion::takeDamage(int damage)
 int Minion::bonusPhysicalDamage() const
 {
 	const int health = attributesSystem.getAttributes().healthAttributes.health;
-	std::cout << "bonus ->" << health << "   " << (double)health * PHYSICAL_DAMAGE_RATIO << std::endl;
 	return (double)health * PHYSICAL_DAMAGE_RATIO;
 }
 
 std::vector<Minion*> Minion::getAdjacentMinions() const
 {
 	std::vector<Minion *> adjacent;
+	std::vector<Position> positions;
 
-	// Adjacent positions.
-	Position pos1 = getPosition();
-	pos1.x += 1;
-	Position pos2 = getPosition();
-	pos2.x -= 1;
-	Position pos3 = getPosition();
-	pos3.y += 1;
-	Position pos4 = getPosition();
-	pos4.y -= 1;
-	Position pos5 = getPosition();
-	pos5.x += 1;
-	pos5.y += 1;
-	Position pos6 = getPosition();
-	pos6.x += 1;
-	pos6.y -= 1;
-	Position pos7 = getPosition();
-	pos7.x -= 1;
-	pos7.y += 1;
-	Position pos8 = getPosition();
-	pos8.x -= 1;
-	pos8.y -= 1;
+	for(int i = -1; i <= 1; ++i)
+	{
+		for(int j = -1; j <= 1; ++j)
+		{
+			if(i == 0 && j == 0)
+			{
+				continue;
+			}
+			Position pos = getPosition();
+			pos.x += i;
+			pos.y += j;
+			positions.push_back(pos);
+		}
+	}
 
-	// Possible adjacent minions.
-	adjacent.push_back(game.getMinionAt(pos1));
-	adjacent.push_back(game.getMinionAt(pos2));
-	adjacent.push_back(game.getMinionAt(pos3));
-	adjacent.push_back(game.getMinionAt(pos4));
-	adjacent.push_back(game.getMinionAt(pos5));
-	adjacent.push_back(game.getMinionAt(pos6));
-	adjacent.push_back(game.getMinionAt(pos7));
-	adjacent.push_back(game.getMinionAt(pos8));
+	for(Position pos : positions)
+	{
+		adjacent.push_back(game.getMinionAt(pos));
+	}
 
 	return adjacent;
 }
@@ -160,8 +148,11 @@ std::vector<Character*> Minion::getAdjacentCharacters() const
 
 void Minion::update()
 {
+	std::cout << "second " << this << std::endl;
+
 	attributesSystem.update();
 
+	std::cout << "third " << this << std::endl;
 	// attackTower();
 	move();
 	attackMinion();
@@ -321,7 +312,7 @@ void Minion::attackCharacter()
 
 	std::vector<Character*> adjacentCharacters = getAdjacentCharacters();
 
-	// Creates vector of non nullptr minions of opposing team from above.
+	// Creates vector of non nullptr characters of opposing team from above.
 	std::vector<Character*> characters;
 
 	for(Character *character : adjacentCharacters)

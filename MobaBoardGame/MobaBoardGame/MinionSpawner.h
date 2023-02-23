@@ -18,7 +18,7 @@ public:
 	void levelUp();
 
 	bool canSpawn();
-	std::unique_ptr<Minion> spawnMinion();
+	std::shared_ptr<Minion> spawnMinion();
 
 private:
 	// Timing.

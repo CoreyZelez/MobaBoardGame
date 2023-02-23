@@ -10,7 +10,6 @@ TargetedDamageReductionEffect::TargetedDamageReductionEffect(int duration, doubl
 TargetedDamageReductionEffect::~TargetedDamageReductionEffect()
 {
 	getReceiver()->unsubscribeObserver(this);
-	std::cout << "fuck yes it works!" << std::endl;
 }
 
 std::unique_ptr<Effect<EntityAttributes>> TargetedDamageReductionEffect::clone()
