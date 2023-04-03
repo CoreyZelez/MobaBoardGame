@@ -13,6 +13,7 @@ public:
 
 	void update(CharacterAction action);
 	void update(CharacterAction action, Character &target);
+	void update(CharacterAction action, Minion &target);
 	void update(CharacterAction action, Creature *target);
 
 private:

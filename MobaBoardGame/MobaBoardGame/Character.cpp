@@ -40,7 +40,7 @@ void Character::update()
 	setHealth(currAttributes.healthAttributes.health, baseAttributes.healthAttributes.health);  // MUST BE RECALLED WHEN LEVELING UP!!!
 }
 
-const EntityAttributes & Character::getAttributes() const
+const EntityAttributes &Character::getAttributes() const
 {
 	return attributesSystem.getAttributes();
 }
@@ -55,15 +55,11 @@ int Character::getLevel() const
 	return attributesSystem.getLevel();
 }
 
-int Character::getAbility1Range() const
+int Character::getAbilityRange(int abilityNum) const
 {
-	return abilities.getAbility1Range();
+	return abilities.getAbilityRange(abilityNum);
 }
 
-int Character::getAbility2Range() const
-{
-	return abilities.getAbility2Range();
-}
 
 bool Character::isAlive() const
 {
@@ -80,34 +76,21 @@ bool Character::unableToBasicAttack() const
 
 }
 
-bool Character::unableToUseAbility1() const
+bool Character::unableToUseAbility(int abilityNum) const
 {
 	const EntityAttributes currAttributes = attributesSystem.getAttributes();
 
-	if(abilities.ability1IsOnCooldown())
+	if(abilities.abilityIsOnCooldown(abilityNum))
 	{
 		return true;
 	}
 
 	const int points = currAttributes.actionAttributes.points;
 	const int attackPoints = currAttributes.actionAttributes.attackPoints;
-	const int pointCost = abilities.getAbility1PointCost();
+	const int pointCost = abilities.getAbilityPointCost(abilityNum);
 	return (pointCost > points || pointCost > attackPoints);
 }
 
-bool Character::unableToUseAbility2() const
-{
-	const EntityAttributes currAttributes = attributesSystem.getAttributes();
-
-	if(abilities.ability2IsOnCooldown())
-	{
-		return true;
-	}
-	const int points = currAttributes.actionAttributes.points;
-	const int attackPoints = currAttributes.actionAttributes.attackPoints;
-	const int pointCost = abilities.getAbility2PointCost();
-	return (pointCost > points || pointCost > attackPoints);
-}
 
 bool Character::basicAttack(Character &target)
 {
@@ -156,7 +139,7 @@ bool Character::basicAttack(Character &target)
 	return false;
 }
 
-bool Character::basicAttack(Minion & target)
+bool Character::basicAttack(Minion &target)
 {
 	EntityAttributes &currAttributes = attributesSystem.getAttributes();
 
@@ -184,7 +167,7 @@ bool Character::basicAttack(Minion & target)
 
 		if(damage >= 0)
 		{
-			experienceGain = target.takeDamage(damage);
+			experienceGain = target.takeDamage(damage);  // Shouldnt return experience gain in future!! nearby allies get experience.
 		}
 
 		notifyObservers(postBasicAttackDamageDealt, target);
@@ -381,14 +364,14 @@ void Character::spawn()
 	assert(false);  // No valid spawn found, game in error.
 }
 
-bool Character::useAbility1(Character &target)
+bool Character::useAbility(Character &target, int abilityNum)
 {
 	EntityAttributes &currAttributes = attributesSystem.getAttributes();
 
-	const int abilityPointCost = abilities.getAbility1PointCost();  // Cost for attack points and points to cast ability.
+	const int abilityPointCost = abilities.getAbilityPointCost(abilityNum);  // Cost for attack points and points to cast ability.
 	int &points = currAttributes.actionAttributes.points;
 	int &attackPoints = currAttributes.actionAttributes.attackPoints;
-	const int range = abilities.getAbility1Range();
+	const int range = abilities.getAbilityRange(abilityNum);
 
 	// Determines whether enough points and attack points to cast ability.
 	if(abilityPointCost > points || abilityPointCost > attackPoints || !inRange(getPosition(), target.getPosition(), range))
@@ -397,7 +380,7 @@ bool Character::useAbility1(Character &target)
 	}
 
 	// abilities.getAbility1Cost()  /// for mana if you choose to implement. then handle as required.
-	bool successfulAbilityUse = abilities.useAbility1(target);
+	bool successfulAbilityUse = abilities.useAbility(target, abilityNum);
 
 	if(successfulAbilityUse)
 	{
@@ -409,14 +392,16 @@ bool Character::useAbility1(Character &target)
 	return false;
 }
 
-bool Character::useAbility2(Character &target)
+
+
+bool Character::useAbility(Minion &target, int abilityNum)
 {
 	EntityAttributes &currAttributes = attributesSystem.getAttributes();
 
-	const int abilityPointCost = abilities.getAbility2PointCost();  // Cost for attack points and points to cast ability.
+	const int abilityPointCost = abilities.getAbilityPointCost(abilityNum);  // Cost for attack points and points to cast ability.
 	int &points = currAttributes.actionAttributes.points;
 	int &attackPoints = currAttributes.actionAttributes.attackPoints;
-	const int range = abilities.getAbility2Range();
+	const int range = abilities.getAbilityRange(abilityNum);
 
 	// Determines whether enough points and attack points to cast ability.
 	if(abilityPointCost > points || abilityPointCost > attackPoints || !inRange(getPosition(), target.getPosition(), range))
@@ -425,7 +410,7 @@ bool Character::useAbility2(Character &target)
 	}
 
 	// abilities.getAbility1Cost()  /// for mana if you choose to implement. then handle as required.
-	bool successfulAbilityUse = abilities.useAbility2(target);
+	bool successfulAbilityUse = abilities.useAbility(target, abilityNum);
 
 	if(successfulAbilityUse)
 	{

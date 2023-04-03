@@ -279,8 +279,8 @@ void Game::markSquares(GameState state)
 	const int actionPoints = character.getAttributes().actionAttributes.points;
 	const int attackPoints = character.getAttributes().actionAttributes.attackPoints;
 	const int range = character.getAttributes().actionAttributes.range;
-	const int ability1Range = character.getAbility1Range();
-	const int ability2Range = character.getAbility2Range();
+	const int ability1Range = character.getAbilityRange(1);
+	const int ability2Range = character.getAbilityRange(2);
 	const Position position = character.getPosition();
 
 	switch(state)
@@ -310,7 +310,7 @@ void Game::markSquares(GameState state)
 
 	case ability1State:
 		// Color squares grey if not enough action points.
-		if(character.unableToUseAbility1())
+		if(character.unableToUseAbility(1))
 		{
 			sf::Color color = sf::Color(40, 40, 40);
 			gameBoard.get()->markSquares(position, ability1Range, false, true, color);
@@ -322,7 +322,7 @@ void Game::markSquares(GameState state)
 
 	case ability2State:
 		// Color squares grey if not enough action points.
-		if(character.unableToUseAbility2())
+		if(character.unableToUseAbility(2))
 		{
 			sf::Color color = sf::Color(40, 40, 40);
 			gameBoard.get()->markSquares(position, ability2Range, false, true, color);
@@ -461,46 +461,22 @@ bool Game::selectedCharacterDoAttack(float x, float y)
 		}
 	}
 
+	// Handles attack on minion.
 	for(auto &minion : minions)
 	{
-		if(minion.get() != nullptr)
+		if(minion.get() == nullptr)  // Recall nullptr minions are awaiting removal.
 		{
 			continue;
 		}
 		if(minion.get()->isAt(x, y))
 		{
 			Minion &target = *minion.get();
-
 			return character.basicAttack(target);
 		}
 	}
 }
 
-bool Game::selectedCharacterUseAbility1(float x, float y)
-{
-	Character &character = *characters[selectedCharacterNum].get();
-	assert(currTeam == character.getTeam());
-
-	for(auto &target : characters)
-	{
-		if(target.get()->isAt(x, y))
-		{
-			return character.useAbility1(*target.get());  // True indicates valid target and ability gets used.
-		}
-	}
-	// for(auto &target : minions)
-	// {
-	// 	if(target.get()->isAt(x, y))
-	// 	{
-	// 
-	// 		return character.useAbility1(*target.get());  // True indicates valid target and ability gets used.
-	// 	}
-	// }
-
-	return false;  
-}
-
-bool Game::selectedCharacterUseAbility2(float x, float y)
+bool Game::selectedCharacterUseAbility(int abilityNum, float x, float y)
 {
 	for(int charNum = 0; charNum < characters.size(); ++charNum)
 	{
@@ -511,7 +487,7 @@ bool Game::selectedCharacterUseAbility2(float x, float y)
 
 			assert(currTeam == character.getTeam());
 
-			return character.useAbility2(target);  // True indicates valid target and ability gets used.
+			return character.useAbility(target, abilityNum);  // True indicates valid target and ability gets used.
 		}
 	}
 

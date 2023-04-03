@@ -4,6 +4,7 @@
 #include "MovementPointEffect.h"
 #include "ActionPointEffect.h"
 #include "Character.h"
+#include "Minion.h"
 
 
 VoidShotPassive::VoidShotPassive(std::array<int, 6> trueDamage, int stackTrigger, int duration)
@@ -59,6 +60,43 @@ void VoidShotPassive::update(CharacterAction action, Character &target)
 			const int damage = (double)trueDamage[level] * nonVoidShotRate;
 			const int damagePerTurn = (double)damage / (double)duration;
 			std::unique_ptr<Effect<EntityAttributes>> effect1 = std::make_unique<HealthEffect>(duration, -damagePerTurn, target);
+			target.addEffect(std::move(effect1));
+		}
+	}
+}
+
+void VoidShotPassive::update(CharacterAction action, Minion &target)
+{
+	const int level = getCharacter()->getLevel() - 1;
+
+	if(stacks == stackTrigger && action == preBasicAttackDamageCalculation)
+	{
+		stacks = 0;
+
+		// True damage effect. Applys damage in excess of normal basic attack damage.
+		int damage = trueDamage[level];
+		if(target.hasEffectType(voidInfliction))
+		{
+			damage *= 2;
+		}
+
+		const int damagePerTurn = (double)damage / (double)duration;
+
+		std::unique_ptr<Effect<EntityAttributes>> effect = std::make_unique<HealthEffect>(duration, -damagePerTurn);
+		target.addEffect(std::move(effect));
+	}
+	else if(action == preBasicAttackDamageCalculation)
+	{
+		++stacks;
+
+		// True damage when target is voidInflicted but stacks not at trigger. (non void shot).
+		if(target.hasEffectType(voidInfliction))
+		{
+			const double nonVoidShotRate = 0.5;
+			const int damage = (double)trueDamage[level] * nonVoidShotRate;
+			const int damagePerTurn = (double)damage / (double)duration;
+			std::unique_ptr<Effect<EntityAttributes>> effect1 = std::make_unique<HealthEffect>(duration, -damagePerTurn);
+			target.addEffect(std::move(effect1));
 		}
 	}
 }
@@ -68,7 +106,7 @@ void VoidShotPassive::update(CharacterAction action, Creature *target)
 	if(stacks == stackTrigger && action == preBasicAttackDamageCalculation)
 	{
 		stacks = 0;
-		// To be implemented. Creatures dont receive slow and action effects.
+		// To be implemented.
 	}
 	else if(action == preBasicAttackDamageCalculation)
 	{

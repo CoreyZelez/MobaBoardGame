@@ -1,12 +1,12 @@
 #pragma once
 #include <memory>
+#include <vector>
 #include "Ability.h"
 #include "PassiveAbility.h"
 
 struct AbilityArsenal{
 	PassiveAbility *passive;
-	Ability *ability1;
-	Ability *ability2;
+	std::vector<Ability*> abilities;
 };
 
 class CharacterAbilities
@@ -18,20 +18,15 @@ public:
 	void update();  // Called at end of every turn.
 
 	// getters
-	int getAbility1Range() const;
-	int getAbility2Range() const;
-	int getAbility1PointCost() const;
-	int getAbility2PointCost() const;
-	bool ability1IsOnCooldown() const;
-	bool ability2IsOnCooldown() const;
+	int getAbilityRange(int abilityNum) const;
+	int getAbilityPointCost(int abilityNum) const;
+	bool abilityIsOnCooldown(int abilityNum) const;
 
-	bool useAbility1(Character &target);
-	bool useAbility2(Character &target);
+	bool useAbility(Character &target, int abilityNum);
+	bool useAbility(Minion &target, int abilityNum);
 
 private:
 	std::unique_ptr<PassiveAbility> passive;
-	std::unique_ptr<Ability> ability1;
-	std::unique_ptr<Ability> ability2;
-
+	std::vector<std::unique_ptr<Ability>> abilities;
 };
 

@@ -65,6 +65,19 @@ bool Ability::use(Character &target)
 	return false;
 }
 
+bool Ability::use(Minion & target)
+{
+	if(validTarget(target) && cooldown == 0 && level > 0)
+	{
+		applyTarget(target);
+		applySelf();
+		cooldown = calculateCooldown();
+		return true;
+	}
+
+	return false;
+}
+
 void Ability::reduceCooldown()
 {
 	assert(cooldown >= 0);

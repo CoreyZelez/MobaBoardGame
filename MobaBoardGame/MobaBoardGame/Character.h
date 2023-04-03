@@ -26,13 +26,12 @@ public:
 	// Getters
 	const EntityAttributes &getAttributes() const;  // Return currAttributes reference.
 	const EntityAttributes &getBaseAttributes() const;
+	bool hasEffectType(Status type);
 	int getLevel() const;
-	int getAbility1Range() const;
-	int getAbility2Range() const;
 	bool isAlive() const;
 	bool unableToBasicAttack() const;
-	bool unableToUseAbility1() const;
-	bool unableToUseAbility2() const;
+	bool unableToUseAbility(int abilityNum) const;
+	int getAbilityRange(int abilityNum) const;
 
 	// Game Actions
 	void update();
@@ -47,14 +46,12 @@ public:
 	int takeDamage(int damage);  // Returns true damage dealt i.e. min(damage, health).
 
 	// Abilities
-	bool useAbility1(Character &target);  // Need to create useAbility functions for other object types e.g. creatures.
-	bool useAbility2(Character &target);
+	bool useAbility(Character &target, int abilityNum);
+	bool useAbility(Minion &target, int abilityNum);  // Need to create useAbility functions for other object types e.g. creatures.
 
 	// Observer functions
 	void subscribeObserver(CharacterObserver *observer);
 	void unsubscribeObserver(CharacterObserver *observer);  
-
-	bool hasEffectType(Status type);
 
 	//testing functions.
 	void printAttributes();

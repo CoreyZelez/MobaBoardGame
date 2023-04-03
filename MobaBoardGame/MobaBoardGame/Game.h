@@ -43,8 +43,7 @@ public:
 
 	// Entity actions
 	bool selectedCharacterDoAttack(float x, float y);  // True represents successful (i.e in range) attack on an entity.
-	bool selectedCharacterUseAbility1(float x, float y);
-	bool selectedCharacterUseAbility2(float x, float y);
+	bool selectedCharacterUseAbility(int abilityNum, float x, float y);
 	bool moveSelectedCharacter(float x, float y);
 
 private:

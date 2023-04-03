@@ -55,6 +55,11 @@ EntityAttributes Minion::getBaseAttributes() const
 	return attributesSystem.getBaseAttributes();
 }
 
+bool Minion::hasEffectType(Status type)
+{
+	return attributesSystem.hasEffectType(type);
+}
+
 int Minion::takeDamage(int damage)
 {
 	int &health = attributesSystem.getAttributes().healthAttributes.health;
@@ -68,6 +73,12 @@ int Minion::takeDamage(int damage)
 	handleDeath();
 
 	return damage;
+}
+
+void Minion::addEffect(std::unique_ptr<EntityEffect> effect)
+{
+	attributesSystem.addEffect(std::move(effect));
+	handleDeath();
 }
 
 
@@ -148,11 +159,8 @@ std::vector<Character*> Minion::getAdjacentCharacters() const
 
 void Minion::update()
 {
-	std::cout << "second " << this << std::endl;
-
 	attributesSystem.update();
 
-	std::cout << "third " << this << std::endl;
 	// attackTower();
 	move();
 	attackMinion();

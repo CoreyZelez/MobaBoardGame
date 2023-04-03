@@ -100,6 +100,7 @@ void GameHandler::handleInput(sf::RenderWindow & window)
 			sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
 
 			bool successfulAttack = game.selectedCharacterDoAttack(worldPos.x, worldPos.y);
+
 			if(successfulAttack == true)
 			{
 				game.setState(moveState);
@@ -133,7 +134,7 @@ void GameHandler::handleInput(sf::RenderWindow & window)
 			sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
 			sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
 
-			bool successfulAbilityUse = game.selectedCharacterUseAbility1(worldPos.x, worldPos.y);
+			bool successfulAbilityUse = game.selectedCharacterUseAbility(1, worldPos.x, worldPos.y);
 			if(successfulAbilityUse == true)
 			{
 				game.setState(moveState);
@@ -167,7 +168,7 @@ void GameHandler::handleInput(sf::RenderWindow & window)
 			sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
 			sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
 
-			bool successfulAbilityUse = game.selectedCharacterUseAbility2(worldPos.x, worldPos.y);
+			bool successfulAbilityUse = game.selectedCharacterUseAbility(2, worldPos.x, worldPos.y);
 			if(successfulAbilityUse == true)
 			{
 				game.setState(moveState);

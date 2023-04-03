@@ -57,9 +57,8 @@ std::shared_ptr<Character> CharacterFactory::createBloodlordKlaus(GameBoard &gam
 	const std::vector<EntityAttributes> baseAttributes = { cha1, cha2, cha3, cha4, cha5, cha6};
 
 	// Abilities
-	AbilityArsenal arsenal = { &AttackHealPassive(),
-		&LifeHarvestAbility({40, 70, 120}),
-		&BloodAnguishAbility({0.005, 0.0075, 0.015}) };
+	std::vector<Ability*> abilities = { &LifeHarvestAbility({40, 70, 120}), &BloodAnguishAbility({0.005, 0.0075, 0.015}) };
+	AbilityArsenal arsenal = { &AttackHealPassive(), abilities };
 
 	sf::Color left(140, 0, 0);
 	sf::Color right(220, 0, 240);
@@ -114,9 +113,8 @@ std::shared_ptr<Character> CharacterFactory::createVoidArcherLeanna(GameBoard &g
 
 	// abilities
 	const std::array<int, 6> voidShotTrueDamage = { 24, 31, 40, 55, 74, 96 };
-	AbilityArsenal arsenal = { &VoidShotPassive(voidShotTrueDamage, 5, 4),
-		&VoidParalyseAbility({100, 0, 220}),
-	    &VoidRendAbility({10, 16, 26}) };
+	std::vector<Ability*> abilities = { &VoidParalyseAbility({100, 0, 220}), &VoidRendAbility({10, 16, 26}) };
+	AbilityArsenal arsenal = { &VoidShotPassive(voidShotTrueDamage, 5, 4), abilities };
 
 	sf::Color left(0, 0, 0);
 	sf::Color right(140, 0, 140);
@@ -166,9 +164,8 @@ std::shared_ptr<Character> CharacterFactory::createAdominusSentinelAdar(GameBoar
 	const std::vector<EntityAttributes> baseAttributes = { cha1, cha2, cha3, cha4, cha5, cha6 };
 
 	// Abilities
-	AbilityArsenal arsenal = { &DisorientingStrikePassive(),
-		&IntimidationAbility(),
-		&ResistantSentinelAbility({75, 110, 175}, {60, 95, 155}) };  // ({ armor increase}, { ability resist increase })
+	std::vector<Ability*> abilities = { &IntimidationAbility(), &ResistantSentinelAbility({75, 110, 175}, {60, 95, 155}) };
+	AbilityArsenal arsenal = { &DisorientingStrikePassive(), abilities}; 
 
 	sf::Color left(140, 140, 140);
 	sf::Color right(0, 255, 196);

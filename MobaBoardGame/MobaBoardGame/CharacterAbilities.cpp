@@ -2,64 +2,62 @@
 #include <iostream>
 
 CharacterAbilities::CharacterAbilities(AbilityArsenal arsenal)
-	: passive(arsenal.passive->clone()),
-	ability1(arsenal.ability1->clone()),
-	ability2(arsenal.ability2->clone())
+	: passive(arsenal.passive->clone())
 {
+	for(auto &ability : arsenal.abilities)
+	{
+		abilities.push_back(ability->clone());
+	}
 }
 
 void CharacterAbilities::initCharacter(Character &character)
 {
 	passive.get()->initCharacter(character);
-	ability1.get()->initCharacter(character);
-	ability2.get()->initCharacter(character);
+	for(auto &ability : abilities)
+	{
+		ability.get()->initCharacter(character);
+	}
 }
 
 void CharacterAbilities::update()
 {
 	passive.get()->apply();
-	ability1.get()->update();
-	ability2.get()->update();
-	ability1.get()->reduceCooldown();
-	ability2.get()->reduceCooldown();
+
+	for(auto &ability : abilities)
+	{
+		ability.get()->update();
+		ability.get()->reduceCooldown();
+	}
 }
 
-int CharacterAbilities::getAbility1Range() const
+int CharacterAbilities::getAbilityRange(int abilityNum) const
 {
-	return ability1.get()->getRange();
+	const int abilityIndex = abilityNum - 1;
+	return abilities[abilityIndex].get()->getRange();
 }
 
-int CharacterAbilities::getAbility2Range() const
+int CharacterAbilities::getAbilityPointCost(int abilityNum) const
 {
-	return ability2.get()->getRange();
+	const int abilityIndex = abilityNum - 1;
+	return abilities[abilityIndex].get()->getPointCost();
 }
 
-int CharacterAbilities::getAbility1PointCost() const
+
+bool CharacterAbilities::abilityIsOnCooldown(int abilityNum) const
 {
-	return ability1.get()->getPointCost();
+	const int abilityIndex = abilityNum - 1;
+	return abilities[abilityIndex].get()->onCooldown();
 }
 
-int CharacterAbilities::getAbility2PointCost() const
+
+bool CharacterAbilities::useAbility(Character &target, int abilityNum)
 {
-	return ability2.get()->getPointCost();
+	const int abilityIndex = abilityNum - 1;
+	return abilities[abilityIndex].get()->use(target);
 }
 
-bool CharacterAbilities::ability1IsOnCooldown() const
+bool CharacterAbilities::useAbility(Minion &target, int abilityNum)
 {
-	return ability1.get()->onCooldown();
-}
-
-bool CharacterAbilities::ability2IsOnCooldown() const
-{
-	return ability2.get()->onCooldown();
-}
-
-bool CharacterAbilities::useAbility1(Character & target)
-{
-	return ability1.get()->use(target);
-}
-
-bool CharacterAbilities::useAbility2(Character & target)
-{
-	return ability2.get()->use(target);
+	const int abilityIndex = abilityNum - 1;
+	return abilities[abilityIndex].get()->use(target);
 }

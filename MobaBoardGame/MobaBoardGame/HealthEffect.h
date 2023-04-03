@@ -8,6 +8,7 @@ class HealthEffect : public Effect<EntityAttributes>
 {
 public:
 	HealthEffect(int duration, int amountPT, const Character &character);
+	HealthEffect(int duration, int amountPT);
 
 	std::unique_ptr<Effect<EntityAttributes>> clone();
 
@@ -15,6 +16,6 @@ public:
 
 private:
 	int amountPT;  // Amount of damage inflicted.
-	const int &maxHealth;
+	const int *const maxHealth = nullptr;
 };
 

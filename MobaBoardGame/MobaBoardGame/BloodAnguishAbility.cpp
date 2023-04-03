@@ -105,7 +105,7 @@ void BloodAnguishAbility::update(CharacterAction action, int quantity)
 		// Add health effect.
 		quantity *= ABSORBTION_RATIO;  // Half of health damage is absorbed.
 		std::unique_ptr<Effect<EntityAttributes>> effect = std::make_unique<HealthEffect>(1, quantity, *getCharacter());
-		getCharacter()->addEffect(std::move(negateEffect));
+		getCharacter()->addEffect(std::move(effect));
 	}
 }
 
